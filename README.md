@@ -1,2 +1,0 @@
-# GoraTeamAngular
-Proyecto angular Gora

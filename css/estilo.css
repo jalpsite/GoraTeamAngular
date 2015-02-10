@@ -1,13 +1,9 @@
 .detalle-nombre{
 height:40px;
-min-width: 360px;
-overflow: hidden;
 }
 
 .detalle{
 height:30px;
-min-width: 360px;
-overflow: hidden;
 }
 .btnEdit-nombre{
 	margin-left:10px;display: inline;position:absolute;line-height:40px
@@ -38,18 +34,5 @@ position: absolute;
 top: 43px;
 right: 8px;
 z-index: 99;
-}
-
-
-.articulo{
-padding:0 15px;
-}
-.articulo li{
-display: inline;
-list-style-type: none;
-}
-
-.h1left{
-margin:10px;
 }
 
