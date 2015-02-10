@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" ng-app>
+<head>
+  <meta charset="utf-8">
+  <title>Prueba</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
+
+		
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
+
+
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+
+		<style type="text/css">
+				body{font-family: Arial,sans-serif;}
+				.line {
+				    height: 5px;
+				    margin-bottom: -4px;
+				}
+				.line {
+				    background: repeat 0 0 #606060;
+				    height: 5px;
+				    width: 100%;
+					height: 8px;
+				}				
+		</style>
+		<script src="js/libs/angular/angular.js"></script>
+ 		 <script src="Controlador/Login.js"></script> 		 
+ 		 <script type="text/javascript" src="sessionvars.js"></script>
+   <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+	    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+	    <script> if (!window.jQuery) { document.write('<script src="js/libs/jquery-2.1.1.min.js"><\/script>');} </script>
+
+	    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+		<script> if (!window.jQuery.ui) { document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');} </script>
+
+</head>
+<body>
+	<div  ng-controller="controlador1">
+		<div class="line"></div>
+		<header id="header" style="height: 70px">
+		
+
+			<div id="logo-group">
+				<span id="logo"> 
+					<img src="http://www.gorasac.com/wp-content/uploads/2013/10/gora-logo1.png" alt="SmartAdmin"> </span>
+			</div>
+
+			<span id="extr-page-header-space"> <span class="hidden-mobile hidden-xs">¿Necesita Una Cuenta?</span> <a href="#" class="btn btn-primary">Registrar</a> </span>
+			<div id="main" role="main" style="margin-left:0px;width:100%!important;">
+
+			<!-- MAIN CONTENT -->
+			<div id="content" class="container" style="max-width: 600px;">
+				
+				<div class="row">
+					
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 10%;">
+						<div class="well no-padding">
+							<form action="" id="login-form" class="smart-form client-form">
+								<header style="background-color:#606060; color:#fff">
+								 	Inicio de Sesion
+								</header>
+								<fieldset>									
+									<section>
+										<label class="label">USUARIO</label>
+										<label class="input"> <i class="icon-append fa fa-user"></i>
+											<input type="input" name="user" ng-model="usuario">
+											<b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Por favor ingrese su usuario</b></label>
+									</section>
+
+									<section>
+										<label class="label">CONTRASEÑA</label>
+										<label class="input"> <i class="icon-append fa fa-lock"></i>
+											<input type="password" name="password" ng-model="pass">
+											<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Por Favor ingrese su contraseña</b> </label>
+										<div class="note">
+											<a href="#">¿Olvido su Contraseña?</a>
+										</div>
+									</section>
+
+									<section>
+										<label class="checkbox">
+											<input type="checkbox" name="remember" checked="">
+											<i></i>Mantener sesion Iniciada</label>
+									</section>
+								</fieldset>
+								<footer>
+									<button type="button" class="btn btn-primary" ng-click="Simple()">
+										Iniciar
+									</button>
+								</footer>
+							</form>
+
+						</div>
+						
+						
+					</div>
+				</div>
+			</div>
+
+		</div>
+		</header>
+		 
+
+	</div>
+
+</body>
+</html>
+<script type="text/javascript">	sessvars.myObj ="";</script>

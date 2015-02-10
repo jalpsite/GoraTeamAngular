@@ -1,0 +1,32 @@
+<!-- User info -->
+			<div class="login-info">
+				<span> <!-- User image size is adjusted inside CSS, it should stay as is --> 
+					
+					<a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+						<img src="img/avatars/sunny.png" alt="me" class="online" /> 
+						<span data-localize="john.doe" id="lblnomb">
+						</span>
+						<i class="fa fa-angle-down"></i>
+					</a> 
+					
+				</span>
+			</div>
+			<!-- end user info -->
+
+			<!-- NAVIGATION : This navigation is also responsive
+
+			To make this navigation dynamic please make sure to link the node
+			(the reference to the nav > ul) after page load. Or the navigation
+			will not initialize.
+			-->
+
+			<navigation>
+				<nav:item data-view="/dashboard" data-icon="fa fa-lg fa-fw fa-home" title="Dashboard" />	
+				<nav:item data-view="/forms/form-templates" data-icon="fa fa-lg fa-fw fa-inbox" title="Personal"></nav:item>	
+				<nav:item data-view="/forms/Mantenimiento" data-icon="fa fa-lg fa-fw  fa-cogs" title="Mantenimiento"></nav:item>
+				<nav:item data-view="/forms/busqueda-templates" data-icon="fa fa-lg fa-fw fa-inbox" title="Búsqueda"></nav:item>
+			</navigation>
+			<span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i> </span>
+<script type="text/javascript">
+	$("#lblnomb").html(sessvars.myObj[4]);
+</script>

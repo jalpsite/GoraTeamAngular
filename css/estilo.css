@@ -1,0 +1,55 @@
+.detalle-nombre{
+height:40px;
+min-width: 360px;
+overflow: hidden;
+}
+
+.detalle{
+height:30px;
+min-width: 360px;
+overflow: hidden;
+}
+.btnEdit-nombre{
+	margin-left:10px;display: inline;position:absolute;line-height:40px
+}
+
+.btnEdit{
+	margin-left:10px;display: inline;position:absolute;line-height:25px;
+}
+
+.atributo-nombre{
+font-size: 20px;
+font-weight: bold;
+display: inline;
+line-height:40px;
+}
+
+.atributo{
+margin-left:10px;
+display: inline;
+line-height:30px;
+color: #606060;
+}
+.enlinea{display:inline}
+.attr{font-weight:bold;color:#606060}
+
+.btnFoto{
+position: absolute;
+top: 43px;
+right: 8px;
+z-index: 99;
+}
+
+
+.articulo{
+padding:0 15px;
+}
+.articulo li{
+display: inline;
+list-style-type: none;
+}
+
+.h1left{
+margin:10px;
+}
+

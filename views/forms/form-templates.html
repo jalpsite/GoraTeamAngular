@@ -1,0 +1,931 @@
+
+<div class="row">
+	<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+		<h1 class="page-title txt-color-blueDark">
+			
+			<!-- PAGE HEADER -->
+			<i class="fa-fw fa fa-pencil-square-o"></i> 
+				Consultores
+			<span>>  
+				Registro de Consultor
+			</span>
+		</h1>
+	</div>
+</div>
+
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+	
+	<div class="row">
+		<article class="col-sm-12 col-md-12 col-lg-12">
+			
+
+				
+			
+			<!-- Widget ID (each widget will need unique ID)-->
+			<div class="jarviswidget jarviswidget-color-red" id="wid-id-110" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-deletebutton="false" data-widget-sortable="false" >
+				<!-- widget options:
+				usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+				data-widget-colorbutton="false"
+				data-widget-editbutton="false"
+				data-widget-togglebutton="false"
+				data-widget-deletebutton="false"
+				data-widget-fullscreenbutton="false"
+				data-widget-custombutton="false"
+				data-widget-collapsed="true"
+				data-widget-sortable="false"
+
+				-->
+				<header>
+					<span class="widget-icon"> <i class="fa fa-check"></i> </span>
+					<h2>Registro de Consultor</h2>
+
+				</header>
+
+				<!-- widget div-->
+				<div>
+
+					<!-- widget edit box -->
+					<div class="jarviswidget-editbox">
+						<!-- This area used as dropdown edit box -->
+
+					</div>
+					<!-- end widget edit box -->
+
+					<!-- widget content -->
+					<div class="widget-body">
+
+						<div class="row">
+							<form action="" id="wizard-1" class="smart-form" novalidate="novalidate" ng-controller="controladorPrincipal">
+								<div id="bootstrap-wizard-1" class="col-sm-12">
+									<div class="form-bootstrapWizard">
+										<ul class="bootstrapWizard form-wizard">
+											<li class="active" data-target="#step1">
+												<a href="#tab1" data-toggle="tab"> <span class="step">1</span> <span class="title">Datos Personales</span> </a>
+											</li>
+											<li data-target="#step2">
+												<a href="#tab2" data-toggle="tab"> <span class="step">2</span> <span class="title">Experiencia Laboral</span> </a>
+											</li>
+											<li data-target="#step3">
+												<a href="#tab3" data-toggle="tab"> <span class="step">3</span> <span class="title">Estudios</span> </a>
+											</li>
+											<li data-target="#step4">
+												<a href="#tab4" data-toggle="tab"> <span class="step">4</span> <span class="title">Competencia</span> </a>
+											</li>
+										</ul>
+										<div class="clearfix"></div>
+									</div>
+									<div class="tab-content" >
+										<div class="tab-pane active" id="tab1" >											
+											<br>
+											<br>
+											<fieldset>
+												<div class="row " >
+													<section class="col col-6 form-group">
+														<label class="input"> <i class="icon-append fa fa-user"></i>
+															<input type="text" name="nombres" id="nombre" placeholder="Nombres" ng-model="_persona.nombres" ng-change="_persona.nombres=_persona.nombres.toUpperCase();">
+														</label>
+													</section>
+													<section class="col col-6 form-group">
+														<label class="input"> <i class="icon-append fa fa-user"></i>
+															<input type="text" name="appat"  placeholder="Apellido Paterno" ng-model="_persona.apepat"  ng-change="_persona.apepat=_persona.apepat.toUpperCase();">
+														</label>
+													</section>
+														
+												</div>
+												<div class="row">												
+													<section class="col col-6 form-group">
+														<label class="input"> <i class="icon-append fa fa-user"></i>
+															<input type="text" name="apmat" placeholder="Apellido Materno" ng-model="_persona.apemat" ng-change="_persona.apemat=_persona.apemat.toUpperCase();">
+														</label>
+													</section>
+													<section class="col col-6 form-group">
+
+													<label class="input"> <i class="icon-append fa fa-calendar"></i>
+														<input type="text" name="nacimiento" id="Nacdate" placeholder="Fecha de Nacimiento" ng-model="_persona.fechanacimiento">
+													</label>	
+													</section>											
+												</div>
+												<div class="row">												
+													<section class="col col-6">
+														<label class="label">Sexo</label>
+														<div class="inline-group">
+															<label class="radio">
+																<input type="radio" name="Sexo" ng-model="_persona.sexo" value="M">
+																<i></i>Masculino</label>
+															<label class="radio">
+																<input type="radio" name="Sexo" ng-model="_persona.sexo" value="F">
+																<i></i>Femenino</label>
+														</div>
+													</section>
+													<section class="col col-6 form-group">
+													<br>
+														<label class="select">
+															<select name="estadoCivil" id="estadocivil" ng-model="_persona.estadocivil" ng-options="opt[0] as opt[1] for opt in Estadocivil"  ng-init="_persona.estadocivil = null" >
+															<option value="" ng-disabled="!!_persona.estadocivil">Seleccione Estado Civil</option>	
+															</select>
+													</section>
+												</div>
+											</fieldset>
+											<fieldset>
+
+												<section class="form-group">
+														
+														<label class="select">
+														<select name="nacionalidad" style="width:100%"   class="select2" ng-model="_persona.nacionalidad"  ng-init="_persona.nacionalidad = null"  ng-options="opt[0] as opt[1] for opt in Nacionalidad"  >	
+														<option value="" ng-disabled="!!_persona.nacionalidad">Seleccione Nacionalidad</option>
+															</select> </label>
+
+													</section>
+												<div class="row">
+													<section class="col col-6 form-group">
+													<br>
+														<label class="label">Tipo de Documento</label>
+														<div class="inline-group">
+															<label class="radio" >
+																<input type="radio" name="tDocumento" ng-model="_persona.tipodocidentidad" value="1">
+																<i></i>DNI</label>
+															<label class="radio">
+																<input type="radio" name="tDocumento" ng-model="_persona.tipodocidentidad" value="2">
+																<i></i>Pasaporte</label>
+														</div>
+													</section>
+													<section  class="col col-6 form-group">
+													<br>
+													<br>
+														<label for="address" class="input"> <i class="icon-append fa fa-building"></i>
+															<input type="text" name="nDocumento" placeholder="Ingrese Numero de Documento"  ng-model="_persona.numerodocidentidad" ng-blur="verificacionDNI()">
+														</label>
+													</section>
+												</div>										
+											</fieldset>
+											<fieldset>
+												<label class="label">Email</label>
+												<br>
+												<div ng-repeat="email in _emails">
+													<section class="col col-5">
+
+														<label class="select">
+															<select name="tipoFono"   ng-model="email.tipo"disabled="disabled" ng-options="opt[0] as opt[1] for opt in TipoEmail">
+															</select> <i></i> </label>
+													</section>
+													<section class="col col-5">
+														<label class="input"> <i class="icon-append fa fa-envelope-o"></i>
+															<input type="tel" name="phone" placeholder="Email"  ng-model="email.email" disabled="disabled" class="form-control" >
+														</label>												
+													</section>
+													<section class="col col-2">
+														<button type="button" class="btn btn-danger btn-sm" data-toggle="#phoneInfo" ng-click="eliminarEmail(email)" >
+															<i class="fa fa-times-circle"></i>
+														</button>
+													</section>
+
+												</div>
+												<div >
+													<section class="col col-4">
+														<label class="select">
+															<select  style="width:100%" ng-model="_email.tipo" ng-options="opt[0] as opt[1] for opt in TipoEmail"  ng-init="_email.tipo = null" >
+															<option value="" ng-disabled="!!_email.tipo">Tipo Email</option>	
+															</select><i></i> </label>
+													</section>
+													<section class="col col-4">
+														<label class="input"> <i class="icon-append fa fa-envelope-o"></i>
+															<input type="email" name="email" placeholder="Email"  ng-model="_email.email" ng-change="_email.email=_email.email.toUpperCase();">
+														</label>												
+													</section>													
+													<section class="col col-4">
+														<button type="button" class="btn btn-default btn-sm" data-toggle="#phoneInfo" ng-click="agregarEmail()">
+															<i class="fa fa-plus-circle"></i>
+														Agregar</button>												
+													</section>
+
+												</div>
+											</fieldset>
+											<fieldset>
+												<label class="label">Teléfono</label>
+												<br>
+												<div ng-repeat="tel in _telefonos">
+												<section class="col col-5">
+
+														<label class="select">
+															<select   ng-model="tel.tipo"disabled="disabled" ng-options="opt[0] as opt[1] for opt in TipoTelefono">
+															</select> <i></i> </label>
+													</section>
+													
+													<section class="col col-5">
+														<label class="input"> <i class="icon-append fa fa-phone"></i>
+															<input type="tel" name="phone" placeholder="Telefono" data-mask="(99) 999-9999" ng-model="tel.telefono" disabled="disabled" class="form-control" >
+														</label>												
+													</section>
+													<section class="col col-2">
+														<button type="button" class="btn btn-danger btn-sm" data-toggle="#phoneInfo" ng-click="eliminarTele(tel)">
+															<i class="fa fa-times-circle"></i>
+														</button>
+													</section>
+
+												</div>
+												<div >
+													<section class="col col-4">
+														<label class="select">
+															<select name="tipoFono"  style="width:100%" ng-model="_telefono.tipo"ng-options="opt[0] as opt[1] for opt in TipoTelefono"  ng-init="_telefono.tipo = null">
+															<option value="" ng-disabled="!!_telefono.tipo">Tipo de Telefono</option>	
+															</select><i></i> </label>															
+													</section>
+													<section class="col col-4">
+														<label class="input"> <i class="icon-append fa fa-phone"></i>
+															<input type="tel" name="phone" placeholder="Telefono"  ng-model="_telefono.telefono">
+														</label>												
+													</section>													
+													<section class="col col-4">
+														<button type="button" class="btn btn-default btn-sm" data-toggle="#phoneInfo" ng-click="agregarTelefono()">
+															<i class="fa fa-plus-circle"></i>
+														Agregar</button>												
+													</section>
+												</div>
+											</fieldset>
+											<fieldset>
+												<label class="label">Dirección</label>
+												<br>
+												<div ng-repeat="direc in _direcciones">													
+													<section class="col col-10">
+														<label class="textarea" disabled="disabled">
+															<textarea class="custom-scroll" rows="2" disabled="disabled">{{direc.descripcion}}
+															</textarea>
+															</label>												
+													</section>
+													<section class="col col-2">
+														<button type="button" class="btn btn-danger btn-sm" data-toggle="#phoneInfo" ng-click="eliminarDirec(direc)">
+															<i class="fa fa-times-circle"></i>
+														</button>
+													</section>
+
+												</div>
+												<div class="row">
+													<section  class="col col-6">
+														<label class="select">
+															<select name="tipoDireccion"  style="width:100%" ng-model="_direccion.tipo" ng-options="opt as opt[1] for opt in TipoDireccion"  ng-init="_direccion.tipo = null">
+															<option value="" ng-disabled="!!_direccion.tipo">Tipo de Dirección</option>	
+															</select><i></i> </label>	
+													</section>
+													<section class="col col-6">
+														<label class="select">
+															<select name="cboDepartamento" style="width:100%" id="cboDepartamento" ng-model="seleccDepartamento" ng-options="opt as opt for opt in items"  ng-init="seleccDepartamento = null" ng-change="llamaDepartamento()" >
+															<option value="" ng-disabled="!!seleccDepartamento">Seleccione Departamento</option>	
+															</select><i></i> </label>
+																																									
+												</div>
+												<div class="row">
+												<section class="col col-6">
+														<label class="select">
+															<select name="cboProvincia" style="width:100%" ng-model="seleccProvincia" ng-options="opt as opt for opt in items2" ng-init="seleccProvincia = null"  ng-change="llamaProvincia()">
+															<option value="" ng-disabled="!!seleccProvincia">Seleccione Provincia</option>	
+															</select><i></i> </label>
+													</section>
+													<section class="col col-6">
+														<label class="select">
+															<select name="cboDistrito" style="width:100%"  ng-model="_direccion.idubigeo" ng-options="opt as opt[1] for opt in items3" ng-init="_direccion.idubigeo = null"  >
+															<option value="" ng-disabled="!!_direccion.idubigeo">Seleccione Distrito</option>	
+															</select><i></i> </label>
+													</section>
+												</div>		
+												<div class="row">
+													<section  class="col col-6">
+														<label for="address" class="input"> <i class="icon-append fa fa-home"></i>
+															<input type="text" name="nDocumento" placeholder="Ingrese su Dirección"  ng-model="_direccion.direccion" ng-change="_direccion.direccion=_direccion.direccion.toUpperCase();">
+														</label>
+													</section>	
+													<section  class="col col-6">
+														<button type="button" class="btn btn-default btn-sm" data-toggle="#phoneInfo" ng-click="agregarDireccion()">
+															<i class="fa fa-plus-circle"></i>
+														Agregar</button>
+													</section>										
+
+													
+													
+												</div>		
+																				
+											</fieldset>
+											<fieldset>										
+												
+												<section class="form-group">
+													<label class="label">Descripción Personal</label>
+													<label class="textarea textarea-expandable">
+													<textarea class="custom-scroll" ng-model="_persona.presentacion" rows="3" name="presentacion"placeholder="Ingrese una Presentacion"  ng-change="_persona.presentacion=_persona.presentacion.toUpperCase();"></textarea>
+													</label>
+												</section>
+												
+											</fieldset>	
+										</div>
+										<div class="tab-pane" id="tab2" >
+											<br>
+											<br>
+											<div id="experiencia" >
+												<fieldset>
+													<div class="row">
+													<section class="col col-6">
+															<label class="input"> 
+																<i class="icon-append fa fa-group"></i>
+																<input type="text" name="empres" placeholder="Empresa" id="empresa" ng-model="_experiencia.empresa" ng-change="_experiencia.empresa=_experiencia.empresa.toUpperCase();">
+															</label>
+														</section>
+														<section class="col col-6">
+															
+															<label class="select">
+															<select name="nacionalidad" style="width:100%"  ng-model="_experiencia.cargo"  ng-init="_experiencia.cargo = null"  ng-options="opt as opt[1] for opt in TipoCargo"  >	
+															<option value="" ng-disabled="!!_experiencia.cargo">Seleccione Puesto</option>
+																</select><i></i></label>
+
+														</section>
+														
+													</div>
+												</fieldset>
+												<fieldset>
+													<section >
+														<label class="select">
+														<select name="nacionalidad" style="width:100%"  ng-model="_experiencia.pais"  ng-init="_experiencia.pais = null"  ng-options="opt[0] as opt[1] for opt in Nacionalidad"  >	
+														<option value="" ng-disabled="!!_experiencia.pais">Seleccione País</option>
+															</select><i></i></label>
+
+													</section>
+													<section>
+														<label class="textarea textarea-expandable">
+															<i class="icon-append fa fa-comment"></i>
+															<textarea rows="3" class="custom-scroll"  placeholder="Ingrese una descripción" ng-model="_experiencia.descripcion" ng-change="_experiencia.descripcion=_experiencia.descripcion.toUpperCase();"></textarea>
+														</label>
+													</section>
+												</fieldset>
+												<fieldset>
+													<section >
+														<label class="input"><i class="icon-append fa fa-calendar"></i>
+															<input type="text" name="startdate" id="startdate" placeholder="Fecha de Inicio" ng-model="_experiencia.anhoinicio"></label>
+															
+													</section>
+													<section >
+														<label class="input">
+															<i class="icon-append fa fa-calendar"></i>
+															<input type="text" name="finishdate" id="finishdate" placeholder="Fecha de Finalización" ng-model="_experiencia.anhofin">
+														</label>
+													</section>
+													<section>
+														<button class="btn btn-sm btn-primary" type="button" id="nuevo" ng-click="agregarExperiencia()">
+															<i class="fa fa-save" ></i> &nbsp Guardar
+														</button>
+														<button class="btn btn-sm btn-primary" type="button" id="Cancelar"><i class="glyphicon glyphicon-remove"></i> &nbsp Cancelar
+														</button>
+													</section>
+												</fieldset>
+													
+											</div>											
+												<fieldset>													
+													<section>				
+														<button class="btn btn-sm btn-primary" type="button" id="agregar" ng-click="cargaExp()" >
+															<i class="fa fa-plus-square"></i> &nbsp Agregar
+														</button>											
+													</section>	
+
+																								
+												</fieldset>												
+												<div class="widget-body no-padding" id="pestañas">
+													<div class="panel-group smart-accordion-default" id="accordion-2">
+														
+														<div class="panel panel-default" ng-repeat="experiencia in _experiencias">
+															<div class="panel-heading">
+																<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-2" href="#Tabexp{{experiencia.idexperiencia}}" class="collapsed"> <i class="fa fa-fw fa-plus-circle txt-color-green"></i> <i class="fa fa-fw fa-minus-circle txt-color-red"></i> {{experiencia.empresa}}</a></h4>
+															</div>
+															<div id="Tabexp{{experiencia.idexperiencia}}" class="panel-collapse collapse">
+																<div class="panel-body">
+																	<fieldset><div class="panel-body"><h6><span class="degree">{{experiencia.cargonom}}</span></h6>
+																	<p>Fecha de Inicio:  {{experiencia.anhoinicio}} </p><p>Fecha de Finalización:  {{experiencia.anhofin}}</p></div></fieldset>
+																</div>
+															</div>
+														</div>
+														
+													</div>
+
+												</div>
+
+										</div>
+										<div class="tab-pane" id="tab3">
+											<br>
+											<br>
+											<div id="estudios" >
+												<fieldset>
+														<section >
+														<label class="select">
+															<select name="nacionalidad" style="width:100%"    ng-model="_estudio.iduniversidad"  ng-init="_estudio.iduniversidad = null"  ng-options="opt as opt[1] for opt in Instituciones"  >	
+															<option value="" ng-disabled="!!_estudio.iduniversidad">Seleccione Universidad</option>
+															</select><i></i></label>													
+														</section>
+														<section>
+														<label class="select">
+															<select name="nacionalidad" style="width:100%"  ng-model="_estudio.idcarrera"  ng-init="_estudio.idcarrera = null"  ng-options="opt as opt[1] for opt in itemsCarre"  >	
+															<option value="" ng-disabled="!!_estudio.idcarrera">Seleccione Titulo</option>
+															</select><i></i></label>												
+													</section>																				
+												</fieldset>
+												<fieldset>													
+													<section>
+														
+														<label class="select">
+															<select name="nacionalidad" style="width:100%" ng-model="_estudio.nivelestudio"  ng-init="_estudio.nivelestudio = null"  ng-options="opt as opt[1] for opt in itemsNivelE"  >	
+															<option value="" ng-disabled="!!_estudio.nivelestudio">Seleccione Nivel de Estudio</option>
+															</select><i></i></label>
+													</section>
+													<section>														
+														<label class="select">
+															<select name="carrera" style="width:100%" ng-model="_estudio.idgrado"  ng-init="_estudio.idgrado = null"  ng-options="opt as opt[1] for opt in itemsGrado">	
+															<option value="" ng-disabled="!!_estudio.idgrado">Seleccione el grado</option>
+															</select><i></i></label>
+													</section>	
+																			
+														<section class="col-col-6">
+															<label class="input"> <i class="icon-append fa fa-calendar"></i>
+															<input type="text" name="fechaInicio" id="fechaInicio01" placeholder="Fecha de Inicio"  ng-model="_estudio.anhoinicio">
+															</label>
+														</section>
+														<section class="col-col-6">									
+															<label class="input"> <i class="icon-append fa fa-calendar"></i>
+															<input type="text" name="fechaFin" id="fechaFin01" placeholder="Fecha de Finalización"  ng-model="_estudio.anhofin">
+															</label>
+														</section>
+														<section>
+																<label class="textarea textarea-expandable">
+																	<i class="icon-append fa fa-comment"></i>
+																	<textarea rows="3" class="custom-scroll"  placeholder="Ingrese una descripcion extra" ng-model="_estudio.descripcion" ng-change="_estudio.descripcion=_estudio.descripcion.toUpperCase();"></textarea>
+																</label>
+														</section>															
+																			
+														<section>
+														<button class="btn btn-sm btn-primary" type="button" id="nuevo" ng-click="agregarEstudio()">
+															<i class="fa fa-save"></i> &nbsp Guardar
+														</button>
+														<button class="btn btn-sm btn-primary" type="button" id="CancelarEstudio"><i class="glyphicon glyphicon-remove"></i> &nbsp Cancelar
+														</button>
+													</section>
+												</fieldset>
+													
+											</div>	
+											<fieldset>													
+													<section>				
+														<button class="btn btn-sm btn-primary" type="button" id="agregarEstudio" ng-click="cargaInstiruciones()">
+															<i class="fa fa-plus-square"></i> &nbsp Agregar
+														</button>											
+													</section>	
+																										
+												</fieldset>												
+												<div class="widget-body no-padding" id="pestañaEstudios">
+													<div class="panel-group smart-accordion-default" id="accordion100">
+														
+														<div class="panel panel-default" ng-repeat="estudio in _estudios">
+															<div class="panel-heading">
+																<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion100" href="#uni{{estudio.idformacion}}" class="collapsed"> <i class="fa fa-fw fa-plus-circle txt-color-green"></i> <i class="fa fa-fw fa-minus-circle txt-color-red"></i> {{estudio.nomCarrera}}</a></h4>
+															</div>
+															<div id="uni{{estudio.idformacion}}" class="panel-collapse collapse">
+																<div class="panel-body">
+																	<fieldset><div class="panel-body"><h6><span class="degree">{{estudio.uninom}}</span></h5>												
+																	<p>Fecha de Inicio:  {{estudio.anhoinicio}} </p><p>Fecha de Finalización:  {{estudio.anhofin}}</p></div></fieldset>
+																</div>
+															</div>
+														</div>														
+													</div>
+												</div>												
+										</div>
+										<div class="tab-pane" id="tab4">									
+											<br>
+											<br>
+											<fieldset>
+												<section class="col col-5">
+																										
+												</section>
+												<section class="col col-5">
+																										
+												</section>
+												<section class="col col-2">
+													
+													<button  class="btn btn-sm btn-primary" ng-click="guardaMatriz()" type="button">
+														<i class="fa fa-save"></i>
+													 	 Guardar Todo
+													</button>
+												</section>
+											</fieldset>
+
+											<div id="competencia">
+																						
+												<fieldset>
+													<label>Seleccionar Competencia</label>								
+													<label class="select" id="lblatribu">
+														<select id="comboCompe" ng-model="_matriz.idcompetencia" ng-options="item[1] for item in itenCompetencia" ng-change="llamaDHablidad()">		
+															<option value="" ng-disabled="!!_matriz.idcompetencia">Elija una Competencia</option>	
+														</select><i></i>
+													</label>
+													<br>
+													<!--Start the habilidades-->
+													<div id="divHbilidad">
+														<section >
+															<label>Seleccionar Producto</label>							
+															<label class="select" >
+																<select  ng-model="_habilidad.idhabilidades" ng-options="item[1] for item in Hablidad" ng-change="llamaDAtributo()">
+																	<option value="" ng-disabled="!!_habilidad.idhabilidades">Elija un Producto</option>
+																</select><i></i>
+															</label>
+														</section>														
+														<section >
+															<label>Seleccionar Atributos</label>
+																	<select multiple style="width:100%" class="select2"  ng-model="selectedAtributos" ng-options="item[1] for item in itenAtributos" ng-change="BtnAgregar()" id="btnAtribu">			
+																	</select>										
+														</section>
+													</div>
+													<div class="col col-10" >												
+														<button type="button" class="btn btn-default btn-sm" data-toggle="#phoneInfo" ng-click="agregarHabilidad()" id="agregah"><i class="fa fa-plus-circle"></i>Agregar</button>
+														<br>
+														<section  class="col col-8 tree" id="BotonPenultimo2">
+															<ul >
+																<li>
+																	<span><i class="fa fa-lg fa-calendar"></i> {{_matriz.idcompetencia[1]}}</span>
+																	<ul>
+																		<li ng-repeat="habili in _habilidades">
+																			<span class="label label-success"><i class="fa fa-lg fa-plus-circle"></i> {{habili.nomhabilidades}}</span>
+																			<ul>
+																				<li ng-repeat="atri in habili.atributotemp">
+																					<span><i class="fa fa-clock-o"></i> 8.00</span> &ndash; <a href="javascript:void(0);">{{atri.nomatributo}}</a>
+																				</li>
+																			</ul>
+																		</li>
+																	</ul>
+																</li>
+															</ul>
+														</section>
+														<section  class="col col-4" id="BotonPenultimo">
+															<br>
+															<br>
+															<div class="row">
+															<button class="btn btn-sm btn-primary" type="button" id="nuevo" ng-click="agregarMatriz()"><i class="fa fa-save" ></i> &nbsp Guardar</button>
+															</div>
+															<br>
+															<br>
+															<div class="row">
+															<button class="btn btn-sm btn-primary" type="button"  ng-click="limpiarCompe()"><i class="glyphicon glyphicon-remove"></i> &nbsp Cancelar</button>
+															</div>
+														</section>
+													</div>
+													
+												</fieldset>
+													
+											</div>
+											<section>												
+												<div class="widget-body">
+													<hr class="simple">
+													
+													<ul id="myTab1" class="nav nav-tabs bordered">
+
+														<li ng-repeat="compe in _matrices">
+															<a href="#tabcompe{{compe.idcompetencia}}" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i>{{compe.nomcompetencia}}</a>
+														</li>
+														<li class="active">
+															<a href="#s1" data-toggle="tab">Agregar<span class="btn badge bg-color-blue txt-color-white"  id="agregarCompetencia"><i class="fa fa-plus-circle" ></i></span></a>
+														</li>
+													</ul>
+
+													<div id="myTabContent1" class="tab-content padding-10">
+														<div class="tab-pane fade in active" id="s1">
+															<p>
+																Presione el boton <span class="badge bg-color-blue txt-color-white fa fa-plus-circle" >  </span> para poder agregar Compenente con sus respectivos productos y atributos
+															</p>
+														</div>
+														<div class="tab-pane fade" id="tabcompe{{compe.idcompetencia}}" ng-repeat="compe in _matrices">
+															<div class="widget-body">
+
+																<div class="panel-group smart-accordion-default" id="accordion">
+																	
+																	<div class="panel panel-default" ng-repeat="habi in compe.habilidades">
+																		<div class="panel-heading" >
+																			<h4 class="panel-title"><a data-toggle="collapse" ng-init="p()"data-parent="#accordion" href="#colpa{{habi.idHabilidad}}" class="collapsed"> <i class="fa fa-lg fa-angle-down pull-right"></i> <i class="fa fa-lg fa-angle-up pull-right"></i>{{habi.nomhabilidades}} </a></h4>
+																		</div>
+																		<div id="colpa{{habi.idHabilidad}}" class="panel-collapse collapse">
+																			<div class="panel-body" >
+																				<h3 class="text-primary" style="margin:10px;">Atributos</h3>
+																				<ul style=" margin:20px ">
+																					<li ng-repeat="atri in habi.atributotemp">{{atri.nomatributo}}</li>
+																				</ul>	
+																			</div>
+																		</div>
+																	</div>
+																	
+																</div>
+														</div>
+														</div>
+													</div>	
+
+											</section>	
+
+																													
+												
+										</div>
+
+										<div class="form-actions">
+											<div class="row">
+												<div class="col-sm-12">
+													<ul class="pager wizard no-margin">									
+														<li class="previous disabled">
+															<a href="javascript:void(0);" class="btn btn-lg btn-default"> Previous </a>
+														</li>
+														<li class="next" id="nex">
+															<a href="javascript:void(0);" class="btn btn-lg txt-color-darken"> Next </a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</form>
+						</div>
+
+					</div>
+					<!-- end widget content -->
+
+				</div>
+				<!-- end widget div -->
+
+			</div>
+			<!-- end widget -->								
+
+
+		</article>
+		
+		<!-- END COL -->		
+
+	</div>
+
+	<!-- END ROW -->
+
+</section>
+<!-- end widget grid -->
+<!-- SCRIPTS ON PAGE EVENT -->
+<script type="text/javascript">
+
+loadScript("js/plugin/bootstrap-tags/bootstrap-tagsinput.min.js", function(){
+			$('.tagsinput').tagsinput('refresh')
+		});
+$("#experiencia").hide();
+$("#divHbilidad").hide();
+$("#estudios").hide();
+$("#competencia").hide();
+$("#pestañas").hide();
+$("#pestañaEstudios").hide();
+$("#BotonPenultimo").hide();
+$("#BotonPenultimo2").hide();
+$("#enviar").hide();
+//$("#pestañaCompetencia").hide();
+	
+	$("#agregah").hide();
+	
+	$("#agregarCompetencia").click(carga);
+	function carga()
+	{	
+	$("#competencia").show();
+		$("#agregarCompetencia").hide();
+	}
+	$("#agregarEstudio").click(cargaEstudio);
+	function cargaEstudio()
+	{	
+		$("#estudios").show();
+		$("#agregarEstudio").hide();
+		$("#CancelarEstudio").click(function()
+		{
+			limpiar();
+		});	
+	}
+	function limpiar()
+		{
+			$("#experiencia").hide();
+			$("#agregar").show();
+			$("#estudios").hide();
+			$("#agregarEstudio").show();
+			$("#competencia").hide();
+			$("#agregarCompetencia").show();
+		}
+	pageSetUp();
+	
+
+	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+	 *
+	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+	 *
+	 * // activate tooltips
+	 * $("[rel=tooltip]").tooltip();
+	 *
+	 * // activate popovers
+	 * $("[rel=popover]").popover();
+	 *
+	 * // activate popovers with hover states
+	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+	 *
+	 * // activate inline charts
+	 * runAllCharts();
+	 *
+	 * // setup widgets
+	 * setup_widgets_desktop();
+	 *
+	 * // run form elements
+	 * runAllForms();
+	 *
+	 ********************************
+	 *
+	 * pageSetUp() is needed whenever you load a page.
+	 * It initializes and checks for all basic elements of the page
+	 * and makes rendering easier.
+	 *
+	 */var pagefunction1 = function() {
+
+		
+		// activate Nestable for list 1
+		$('#nestable').nestable({
+			group : 1
+		}).on();
+
+		// activate Nestable for list 2
+		
+		// output initial serialised data
+
+		$('#nestable-menu').on('click', function(e) {
+			var target = $(e.target), action = target.data('action');
+			if (action === 'expand-all') {
+				$('.dd').nestable('expandAll');
+			}
+			if (action === 'collapse-all') {
+				$('.dd').nestable('collapseAll');
+			}
+		});
+
+		
+		
+	};
+	
+	// end pagefunction
+	
+	// load nestable.min.js then run pagefunction
+	loadScript("js/plugin/bootstraptree/bootstrap-tree.min.js");
+	loadScript("js/plugin/jquery-nestable/jquery.nestable.min.js", pagefunction1);
+
+	var pagefunction = function() {
+
+		// load bootstrap wizard
+		loadScript("js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js", runBootstrapWizard);
+
+		//Bootstrap Wizard Validations
+
+		function runBootstrapWizard() {
+
+			var $validator = $("#wizard-1").validate({
+
+				rules : {
+					email : {
+						required : false,
+						email : "Ingrese un email valido"
+					},
+					nombres : {
+						required : true
+					},
+					appat : {
+						required : true
+					},
+					apmat : {
+						required : true
+					},
+					nacimiento : {
+						required : true
+					},
+
+					nacionalidad : {
+						required : true
+					},
+					presentacion : {
+						required : true
+					},
+					estadoCivil : {
+						required : true
+					},
+					nDocumento : {
+						required : true
+					}
+					
+				},
+
+				messages : {
+					nombres : "Ingrese sus nombres",
+					appat : "Ingrese su apellido Paterno",
+					apmat : "Ingrese su apellido Materno",
+					nacimiento : "Seleccione su fecha de nacimiento",
+					nacionalidad : "Este Campo es obligatorio",
+					presentacion : "Este Campo es obligatorio",
+					estadoCivil : "Este Campo es obligatorio",
+					nDocumento : "Este Campo es obligatorio",
+					email : {
+						required : "Ingrese un email de contacto",
+						email : "El formato del email no es el correcto"
+					}
+				},
+
+				highlight : function(element) {
+					$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+				},
+				unhighlight : function(element) {
+					$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+				},
+				errorElement : 'span',
+				errorClass : 'help-block',
+				errorPlacement : function(error, element) {
+					if (element.parent('.input-group').length) {
+						error.insertAfter(element.parent());
+					} else {
+						error.insertAfter(element);
+					}
+				}
+			});
+
+			$('#bootstrap-wizard-1').bootstrapWizard({
+
+				'tabClass' : 'form-wizard',
+				'onNext' : function(tab, navigation, index) {
+					var $valid = $("#wizard-1").valid();
+					if (!$valid) {
+						$validator.focusInvalid();
+						return false;
+					} else {
+						$('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass('complete');
+						$('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step').html('<i class="fa fa-check"></i>');
+					}
+				}
+			});
+			$('#Nacdate').datepicker({
+			dateFormat : 'yy/mm/dd',
+			changeMonth: true,
+			changeYear: true,
+			dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+			monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+			prevText : '<i class="fa fa-chevron-left"></i>',
+			nextText : '<i class="fa fa-chevron-right"></i>',
+			
+		});
+			$('#startdate').datepicker({
+			dateFormat : 'yy/mm/dd',
+			changeMonth: true,
+			changeYear: true,
+			dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+			monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+			prevText : '<i class="fa fa-chevron-left"></i>',
+			nextText : '<i class="fa fa-chevron-right"></i>',
+			
+			
+		});
+			$('#finishdate').datepicker({
+			dateFormat : 'yy/mm/dd',
+			changeMonth: true,
+			changeYear: true,
+			dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+			monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+			prevText : '<i class="fa fa-chevron-left"></i>',
+			nextText : '<i class="fa fa-chevron-right"></i>',			
+		});
+			$('#fechaInicio01').datepicker({
+			dateFormat : 'yy/mm/dd',
+			changeMonth: true,
+			changeYear: true,
+			dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+			monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+			prevText : '<i class="fa fa-chevron-left"></i>',
+			nextText : '<i class="fa fa-chevron-right"></i>'
+			
+		});
+			$('#fechaFin01').datepicker({
+			dateFormat : 'yy/mm/dd',
+			changeMonth: true,
+			changeYear: true,
+			dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+			monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+			prevText : '<i class="fa fa-chevron-left"></i>',
+			nextText : '<i class="fa fa-chevron-right"></i>'
+		});
+
+		};
+		
+
+		// load fuelux wizard
+		
+		loadScript("js/plugin/fuelux/wizard/wizard.min.js");
+
+		
+
+	};
+
+	// end pagefunction
+	
+	// Load bootstrap wizard dependency then run pagefunction
+	pagefunction();
+
+</script>
