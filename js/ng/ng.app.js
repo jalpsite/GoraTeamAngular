@@ -565,7 +565,7 @@ function controladorPrincipal($scope,$http){
 		$scope._matriz= new Matriz();
 		$scope._habilidad= new Habilidad();
 		$scope._habilidades= [];
-		$scope.IP=IP;	
+		$scope.IP="10.77.33.117:8083"	
 
 
 	//$scope.IP="10.77.33.117:8083"
@@ -601,8 +601,6 @@ function controladorPrincipal($scope,$http){
 					}).success(function(data)
 						{
 							$scope._persona.nombres=data.nombres;
-							$scope._persona.apepat=data.apepat;
-							$scope._persona.apemat=data.apemat;
 							$scope._persona.apepat=data.apepat;
 						});
 		}

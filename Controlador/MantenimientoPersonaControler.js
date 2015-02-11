@@ -1,6 +1,6 @@
 
 function DatosPersonalesController($scope,$http){
-  $scope.IP=IP;
+  $scope.IP="10.77.33.117:8083";
 
     $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/1200').success(function(data) {
    
@@ -37,7 +37,7 @@ function DatosPersonalesController($scope,$http){
 
 
 function DatosTelefonosController($scope,$http){
-$scope.IP=IP;
+$scope.IP="10.77.33.117:8083";
 
     $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/1200/telefono').success(function(data) {
        $scope.tele = data; 
@@ -51,7 +51,7 @@ $scope.IP=IP;
 
 
 function DatosCorreosController($scope,$http){
-$scope.IP=IP;
+$scope.IP="10.77.33.117:8083";
 
     $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/1200/email').success(function(data) {
        $scope.correo = data; 
@@ -64,7 +64,7 @@ $scope.IP=IP;
 };
 
 function DatosDireccionesController($scope,$http){
-$scope.IP=IP;
+$scope.IP="10.77.33.117:8083";
 
 
     $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/1200/direccion').success(function(data) {
@@ -81,7 +81,7 @@ $scope.IP=IP;
 
 
 function DatosExperienciaController($scope,$http){
-$scope.IP=IP;
+$scope.IP="10.77.33.117:8083";
 /*
 function Experiencia()
     {

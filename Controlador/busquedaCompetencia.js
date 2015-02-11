@@ -1,5 +1,5 @@
 function ControladorDatosCompetencia($scope, $http){   
-	$scope.IP=IP;
+	$scope.IP="10.77.33.117:8083";
 	$scope._comp= [];		
 	$scope._hab= [];
 	$scope._atri= [];
