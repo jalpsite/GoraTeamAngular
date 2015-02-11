@@ -1,3 +1,4 @@
+	
 <link rel="stylesheet" type="text/css" media="screen" href="css/estilo.css">
 <div class="row" >
 	<div class="col-sm-12">
@@ -48,7 +49,7 @@
 																		  
 																		var formData = new FormData(this);
 																				$.ajax({                        
-																					url: "http://10.77.33.117:8083/SpringGoraTeam/persona/1/createfoto",
+																					url: "http://"+IP+"/SpringGoraTeam/persona/"+sessvars.myObj[0]+"/createfoto",
 																					type: "POST",                        
 																					data:  formData,
 																					mimeType:"multipart/form-data",
@@ -57,7 +58,7 @@
 																					contentType: false,
 																					processData: false,
 																					success: function(resp) {																						
-																						$('#fotoPersona').attr('src','http://10.77.33.117:8083/SpringGoraTeam/persona/1/getfoto'+'?'+Math.random());
+																						$('#fotoPersona').attr('src','http://'+IP+'/SpringGoraTeam/persona/'+sessvars.myObj[0]+'/getfoto'+'?'+Math.random());
 																						$('#popoverF').popover('hide')																						 															 
 																					},																					
 																					error: function(jqXHR, estado, error) {
@@ -125,9 +126,9 @@
 																		var amat=$("#txtapemat").val();
 																		alert(nomb+" - "+ apat +" - "+amat);
 																		event.preventDefault();
-																	var formData = {nombres:nomb,apepat:apat,apemat:amat,idpersona:"2"};
+																	var formData = {nombres:nomb,apepat:apat,apemat:amat,idpersona:sessvars.myObj[0]};
 																	$.ajax({
-																	    url : "http://10.77.33.117:8083/SpringGoraTeam/persona/update/1/",
+																	    url : "http://"+IP+"/SpringGoraTeam/persona/update/1/",
 																	    type: "POST",
 																	    data : formData,
 																	    success: function(data, textStatus, jqXHR)
@@ -196,9 +197,9 @@
 																	 //$('#cboPais > option[value="ALEMANIA"]').attr('selected', 'selected');
 																		var pais=$("#cboPais option:selected").html();
 																		event.preventDefault();
-																	var formData = {nacionalidad:pais,idpersona:"2"};
+																	var formData = {nacionalidad:pais,idpersona:sessvars.myObj[0]};
 																	$.ajax({
-																	    url : "http://10.77.33.117:8083/SpringGoraTeam/persona/update/4/",
+																	    url : "http://"+IP+"/SpringGoraTeam/persona/update/4/",
 																	    type: "POST",
 																	    data : formData,
 																	    success: function(data, textStatus, jqXHR)
@@ -221,7 +222,7 @@
 
 																	function DatosPaises($scope,$http){
 																
-																$http.get('http://10.77.33.117:8083/SpringGoraTeam/listas/nacionalidad').success(function(data) {
+																$http.get('http://'+IP+'/SpringGoraTeam/listas/nacionalidad').success(function(data) {
 														          	$scope.Nacion =data;  
 														        });
 															}
@@ -343,9 +344,9 @@
 																	$( "#formPresentacion" ).submit(function( event ) {
 																		var presenta=$("#txtPresenta").val();
 																		event.preventDefault();
-																	var formData = {presentacion:presenta,idpersona:"2"};
+																	var formData = {presentacion:presenta,idpersona:sessvars.myObj[0]};
 																	$.ajax({
-																	    url : "http://10.77.33.117:8083/SpringGoraTeam/persona/update/7/",
+																	    url : "http://"+IP+"/SpringGoraTeam/persona/update/7/",
 																	    type: "POST",
 																	    data : formData,
 																	    success: function(data, textStatus, jqXHR)
@@ -436,10 +437,10 @@
     																		fecha = new Date(ms);
 																		//new Date(Nace);
 																		event.preventDefault();
-																	var formData = {fechanacimiento:fecha,idpersona:"2"};
+																	var formData = {fechanacimiento:fecha,idpersona:sessvars.myObj[0]};
 
 																	$.ajax({
-																	    url : "http://10.77.33.117:8083/SpringGoraTeam/persona/update/3/",
+																	    url : "http://"+IP+"/SpringGoraTeam/persona/update/3/",
 																	    type: "POST",
 																	    data : formData,
 																	    success: function(data, textStatus, jqXHR)
@@ -558,9 +559,9 @@
 																	        } 
 																	        event.preventDefault();
 																		 
-																	var formData = {sexo:sexoSel,idpersona:"2"};
+																	var formData = {sexo:sexoSel,idpersona:sessvars.myObj[0]};
 																	$.ajax({
-																	    url : "http://10.77.33.117:8083/SpringGoraTeam/persona/update/6/",
+																	    url : "http://"+IP+"/SpringGoraTeam/persona/update/6/",
 																	    type: "POST",
 																	    data : formData,
 																	    success: function(data, textStatus, jqXHR)
@@ -621,9 +622,9 @@
 																	$( "#formCivil" ).submit(function( event ) {
 																		var civil=$("#cboCivil").val();
 																		event.preventDefault();
-																	var formData = {estadocivil:civil,idpersona:"2"};
+																	var formData = {estadocivil:civil,idpersona:sessvars.myObj[0]};
 																	$.ajax({
-																	    url : "http://10.77.33.117:8083/SpringGoraTeam/persona/update/2/",
+																	    url : "http://"+IP+"/SpringGoraTeam/persona/update/2/",
 																	    type: "POST",
 																	    data : formData,
 																	    success: function(data, textStatus, jqXHR)
@@ -652,7 +653,7 @@
 
 															function DatosEstadoCivil($scope,$http){
 																
-																$http.get('http://10.77.33.117:8083/SpringGoraTeam/listas/estadocivil').success(function(data) {
+																$http.get('http://'+IP+'/SpringGoraTeam/listas/estadocivil').success(function(data) {
 														          	$scope.Civil =data;  
 														        });
 															}
@@ -701,9 +702,9 @@
 																		var numero=$("#txtDocumento").val();
 																		event.preventDefault();
 
-																	var formData = {tipodocidentidad:tipo,numerodocidentidad:numero,idpersona:"2"};
+																	var formData = {tipodocidentidad:tipo,numerodocidentidad:numero,idpersona:sessvars.myObj[0]};
 																	$.ajax({
-																	    url : "http://10.77.33.117:8083/SpringGoraTeam/persona/update/5/",
+																	    url : "http://"+IP+"/SpringGoraTeam/persona/update/5/",
 																	    type: "POST",
 																	    data : formData,
 																	    success: function(data, textStatus, jqXHR)
@@ -729,7 +730,7 @@
 
 																function DatosTipoDoc($scope,$http){
 																
-																$http.get('http://10.77.33.117:8083/SpringGoraTeam/listas/tipodocumentos').success(function(data) {
+																$http.get('http://'+IP+'/SpringGoraTeam/listas/tipodocumentos').success(function(data) {
 														          	$scope.Tipo =data;  
 														        });
 															}
@@ -850,7 +851,7 @@
 								//alert (tipo+" - "+nomb+" - "+x)
 								var formData = {"idpersonatelefono":id,"estado":"A","telefono":nomb,"tipo":tipo};
 								$.ajax({
-								url : "http://10.77.33.117:8083/SpringGoraTeam/persona/telefono/update/1200",
+								url : "http://10.77.33.117:8083/SpringGoraTeam/persona/telefono/update/"+sessvars.myObj[0],
 								type: "POST",
 								data: formData,
 								success: function(data, textStatus, jqXHR)
@@ -873,7 +874,7 @@
 		
 							}
 							function DatosTipoTel($scope,$http){
-								$http.get('http://10.77.33.117:8083/SpringGoraTeam/listas/tipotelefono').success(function(data) {
+								$http.get('http://'+IP+'/SpringGoraTeam/listas/tipotelefono').success(function(data) {
 								$scope.TipoTel =data;  
 							 });
 							}
@@ -971,7 +972,7 @@
 								//alert (tipo+" - "+nomb+" - "+x)
 								var formData = {"idpersonaemail":ids,"email":nombs,"estado":"A","tipo":tipos};
 								$.ajax({
-								url : "http://10.77.33.117:8083/SpringGoraTeam/persona/email/update/1200",
+								url : "http://"+IP+"/SpringGoraTeam/persona/email/update/"+sessvars.myObj[0],
 								type: "POST",
 								data: formData,
 								success: function(datas, textStatus, jqXHR)
@@ -994,7 +995,7 @@
 		
 							}
 							function DatosTipoCorreo($scope,$http){
-								$http.get('http://10.77.33.117:8083/SpringGoraTeam/listas/tipoemail').success(function(data) {
+								$http.get('http://'+IP+'/SpringGoraTeam/listas/tipoemail').success(function(data) {
 								$scope.TipoCorreo =data;  
 							 });
 							}
@@ -1124,7 +1125,7 @@
 								//alert (tipo+" - "+nomb+" - "+x)
 								var formData = {"idpersonadireccion":idDir,"direccion": direccion,"estado":"A","idubigeo": ubigeo,"tipo":tipoDir}
 								$.ajax({
-								url : "http://10.77.33.117:8083/SpringGoraTeam/persona/direccion/update/1200",
+								url : "http://"+IP+"/SpringGoraTeam/persona/direccion/update/"+sessvars.myObj[0],
 								type: "POST",
 								data: formData,
 								success: function(data3, textStatus, jqXHR)
@@ -1297,7 +1298,7 @@
 												//alert(idExp+" - "+cargEmp+" - "+descEmp+" - "+emp+" - "+pais+" - "+inicio+" - "+fin);
 												var formData = {"idexperiencia":idExp,"cargo":cargEmp,"descripcion":descEmp,"estado":"A","empresa":emp,"pais":pais,"anhoinicio":fec1,"anhofin":fec2}
 												$.ajax({
-												url : "http://10.77.33.117:8083/SpringGoraTeam/experiencia/update/1200",
+												url : "http://"+IP+"/SpringGoraTeam/experiencia/update/"+sessvars.myObj[0],
 												type: "POST",
 												data: formData,
 												success: function(data4, textStatus, jqXHR)
@@ -1322,7 +1323,7 @@
 
 											function DatosTipoExp($scope,$http){
 																	
-											$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/cargos').success(function(data) {
+											$http.get('http://'+IP+'/SpringGoraTeam/listas/cargos').success(function(data) {
 											$scope.TipoCargo = data ;
 											});
 											}
@@ -1354,194 +1355,192 @@
 				<div class="col-sm-12 col-md-12 col-lg-12">
 					<div class="well well-light well-sm no-margin" ng-controller="DatosEducacionController">
 						<!--Insertar Aqui las Habilidades -->
-							<h1 class="semi-bold h1left">FORMACION PROFESIONAL</h1>
-						 <div>
+						<h1 class="semi-bold h1left">FORMACION PROFESIONAL</h1>
+						<div>
 							&nbsp; Tengo {{educ.length}} Estudios Logrados. Ellos Son:<br>
 							<br>
-							  <ul class="example-animate-container articulo">
+							<ul class="example-animate-container articulo">
 							    <li class="animate-repeat " ng-repeat="educs in educ ">
-								<div class="well well-sm well-light">
-							    	<div class="campoEducacion{{educs.idformacion}}" id="{{educs.idformacion}}">	
-								    	 <br>						    		
-								     	CARRERA : 
-								     	<label class="carrEduc{{educs.idformacion}">{{educs.carrera.nombre}}</label> &nbsp;
-								     	<span class="btnEdit-Exp">
-									     	<a  class="btn btn-default btn-xs btnEditaEduc" id="{{educs.idformacion}}" data-placement='above' data-toggle="collapse" href="#EducColapsable{{educs.idformacion}}" aria-expanded="false" aria-controls="DatosColapsables">
-									     		<i class="icon-prepend fa fa-pencil"></i>
-									     	</a>
-									     </span>
-									     <br> 
-								     	GRADO : <label class="gradoEduc{{educs.idformacion}}"> {{educs.grado.descripcion}} </label>
-								     	<br>
-								     	NIVEL : <label class="nivelEduc{{educs.idformacion}}">{{educs.nivelestudio}}</label>
-								     	<br>
-								     	UNIVERSIDAD : <label class="uniEduc{{educs.idformacion}}">{{educs.universidad.nombre}}</label>
-							    	</div>
+									<div class="well well-sm well-light">
+								    	<div class="campoEducacion{{educs.idformacion}}" id="{{educs.idformacion}}">	
+									    	<br>						    		
+									     	CARRERA : 
+									     	<label class="carrEduc{{educs.idformacion}}">{{educs.carrera.nombre}}</label> &nbsp;
+									     	<span class="btnEdit-Exp">
+										     	<a  class="btn btn-default btn-xs btnEditaEduc" id="{{educs.idformacion}}" data-placement='above' data-toggle="collapse" href="#EducColapsable{{educs.idformacion}}" aria-expanded="false" aria-controls="DatosColapsables">
+										     		<i class="icon-prepend fa fa-pencil"></i>
+										     	</a>
+										    </span>
+										    <br> 
+									     	GRADO : <label class="gradoEduc{{educs.idformacion}}"> {{educs.grado.descripcion}} </label>
+									     	<br>
+									     	NIVEL : <label class="nivelEduc{{educs.idformacion}}">{{educs.nivelestudio}}</label>
+									     	<br>
+									     	UNIVERSIDAD : <label class="uniEduc{{educs.idformacion}}">{{educs.universidad.nombre}}</label>
+								    	</div>
 
-							    	<div id="EducColapsable{{educs.idformacion}}" class="panel-collapse collapse EducColapsable{{educs.idformacion}}" >
-							    		<div class="" ng-controller="DatosPersonalesController">
-							    		<form id="" action="" class="smart-form form{{educs.idformacion}}"  ng-controller="DatosEducacionCombos">	
-											<fieldset>
-												<section >
-													<label class="select">
-													<select class="cboUni{{educs.idformacion}}" style="width:100%"    ng-model="_estudio.iduniversidad"  ng-init="_estudio.iduniversidad = null"  ng-options="opt as opt[1] for opt in  unis track by opt[0]"  >	
-														<option value="" ng-disabled="!!_estudio.iduniversidad">Seleccione Universidad</option>
-													</select><i></i></label>													
-												</section>
-												<section>
-													<label class="select">
-													<select class="cboTitulo{{educs.idformacion}}" style="width:100%"  ng-model="_estudio.idcarrera"  ng-init="_estudio.idcarrera = null"  ng-options="opt as opt[1] for opt in carrera track by opt[0]"  >	
-															<option value="" ng-disabled="!!_estudio.idcarrera">Seleccione Titulo</option>
-													</select><i></i></label>												
-												</section>																				
-											</fieldset>
-											<fieldset>													
-												<section>
-													<label class="select">
-													<select class="cboNivel{{educs.idformacion}}" style="width:100%" ng-model="_estudio.nivelestudio"  ng-init="_estudio.nivelestudio = null"  ng-options="opt as opt[1] for opt in nivel track by opt[1]"  >	
-														<option value="" ng-disabled="!!_estudio.nivelestudio">Seleccione Nivel de Estudio</option>
-													</select><i></i></label>
-												</section>
-												<section>														
-													<label class="select">
-													<select class="cboGrado{{educs.idformacion}}" style="width:100%" ng-model="_estudio.idgrado"  ng-init="_estudio.idgrado = null"  ng-options="opt as opt[1] for opt in Grado track by opt[0]">	
-														<option value="" ng-disabled="!!_estudio.idgrado">Seleccione el grado</option>
-													</select><i></i></label>
-												</section>	
-												<section class="col-col-6">
-													<label class="input"> <i class="icon-append fa fa-calendar"></i>
-														<input type="text" class="fecIniEst{{educs.idformacion}}" placeholder="Fecha de Inicio"  ng-model="_estudio.anhoinicio">
-													</label>
-												</section>
-												<section class="col-col-6">									
-													<label class="input"> <i class="icon-append fa fa-calendar"></i>
-														<input type="text" class="fecFinEst{{educs.idformacion}}" placeholder="Fecha de Finalización"  ng-model="_estudio.anhofin">
-													</label>
-												</section>
-												<section>
-													<label class="textarea textarea-expandable">
-														<i class="icon-append fa fa-comment"></i>
-														<textarea rows="3" class="custom-scroll txtDescFor{{educs.idformacion}}"  placeholder="Ingrese una descripcion extra" ng-model="_estudio.descripcion" ng-change="_estudio.descripcion=_estudio.descripcion.toUpperCase();"></textarea>
-													</label>
-												</section>	
-											</fieldset>
-										</form>
-											<button type="submit"  class="btn btn-primary btn-sm" onclick="llama5()">
-												Grabar Cambios
-											</button>
-											<button type="button" id="btnCancelar" class="btn btn-danger btn-sm" onclick="cierraColapse5()">
-												Cancelar
-											</button>
-											<br><br>										
-									<script type="text/javascript">
+								    	<div id="EducColapsable{{educs.idformacion}}" class="panel-collapse collapse EducColapsable{{educs.idformacion}}" >
+								    		<div class="" ng-controller="DatosPersonalesController">
+									    		<form id="" action="" class="smart-form form{{educs.idformacion}}" ng-controller="DatosEducacionCombos">	
+													<fieldset>
+														<section >
+															<label class="select">
+																<select class="cboUni{{educs.idformacion}}" style="width:100%"    ng-model="_estudio.iduniversidad"  ng-init="_estudio.iduniversidad = null"  ng-options="opt as opt[1] for opt in  unis track by opt[0]"  >	
+																	<option value="" ng-disabled="!!_estudio.iduniversidad">Seleccione Universidad</option>
+																</select><i></i>
+															</label>													
+														</section>
+														<section>
+															<label class="select">
+																<select class="cboTitulo{{educs.idformacion}}" style="width:100%"  ng-model="_estudio.idcarrera"  ng-init="_estudio.idcarrera = null"  ng-options="opt as opt[1] for opt in carrera track by opt[0]"  >	
+																		<option value="" ng-disabled="!!_estudio.idcarrera">Seleccione Titulo</option>
+																</select><i></i>
+															</label>												
+														</section>																				
+													</fieldset>
+													<fieldset>													
+														<section>
+															<label class="select">
+																<select class="cboNivel{{educs.idformacion}}" style="width:100%" ng-model="_estudio.nivelestudio"  ng-init="_estudio.nivelestudio = null"  ng-options="opt as opt[1] for opt in nivel track by opt[1]"  >	
+																	<option value="" ng-disabled="!!_estudio.nivelestudio">Seleccione Nivel de Estudio</option>
+																</select><i></i>
+															</label>
+														</section>
+														<section>														
+															<label class="select">
+																<select class="cboGrado{{educs.idformacion}}" style="width:100%" ng-model="_estudio.idgrado"  ng-init="_estudio.idgrado = null"  ng-options="opt as opt[1] for opt in Grado track by opt[0]">	
+																	<option value="" ng-disabled="!!_estudio.idgrado">Seleccione el grado</option>
+																</select><i></i>
+															</label>
+														</section>	
+														<section class="col-col-6">
+															<label class="input"> <i class="icon-append fa fa-calendar"></i>
+																<input type="text" class="fecIniEst{{educs.idformacion}}" placeholder="Fecha de Inicio"  ng-model="_estudio.anhoinicio">
+															</label>
+														</section>
+														<section class="col-col-6">									
+															<label class="input"> <i class="icon-append fa fa-calendar"></i>
+																<input type="text" class="fecFinEst{{educs.idformacion}}" placeholder="Fecha de Finalización"  ng-model="_estudio.anhofin">
+															</label>
+														</section>
+														<section>
+															<label class="textarea textarea-expandable">
+																<i class="icon-append fa fa-comment"></i>
+																<textarea rows="3" class="custom-scroll txtDescFor{{educs.idformacion}}"  placeholder="Ingrese una descripcion extra" ng-model="_estudio.descripcion" ng-change="_estudio.descripcion=_estudio.descripcion.toUpperCase();"></textarea>
+															</label>
+														</section>	
+													</fieldset>
+												</form>
+													<button type="submit"  class="btn btn-primary btn-sm" onclick="llama5()">
+														Grabar Cambios
+													</button>
+													<button type="button" id="btnCancelar" class="btn btn-danger btn-sm" onclick="cierraColapse5()">
+														Cancelar
+													</button>
+													<br><br>										
+												<script type="text/javascript">
 
-							    			var varContEd=""
-											$(document).on("click",".btnEditaEduc",CargarEdu);	
-											function CargarEdu()
-											{								
-												var idFor=($(this).attr('id'));
-												varContEd=idFor;
-												$(".campoEducacion"+varContEd).hide();
+									    			var varContEd=""
+													$(document).on("click",".btnEditaEduc",CargarEdu);	
+													function CargarEdu()
+													{								
+														var idFor=($(this).attr('id'));
+														varContEd=idFor;
+														$(".campoEducacion"+varContEd).hide();
 
 
-							    			$('.fecIniEst'+varContEd).datepicker({
-											dateFormat : 'yy/mm/dd',
-											changeMonth: true,
-											changeYear: true,
-											dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
-											monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
-											prevText : '<i class="fa fa-chevron-left"></i>',
-											nextText : '<i class="fa fa-chevron-right"></i>',
-											});
-											$('.fecFinEst'+varContEd).datepicker({
-												dateFormat : 'yy/mm/dd',
-												changeMonth: true,
-												changeYear: true,
-												dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
-												monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
-												prevText : '<i class="fa fa-chevron-left"></i>',
-												nextText : '<i class="fa fa-chevron-right"></i>',			
-											});
-											}
-
-											function cierraColapse5(){
-											//alert(".campoTelefonos"+x);
-												$('.EducColapsable'+varContEd).collapse('toggle');
-												$(".campoEducacion"+varContEd).show();							
-
-											}
-
-											function llama5(){
-												
-												var univ=($(".cboUni"+varContEd).val());	
-												var titulo=$(".cboTitulo"+varContEd).val();
-												var nivel=$(".cboNivel"+varContEd).val();	
-												var Desc= $(".txtDescFor"+varContEd).val();	
-												var grado= $(".cboGrado"+varContEd).val();	
-												var inicio=($('.fecIniEst'+varContEd).val());
-												var ano1=inicio.charAt(0)+inicio.charAt(1)+inicio.charAt(2)+inicio.charAt(3);
-												var mes1=inicio.charAt(5)+inicio.charAt(6);
-												var dia1=inicio.charAt(8)+inicio.charAt(9);
-												var fec1=ano1+"/"+mes1+"/"+dia1;
-												var fin=($('.fecFinEst'+varContEd).val());
-												var ano2=fin.charAt(0)+fin.charAt(1)+fin.charAt(2)+fin.charAt(3);
-												var mes2=fin.charAt(5)+fin.charAt(6);
-												var dia2=fin.charAt(8)+fin.charAt(9);
-												var fec2=ano2+"/"+mes2+"/"+dia2;
-												var idFor = varContEd;
-												//alert(idExp+" - "+univ+" - "+titulo+" - "+nivel+" - "+Desc+" - "+grado+" - "+fec1+" - "+fec2);
-												var formData = {"idformacion":idFor,"descripcion":Desc,"estado":"A","nivelestudio":nivel,"anhoinicio":fec1,"anhofin":fec2}
-												$.ajax({
-												url : "http://localhost:8083/SpringGoraTeam/formacion/update/1200/"+univ+"/"+titulo+"/"+grado+"/",
-												type: "POST",
-												data: formData,
-												success: function(data5, textStatus, jqXHR)
-													{
-													alert("Datos modificados satisfactoriamente");
-													$(".carrEduc"+varContEd).html(data5.carrera.nombre);
-													$(".gradoEduc"+varContEd).html(data5.grado.descripcion);
-													$(".nivelEduc"+varContEd).html(data5.nivelestudio);
-													$(".uniEduc"+varContEd).html(data5.universidad.nombre);
-													$('.EducColapsable'+varContEd).collapse('toggle');
-													$(".campoEducacion"+varContEd).show();	
-													 },
-													 error: function (jqXHR, textStatus, errorThrown)
-													   {
-													alert("No sale");
-													   }
+									    			$('.fecIniEst'+varContEd).datepicker({
+													dateFormat : 'yy/mm/dd',
+													changeMonth: true,
+													changeYear: true,
+													dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+													monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+													prevText : '<i class="fa fa-chevron-left"></i>',
+													nextText : '<i class="fa fa-chevron-right"></i>',
 													});
-											}
-											
+													$('.fecFinEst'+varContEd).datepicker({
+														dateFormat : 'yy/mm/dd',
+														changeMonth: true,
+														changeYear: true,
+														dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+														monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+														prevText : '<i class="fa fa-chevron-left"></i>',
+														nextText : '<i class="fa fa-chevron-right"></i>',			
+													});
+													}
 
-							    	function DatosEducacionCombos($scope,$http){
-										$scope.IP="localhost:8083";							
-											$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/universidades').success(function(data) {
-											$scope.unis = data ;
-											});
-											$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/grados').success(function(data) {
-											$scope.Grado = data ;
-											});
-											$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/carreras').success(function(data) {
-											$scope.carrera = data ;
-											});
-											$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/nivelestudio').success(function(data) {
-											$scope.nivel = data ;
-											});
+													function cierraColapse5(){
+													//alert(".campoTelefonos"+x);
+														$('.EducColapsable'+varContEd).collapse('toggle');
+														$(".campoEducacion"+varContEd).show();							
 
+													}
 
+													function llama5(){
+														
+														var univ=($(".cboUni"+varContEd).val());	
+														var titulo=$(".cboTitulo"+varContEd).val();
+														var nivel=$(".cboNivel"+varContEd).val();	
+														var Desc= $(".txtDescFor"+varContEd).val();	
+														var grado= $(".cboGrado"+varContEd).val();	
+														var inicio=($('.fecIniEst'+varContEd).val());
+														var ano1=inicio.charAt(0)+inicio.charAt(1)+inicio.charAt(2)+inicio.charAt(3);
+														var mes1=inicio.charAt(5)+inicio.charAt(6);
+														var dia1=inicio.charAt(8)+inicio.charAt(9);
+														var fec1=ano1+"/"+mes1+"/"+dia1;
+														var fin=($('.fecFinEst'+varContEd).val());
+														var ano2=fin.charAt(0)+fin.charAt(1)+fin.charAt(2)+fin.charAt(3);
+														var mes2=fin.charAt(5)+fin.charAt(6);
+														var dia2=fin.charAt(8)+fin.charAt(9);
+														var fec2=ano2+"/"+mes2+"/"+dia2;
+														var idFor = varContEd;
+														//alert(idExp+" - "+univ+" - "+titulo+" - "+nivel+" - "+Desc+" - "+grado+" - "+fec1+" - "+fec2);
+														var formData = {"idformacion":idFor,"descripcion":Desc,"estado":"A","nivelestudio":nivel,"anhoinicio":fec1,"anhofin":fec2}
+														$.ajax({
+														url : "http://"+IP+"/SpringGoraTeam/formacion/update/"+sessvars.myObj[0]+"/"+univ+"/"+titulo+"/"+grado+"/",
+														type: "POST",
+														data: formData,
+														success: function(data5, textStatus, jqXHR)
+															{
+															alert("Datos modificados satisfactoriamente");
+															$(".carrEduc"+varContEd).html(data5.carrera.nombre);
+															$(".gradoEduc"+varContEd).html(data5.grado.descripcion);
+															$(".nivelEduc"+varContEd).html(data5.nivelestudio);
+															$(".uniEduc"+varContEd).html(data5.universidad.nombre);
+															$('.EducColapsable'+varContEd).collapse('toggle');
+															$(".campoEducacion"+varContEd).show();	
+															 },
+															 error: function (jqXHR, textStatus, errorThrown)
+															   {
+															alert("No sale");
+															   }
+															});
+													}
+													
 
-											}
-
-
-							    	</script>
-							    		</div>
-
-
-
+											    	function DatosEducacionCombos($scope,$http){
+														$scope.IP=IP;							
+															$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/universidades').success(function(data) {
+															$scope.unis = data ;
+															});
+															$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/grados').success(function(data) {
+															$scope.Grado = data ;
+															});
+															$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/carreras').success(function(data) {
+															$scope.carrera = data ;
+															});
+															$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/nivelestudio').success(function(data) {
+															$scope.nivel = data ;
+															});
+															}
+										    	</script>
+								    		</div>
+										</div>
+									</div>
+								</li>
+							</ul>
 						</div>
 					</div>
-					</li>
-					</ul>
 				</div>
 			</div>
 		</div>
@@ -1553,8 +1552,59 @@
 		<div class="well well-sm">
 			<div class="row">
 				<div class="col-sm-12 col-md-12 col-lg-12">
-					<div class="well well-light well-sm no-margin no-padding">
+					<div class="well well-light well-sm no-margin no-padding" style="overflow: auto;" >
 						<!--Insertar Aqui Competencias-->
+						<h1 class="semi-bold h1left">COMPETENCIAS EMPRESARIALES</h1>
+						<div>
+							<br>	
+							<div class="tabs-left" ng-controller="DatosCompetenciaController">
+									<ul id="myModCom" class="nav nav-tabs tabs-left" >
+										<li ng-repeat="competis in competi" >		
+											<a href="#tab{{competis[0]}}" ng-click="muestraHab(competis[0])" class="btnEditaCom" id="{{competis[0]}}" data-toggle="tab">{{competis[1]}}</a>
+
+										</li>														
+									</ul>
+								<div class="tab-content" >
+
+									<div class="tab-pane fade tab{{competis[0]}}" ng-repeat="competis in competi" id="tab{{competis[0]}}">
+										HABILIDADES											
+												<div class="form-group">
+													<div class="col-lg-5">
+														<ol class="dd-list">
+															<li class="dd-item" ng-repeat="habs in habilidad">
+																<div class="col-lg-10 dd-handle"><i class="fa fa-lg fa-sliders "></i>&nbsp;&nbsp;{{habs[1]}}
+																</div>																
+																<div class="col-lg-2">																
+																<span><a ng-click="muestraAtri(habs[0])" class="btn btn-info btn-sm" type="button">
+																<i class="fa fa-info-circle "></i></a>
+																</span>				
+																</div>
+
+															</li>								
+														</ol>															
+													</div>
+													<div class="alert alert-info col-lg-5">
+													ATRIBUTOS
+														<ul>
+															<li ng-repeat="atribs in atrib">
+																<span>{{atribs[1]}}
+																&nbsp;&nbsp;<a href="#"  class="btn btn-info btn-sm" type="button">
+																<i class="fa fa-pencil-square-o "></i></a>
+																</span>
+															
+															</li>
+														</ul>	
+													
+													</div>
+												</div>
+
+																			
+									</div>	
+					
+							
+								</div>
+							</div>								
+						</div>
 					</div>
 				</div>
 			</div>
@@ -1577,7 +1627,6 @@
 -->
 
 
-<script src="Controlador/PersonaControler.js"></script>
 <script src="Controlador/MantenimientoPersonaControler.js"></script>
 
 <script type="text/javascript">
@@ -1714,12 +1763,7 @@
     });
 });
 
-   
 	
-
-
-
-
 
 
 </script>
