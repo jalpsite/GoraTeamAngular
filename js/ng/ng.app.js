@@ -27,7 +27,7 @@ function controladorPrincipal($scope,$http){
 			this.apepat="";
 			this.apemat="";
 			this.nombres="";
-			this.estado="a";
+			this.estado="A";
 			this.estadocivil="Soltero";
 			this.fechanacimiento="";
 			this.nacionalidad="Perú";			
@@ -45,7 +45,7 @@ function controladorPrincipal($scope,$http){
 			this.idpersona="";
 			this.telefono="";
 			this.tipo ="";
-			this.estado="a";
+			this.estado="A";
 		}
 		function Email()
 		{
@@ -54,7 +54,7 @@ function controladorPrincipal($scope,$http){
 			this.idpersonaemail="";
 			this.email="";
 			this.tipo="";
-			this.estado="a";
+			this.estado="A";
 		}	
 		function Direccion()
 		{
@@ -63,7 +63,7 @@ function controladorPrincipal($scope,$http){
 			this.idubigeo="";
 			this.direccion="";
 			this.tipo="Casa";
-			this.estado="a";
+			this.estado="A";
 			this.descripcion=""
 		}	
 		function Experiencia()
@@ -71,7 +71,7 @@ function controladorPrincipal($scope,$http){
 			this.idexperiencia="";			
 			this.cargo="";
 			this.descripcion="";
-			this.estado="a";
+			this.estado="A";
 			this.idpersona="";
 			this.empresa ="";
 			this.cargonom ="";
@@ -104,6 +104,7 @@ function controladorPrincipal($scope,$http){
 			this.nomcompetencia="";
 			this.idpersona="";	
 			this.habilidades=[];
+			this.estado="A";
 				
 		}
 		function Habilidad()
@@ -113,7 +114,7 @@ function controladorPrincipal($scope,$http){
 			this.idpersona="";//creo q esto de puede quitar ya q la matriz trae el id de la persona
 			this.idhabilidades="";
 			this.nomhabilidades="";
-			this.atributotemp=[]
+			this.atributotemp=[];
 		}
 		function Atributos()
 		{
@@ -416,7 +417,8 @@ function controladorPrincipal($scope,$http){
 			mtz.idcompetencia=$scope._matriz.idcompetencia[0];
 			mtz.nomcompetencia=$scope._matriz.idcompetencia[1];
 			mtz.idpersona=$scope._matriz.idpersona;	
-			mtz.habilidades=$scope._habilidades;		
+			mtz.habilidades=$scope._habilidades;
+			mtz.estado="A";		
 			$scope._matrices.push(mtz);
 			$scope._habilidades=[];
 			$("#pestañas").show();
@@ -565,7 +567,7 @@ function controladorPrincipal($scope,$http){
 		$scope._matriz= new Matriz();
 		$scope._habilidad= new Habilidad();
 		$scope._habilidades= [];
-		$scope.IP="10.77.33.117:8083"	
+		$scope.IP=IP;	
 
 
 	//$scope.IP="10.77.33.117:8083"
@@ -601,6 +603,8 @@ function controladorPrincipal($scope,$http){
 					}).success(function(data)
 						{
 							$scope._persona.nombres=data.nombres;
+							$scope._persona.apepat=data.apepat;
+							$scope._persona.apemat=data.apemat;
 							$scope._persona.apepat=data.apepat;
 						});
 		}
