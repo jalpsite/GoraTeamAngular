@@ -605,13 +605,13 @@ function controladorPrincipal($scope,$http){
 					}).success(function(data)
 						{
 							$scope._emails=[];
-							var dateee=data.fechanacimiento.replace(/\-/g, '/');
-							dt_to = $.datepicker.formatDate('dd/mm/yy', new Date(dateee));
+							//var dateee=data.fechanacimiento.replace(/\-/g, '/');
+							//dt_to = $.datepicker.formatDate('dd/mm/yy', new Date(dateee));
 							$scope._persona.nombres=data.nombres;
 							$scope._persona.apepat=data.apepat;
 							$scope._persona.apemat=data.apemat;
 							$scope._persona.estadocivil=data.estadocivil;
-							$scope._persona.fechanacimiento=dt_to;
+							$scope._persona.fechanacimiento=data.fechanacimiento;
 							$scope._persona.nacionalidad=data.nacionalidad;
 							$scope._persona.tipodocidentidad=data.tipodocidentidad;
 							$scope._persona.numerodocidentidad=data.numerodocidentidad;

@@ -344,7 +344,7 @@
 												<fieldset>
 													<section >
 														<label class="select">
-														<select name="nacionalidad" style="width:100%"  ng-model="_experiencia.pais"  ng-init="_experiencia.pais = null"  ng-options="opt[0] as opt[1] for opt in Nacionalidad"  >	
+														<select name="nacionalidad" style="width:100%"  ng-model="_experiencia.pais"  ng-init="_experiencia.pais = null"  ng-options="opt[1] as opt[1] for opt in Nacionalidad"  >	
 														<option value="" ng-disabled="!!_experiencia.pais">Seleccione País</option>
 															</select><i></i></label>
 
@@ -352,7 +352,7 @@
 													<section>
 														<label class="textarea textarea-expandable">
 															<i class="icon-append fa fa-comment"></i>
-															<textarea rows="3" class="custom-scroll"  placeholder="Ingrese una descripción" ng-model="_experiencia.presentacion" ng-change="_experiencia.descripcion=_experiencia.descripcion.toUpperCase();"></textarea>
+															<textarea rows="3" class="custom-scroll"  placeholder="Ingrese una descripción" ng-model="_experiencia.descripcion" ng-change="_experiencia.descripcion=_experiencia.descripcion.toUpperCase();"></textarea>
 														</label>
 													</section>
 												</fieldset>
@@ -549,7 +549,7 @@
 																			<span class="label label-success"><i class="fa fa-lg fa-plus-circle"></i> {{habili.nomhabilidades}}</span>
 																			<ul>
 																				<li ng-repeat="atri in habili.atributotemp">
-																					<span><i class="fa fa-empire "></i> </span> &ndash; {{atri.nomatributo}}
+																					<span><i class="fa fa-empire "></i></span> &ndash; {{atri.nomatributo}}
 																				</li>
 																			</ul>
 																		</li>
@@ -862,7 +862,7 @@ $("#enviar").hide();
 				}
 			});
 			$('#Nacdate').datepicker({
-			dateFormat : 'yy/mm/dd',
+			dateFormat : 'yy-mm-dd',
 			changeMonth: true,
 			changeYear: true,
 			dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
@@ -872,7 +872,7 @@ $("#enviar").hide();
 			
 		});
 			$('#startdate').datepicker({
-			dateFormat : 'yy/mm/dd',
+			dateFormat : 'yy-mm-dd',
 			changeMonth: true,
 			changeYear: true,
 			dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
@@ -883,7 +883,7 @@ $("#enviar").hide();
 			
 		});
 			$('#finishdate').datepicker({
-			dateFormat : 'yy/mm/dd',
+			dateFormat : 'yy-mm-dd',
 			changeMonth: true,
 			changeYear: true,
 			dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
@@ -892,7 +892,7 @@ $("#enviar").hide();
 			nextText : '<i class="fa fa-chevron-right"></i>',			
 		});
 			$('#fechaInicio01').datepicker({
-			dateFormat : 'yy/mm/dd',
+			dateFormat : 'yy-mm-dd',
 			changeMonth: true,
 			changeYear: true,
 			dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
@@ -902,7 +902,7 @@ $("#enviar").hide();
 			
 		});
 			$('#fechaFin01').datepicker({
-			dateFormat : 'yy/mm/dd',
+			dateFormat : 'yy-mm-dd',
 			changeMonth: true,
 			changeYear: true,
 			dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
