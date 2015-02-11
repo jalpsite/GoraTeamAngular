@@ -126,7 +126,7 @@
 														<label class="select">
 															<select name="estadoCivil" id="estadocivil" ng-model="_persona.estadocivil" ng-options="opt[0] as opt[1] for opt in Estadocivil"  ng-init="_persona.estadocivil = null" >
 															<option value="" ng-disabled="!!_persona.estadocivil">Seleccione Estado Civil</option>	
-															</select>
+															</select> <i></i> </label>
 													</section>
 												</div>
 											</fieldset>
@@ -135,10 +135,9 @@
 												<section class="form-group">
 														
 														<label class="select">
-														<select name="nacionalidad" style="width:100%"   class="select2" ng-model="_persona.nacionalidad"  ng-init="_persona.nacionalidad = null"  ng-options="opt[0] as opt[1] for opt in Nacionalidad"  >	
+														<select name="nacionalidad" style="width:100%"  ng-model="_persona.nacionalidad"  ng-init="_persona.nacionalidad = null"  ng-options="opt[1] as opt[1] for opt in Nacionalidad"  >	
 														<option value="" ng-disabled="!!_persona.nacionalidad">Seleccione Nacionalidad</option>
-															</select> </label>
-
+															</select> <i></i> </label>
 													</section>
 												<div class="row">
 													<section class="col col-6 form-group">
@@ -146,10 +145,10 @@
 														<label class="label">Tipo de Documento</label>
 														<div class="inline-group">
 															<label class="radio" >
-																<input type="radio" name="tDocumento" ng-model="_persona.tipodocidentidad" value="1">
+																<input type="radio" name="tDocumento" ng-model="_persona.tipodocidentidad" value="DNI">
 																<i></i>DNI</label>
 															<label class="radio">
-																<input type="radio" name="tDocumento" ng-model="_persona.tipodocidentidad" value="2">
+																<input type="radio" name="tDocumento" ng-model="_persona.tipodocidentidad" value="Pasaporte">
 																<i></i>Pasaporte</label>
 														</div>
 													</section>
@@ -169,7 +168,7 @@
 													<section class="col col-5">
 
 														<label class="select">
-															<select name="tipoFono"   ng-model="email.tipo"disabled="disabled" ng-options="opt[0] as opt[1] for opt in TipoEmail">
+															<select    ng-model="email.tipo"disabled="disabled" ng-options="opt[1] as opt[1] for opt in TipoEmail">
 															</select> <i></i> </label>
 													</section>
 													<section class="col col-5">
@@ -187,7 +186,7 @@
 												<div >
 													<section class="col col-4">
 														<label class="select">
-															<select  style="width:100%" ng-model="_email.tipo" ng-options="opt[0] as opt[1] for opt in TipoEmail"  ng-init="_email.tipo = null" >
+															<select  style="width:100%" ng-model="_email.tipo" ng-options="opt[1] as opt[1] for opt in TipoEmail"  ng-init="_email.tipo = null" >
 															<option value="" ng-disabled="!!_email.tipo">Tipo Email</option>	
 															</select><i></i> </label>
 													</section>
@@ -211,7 +210,7 @@
 												<section class="col col-5">
 
 														<label class="select">
-															<select   ng-model="tel.tipo"disabled="disabled" ng-options="opt[0] as opt[1] for opt in TipoTelefono">
+															<select   ng-model="tel.tipo"disabled="disabled" ng-options="opt[1] as opt[1] for opt in TipoTelefono">
 															</select> <i></i> </label>
 													</section>
 													
@@ -230,7 +229,7 @@
 												<div >
 													<section class="col col-4">
 														<label class="select">
-															<select name="tipoFono"  style="width:100%" ng-model="_telefono.tipo"ng-options="opt[0] as opt[1] for opt in TipoTelefono"  ng-init="_telefono.tipo = null">
+															<select name="tipoFono"  style="width:100%" ng-model="_telefono.tipo"ng-options="opt[1] as opt[1] for opt in TipoTelefono"  ng-init="_telefono.tipo = null">
 															<option value="" ng-disabled="!!_telefono.tipo">Tipo de Telefono</option>	
 															</select><i></i> </label>															
 													</section>
@@ -353,7 +352,7 @@
 													<section>
 														<label class="textarea textarea-expandable">
 															<i class="icon-append fa fa-comment"></i>
-															<textarea rows="3" class="custom-scroll"  placeholder="Ingrese una descripción" ng-model="_experiencia.descripcion" ng-change="_experiencia.descripcion=_experiencia.descripcion.toUpperCase();"></textarea>
+															<textarea rows="3" class="custom-scroll"  placeholder="Ingrese una descripción" ng-model="_experiencia.presentacion" ng-change="_experiencia.descripcion=_experiencia.descripcion.toUpperCase();"></textarea>
 														</label>
 													</section>
 												</fieldset>
@@ -505,7 +504,7 @@
 												</section>
 												<section class="col col-2">
 													
-													<button  class="btn btn-sm btn-primary" ng-click="guardaMatriz()" type="button">
+													<button  class="btn btn-sm btn-primary" ng-click="guardaMatrizPrimera()" type="button">
 														<i class="fa fa-save"></i>
 													 	 Guardar Todo
 													</button>
@@ -550,7 +549,7 @@
 																			<span class="label label-success"><i class="fa fa-lg fa-plus-circle"></i> {{habili.nomhabilidades}}</span>
 																			<ul>
 																				<li ng-repeat="atri in habili.atributotemp">
-																					<span><i class="fa fa-clock-o"></i> 8.00</span> &ndash; <a href="javascript:void(0);">{{atri.nomatributo}}</a>
+																					<span><i class="fa fa-empire "></i> </span> &ndash; {{atri.nomatributo}}
 																				</li>
 																			</ul>
 																		</li>
