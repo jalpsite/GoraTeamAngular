@@ -598,7 +598,11 @@ function controladorPrincipal($scope,$http){
 		{
 			$http({	method: 'GET', 
 					url: 'http://'+$scope.IP+'/SpringGoraTeam/persona/'+id,
-					}).success(function(data){console.log(data);});
+					}).success(function(data)
+						{
+							$scope._persona.nombres=data.nombres;
+							$scope._persona.apepat=data.apepat;
+						});
 		}
 	}
 

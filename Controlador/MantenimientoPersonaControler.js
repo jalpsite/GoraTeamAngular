@@ -66,6 +66,7 @@ $scope.IP="10.77.33.117:8083";
 function DatosDireccionesController($scope,$http){
 $scope.IP="10.77.33.117:8083";
 
+
     $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/1200/direccion').success(function(data) {
        $scope.direc = data; 
 
@@ -81,46 +82,55 @@ $scope.IP="10.77.33.117:8083";
 
 function DatosExperienciaController($scope,$http){
 $scope.IP="10.77.33.117:8083";
-    $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/1200/experiencias').success(function(data) {
-       $scope.exp = data; 
+/*
+function Experiencia()
+    {
+      this.idexperiencia="";      
+      this.cargo="";
+      this.descripcion="";
+      this.estado="a";
+      this.idpersona="";
+      this.empresa ="";
+      this.cargonom ="";
+      this.pais="";
+      this.anhoinicio="";
+      this.anhofin ="";
+      
+    }
+   $scope.experienci= new Experiencia();
+   $scope.experiencias=[];
 
+
+    $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/1200/experiencias').success(function(data)
+     {
+      for (var i = 0; i < data.length; i++) {
+        alert(data[i].cargo)
+        var m=jQuery.inArray( data[i].cargo, data )
+        console.log(m);
+      };
        
         
-});
+});*/
      
    
- /*  $scope.tipoPet=function(carg){
+   $scope.tipoPet=function(carg){
         //alert($scope.exp[1].cargo);
        // alert(carg);
-        var superior[];
+        var superior=[];
         superior.push(carg);
         for (var i = superior.length - 1; i >= 0; i--) {
             alert(superior[i]);
+             
         };
-      $http.get('http://'+$scope.IP+'/SpringGoraTeam/cargo/'+carg).success(function(datas) {
+      
       //alert("hola");
-      alert(datas[0]);
+      //alert(datas[0]);
         
-});
+
    
-   }*/
+   }
 
 };
-
-
-function DatosEducacionController($scope,$http){
-$scope.IP="10.77.33.117:8083";
-    $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/1200/formacion').success(function(data) {
-       $scope.educ = data; 
-
-       
-        
-});   
-   
-
-
-};
-
 
 
 
