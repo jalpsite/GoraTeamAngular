@@ -1,8 +1,8 @@
-
+ //alert(sessvars.myObj[0]);
 function DatosPersonalesController($scope,$http){
   $scope.IP=IP;
 
-    $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/1200').success(function(data) {
+    $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/'+sessvars.myObj[0]).success(function(data) {
    
     $scope.nombre = data; 
     $scope.apepat = data;
@@ -11,7 +11,8 @@ function DatosPersonalesController($scope,$http){
     $scope.nacio = data;
     $scope.persona =data;
     $scope.sexo;
-   
+  
+
     if ($scope.persona.sexo=="M") {
         $scope.sexo="MASCULINO";
     };
@@ -39,7 +40,7 @@ function DatosPersonalesController($scope,$http){
 function DatosTelefonosController($scope,$http){
 $scope.IP=IP;
 
-    $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/1200/telefono').success(function(data) {
+    $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/'+sessvars.myObj[0]+'/telefono').success(function(data) {
        $scope.tele = data; 
 
        //alert($scope.tele[0].tipo);
@@ -53,7 +54,7 @@ $scope.IP=IP;
 function DatosCorreosController($scope,$http){
 $scope.IP=IP;
 
-    $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/1200/email').success(function(data) {
+    $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/'+sessvars.myObj[0]+'/email').success(function(data) {
        $scope.correo = data; 
 
        //alert($scope.tele[0].tipo);
@@ -66,8 +67,7 @@ $scope.IP=IP;
 function DatosDireccionesController($scope,$http){
 $scope.IP=IP;
 
-
-    $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/1200/direccion').success(function(data) {
+    $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/'+sessvars.myObj[0]+'/direccion').success(function(data) {
        $scope.direc = data; 
 
        //alert($scope.tele[0].tipo);
@@ -82,55 +82,46 @@ $scope.IP=IP;
 
 function DatosExperienciaController($scope,$http){
 $scope.IP=IP;
-/*
-function Experiencia()
-    {
-      this.idexperiencia="";      
-      this.cargo="";
-      this.descripcion="";
-      this.estado="a";
-      this.idpersona="";
-      this.empresa ="";
-      this.cargonom ="";
-      this.pais="";
-      this.anhoinicio="";
-      this.anhofin ="";
-      
-    }
-   $scope.experienci= new Experiencia();
-   $scope.experiencias=[];
+    $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/'+sessvars.myObj[0]+'/experiencias').success(function(data) {
+       $scope.exp = data; 
 
-
-    $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/1200/experiencias').success(function(data)
-     {
-      for (var i = 0; i < data.length; i++) {
-        alert(data[i].cargo)
-        var m=jQuery.inArray( data[i].cargo, data )
-        console.log(m);
-      };
        
         
-});*/
+});
      
    
-   $scope.tipoPet=function(carg){
+ /*  $scope.tipoPet=function(carg){
         //alert($scope.exp[1].cargo);
        // alert(carg);
-        var superior=[];
+        var superior[];
         superior.push(carg);
         for (var i = superior.length - 1; i >= 0; i--) {
             alert(superior[i]);
-             
         };
-      
+      $http.get('http://'+$scope.IP+'/SpringGoraTeam/cargo/'+carg).success(function(datas) {
       //alert("hola");
-      //alert(datas[0]);
+      alert(datas[0]);
         
-
+});
    
-   }
+   }*/
 
 };
+
+
+function DatosEducacionController($scope,$http){
+$scope.IP=IP;
+    $http.get('http://'+$scope.IP+'/SpringGoraTeam/persona/'+sessvars.myObj[0]+'/formacion').success(function(data) {
+       $scope.educ = data; 
+
+       
+        
+});   
+   
+
+
+};
+
 
 
 
