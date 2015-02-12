@@ -624,16 +624,51 @@
 												
 										</div>
 
+										<script type="text/javascript">
+										$(document).ready(pestanias);
+
+
+
+										function pestanias(){
+										
+											$("#tabFinal").on("click", function() {
+											$("#btnFinaliza").remove();
+											$("#botonFin").append("<li id='btnFinaliza' class='next'>"
+												+"<a href='javascript:void(0);' class='btn btn-lg txt-color-"
+												+"darken'> Finalizar</a></li>");
+/*<li id='btnSiguiente' class='next'> <a href='javascript:void(0);' class='btn btn-lg txt-color-darken'> Next </a></li>*/								
+											$("#btnSiguiente").hide();
+										});
+										$("#tabs1,#tabs2,#tabs3").on("click", function() {
+											
+											$("#btnFinaliza").remove();
+											$("#btnSiguiente").show();
+										});
+											
+									
+										}
+
+										</script>
+									
 										<div class="form-actions">
 											<div class="row">
 												<div class="col-sm-12">
-													<ul class="pager wizard no-margin">									
-														<li class="previous disabled">
+													<ul class="pager wizard no-margin">
+														<!--<li class="previous first disabled">
+														<a href="javascript:void(0);" class="btn btn-lg btn-default"> First </a>
+														</li>-->
+														<li class="previous disabled" id="btnPrevio">
 															<a href="javascript:void(0);" class="btn btn-lg btn-default"> Previous </a>
 														</li>
-														<li class="next" id="nex">
+														<!--<li class="next last">
+														<a href="javascript:void(0);" class="btn btn-lg btn-primary"> Last </a>
+														</li>-->
+														<div id="botonFin">
+														<li id="btnSiguiente" class="next">
 															<a href="javascript:void(0);" class="btn btn-lg txt-color-darken"> Next </a>
 														</li>
+														</div>
+														
 													</ul>
 												</div>
 											</div>
@@ -847,9 +882,25 @@ $("#enviar").hide();
 				}
 			});
 
+			
+
 			$('#bootstrap-wizard-1').bootstrapWizard({
 
 				'tabClass' : 'form-wizard',
+				'onPrevious':function(tab, navigation, index){
+					if(index==4){
+						$("#botonFin").append("<li id='btnFinaliza' class='next'>"
+												+"<a href='javascript:void(0);' class='btn btn-lg txt-color-"
+												+"darken'> Finalizar</a></li>");
+						$("#btnSiguiente").hide();
+
+						}else if(index!=4){
+								$("#btnFinaliza").remove();
+								$("#btnSiguiente").show();
+
+
+						}
+					},
 				'onNext' : function(tab, navigation, index) {
 					var $valid = $("#wizard-1").valid();
 					if (!$valid) {
@@ -859,6 +910,26 @@ $("#enviar").hide();
 						$('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass('complete');
 						$('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step').html('<i class="fa fa-check"></i>');
 					}
+						
+						if(index==3 || index == 4){
+						$("#btnFinaliza").remove();
+						$("#botonFin").append("<li id='btnFinaliza' class='next'>"
+												+"<a href='javascript:void(0);' class='btn btn-lg txt-color-"
+												+"darken'> Finalizar</a></li>");
+						$("#btnSiguiente").hide();
+
+						}else if(index!=3){
+								$("#btnFinaliza").remove();
+								$("#btnSiguiente").show();
+
+
+						}
+
+													
+						
+
+					
+
 				}
 			});
 			$('#Nacdate').datepicker({
