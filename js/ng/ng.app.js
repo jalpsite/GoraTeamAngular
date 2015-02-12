@@ -280,7 +280,28 @@ function controladorPrincipal($scope,$http){
 		};
 		
 		$scope.agregarEstudio = function(){
-			
+		if ($scope._estudio.anhofin<$scope._estudio.anhoinicio) 
+				{
+						$.smallBox({
+							title : "Error el año de Inicio es menor al Año de Finalización",
+							content : "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+							color : "#C46A69",
+							iconSmall : "fa fa-thumbs-up bounce animated",
+							timeout : 4000
+						});
+				}
+		else if($scope._estudio.iduniversidad== null|| $scope._estudio.idcarrera== null|| $scope._estudio.nivelestudio== null|| $scope._estudio.idgrado== null || $scope._estudio.descripcion.trim().length<1|| $scope._estudio.anhofin.trim().length<1|| $scope._estudio.anhoinicio.trim().length<1)
+		{
+			$.smallBox({
+							title : "Para poder agregar Información sobre su Formación es nesecisario llenar todos los campos",
+							content : "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+							color : "#C46A69",
+							iconSmall : "fa fa-thumbs-up bounce animated",
+							timeout : 4000
+						});
+		}
+			else
+			{
 			var est = new Estudio();
 			est.idpersona=$scope._estudio.idpersona;
 			est.idformacion=$scope._estudios.length;			
@@ -302,36 +323,61 @@ function controladorPrincipal($scope,$http){
 			$("#pestañaEstudios").show();
 			$("#agregarEstudio").show(); 
 			$("#estudios").hide();
+		}
 		};
 		$scope.agregarExperiencia = function(){
-			
-			var exp = new Experiencia();
-			
+			if ($scope._experiencia.anhofin<$scope._experiencia.anhoinicio) 
+				{
+						$.smallBox({
+							title : "Error el año de Inicio es menor al Año de Finalización",
+							content : "<i class='fa fa-exclamation-triangle'></i> <i>2 seconds ago...</i>",
+							color : "#C46A69",
+							iconSmall : "fa fa-thumbs-up bounce animated",
+							timeout : 4000
+						});
+				}
 
-			exp.idexperiencia=$scope._experiencias.length;
-			exp.cargo=$scope._experiencia.cargo[0];
-			exp.cargonom=$scope._experiencia.cargo[1];
-			exp.descripcion=$scope._experiencia.descripcion;
-			exp.estado=$scope._experiencia.estado;
-			exp.idpersona=$scope._experiencia.idpersona;
-			exp.empresa=$scope._experiencia.empresa;
-			exp.pais=$scope._experiencia.pais;
-			exp.anhoinicio=$scope._experiencia.anhoinicio;
-			exp.anhofin=$scope._experiencia.anhofin;
-			$scope._experiencias.push(exp);	
-			$("#pestañas").show();
-			$("#experiencia").hide();
-			$("#agregar").show();
-			$scope._experiencia.idexperiencia="";			
-			$scope._experiencia.cargo="";
-			$scope._experiencia.descripcion="";
-			$scope._experiencia.estado="a";
-			$scope._experiencia.idpersona="";
-			$scope._experiencia.empresa ="";
-			$scope._experiencia.cargonom ="";
-			$scope._experiencia.pais=$scope.Nacionalidad[-1];
-			$scope._experiencia.anhoinicio="";
-			$scope._experiencia.anhofin ="";
+		else if($scope._experiencia.empresa.trim().length<1|| $scope._experiencia.cargo== null|| $scope._experiencia.pais== null || $scope._experiencia.descripcion.trim().length<1|| $scope._experiencia.anhofin.trim().length<1|| $scope._experiencia.anhoinicio.trim().length<1)
+		{
+			$.smallBox({
+							title : "Para poder agregar Información sobre su Experiencia Laboral es nesecisario llenar todos los campos",
+							content : "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+							color : "#C46A69",
+							iconSmall : "fa fa-thumbs-up bounce animated",
+							timeout : 4000
+						});
+		}
+			else
+			{
+				var exp = new Experiencia();
+				exp.idexperiencia=$scope._experiencias.length;
+				exp.cargo=$scope._experiencia.cargo[0];
+				exp.cargonom=$scope._experiencia.cargo[1];
+				exp.descripcion=$scope._experiencia.descripcion;
+				exp.estado=$scope._experiencia.estado;
+				exp.idpersona=$scope._experiencia.idpersona;
+				exp.empresa=$scope._experiencia.empresa;
+				exp.pais=$scope._experiencia.pais;
+				exp.anhoinicio=$scope._experiencia.anhoinicio;
+				exp.anhofin=$scope._experiencia.anhofin;
+				$scope._experiencias.push(exp);	
+				$("#pestañas").show();
+				$("#experiencia").hide();
+				$("#agregar").show();
+				$scope._experiencia.idexperiencia="";			
+				$scope._experiencia.cargo="";
+				$scope._experiencia.descripcion="";
+				$scope._experiencia.estado="a";
+				$scope._experiencia.idpersona="";
+				$scope._experiencia.empresa ="";
+				$scope._experiencia.cargonom ="";
+				$scope._experiencia.pais=$scope.Nacionalidad[-1];
+				$scope._experiencia.anhoinicio="";
+				$scope._experiencia.anhofin ="";
+
+			}
+			
+			
 
 		};
 		$scope.BtnAgregar = function(){
@@ -731,7 +777,13 @@ function controladorPrincipal($scope,$http){
 				|| $scope._persona.fechanacimiento.trim().length < 1 || $scope._persona.estadocivil== null || $scope._persona.nacionalidad== null
 				|| $scope._persona.numerodocidentidad.trim().length < 1 || $scope._persona.tipodocidentidad.trim().length < 1 || $scope._persona.presentacion.trim().length < 1 )	
 				{
-					alert("Los Datos personales son Obligatorios")
+					$.smallBox({
+							title : "Los Datos personales son Obligatorios",
+							content : "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+							color : "#C46A69",
+							iconSmall : "fa fa-thumbs-up bounce animated",
+							timeout : 4000
+						});
 				}
 			else
 			{
