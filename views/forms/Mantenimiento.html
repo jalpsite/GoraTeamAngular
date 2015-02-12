@@ -1,4 +1,5 @@
 	
+
 <link rel="stylesheet" type="text/css" media="screen" href="css/estilo.css">
 <div class="row" >
 	<div class="col-sm-12">
@@ -18,7 +19,7 @@
 
 										<div class="row">											
 											<div class="col-sm-2 profile-pic">
-												<img id="fotoPersona" src="http://10.77.33.117:8083/SpringGoraTeam/persona/1/getfoto" style="width:100px;height:100px;">
+												<img id="fotoPersona" src="" style="width:100px;height:100px;">
 													<div class="btnFoto">
 														<div id="inputWrapper">
 															<a href="" class="btn btn-default btn-xs" style="height: 22px; width: 22px;" id="popoverF" data-placement='above' title="Subir una Imagen" ><i class="icon-prepend fa fa-plus"></i>
@@ -44,12 +45,13 @@
 																	</div>
 																</form>
 																<script type="text/javascript">
+																$('#fotoPersona').attr('src','http://'+IP+'/SpringGoraTeam/archivo/'+sessvars.myObj[0]+'/pf');
 															
 																	$( "#frmImagen" ).submit(function( event ) {
 																		  
 																		var formData = new FormData(this);
 																				$.ajax({                        
-																					url: "http://"+IP+"/SpringGoraTeam/persona/"+sessvars.myObj[0]+"/createfoto",
+																					url: "http://"+IP+"/SpringGoraTeam/archivo/"+sessvars.myObj[0]+"/subir/pf",
 																					type: "POST",                        
 																					data:  formData,
 																					mimeType:"multipart/form-data",
@@ -58,7 +60,7 @@
 																					contentType: false,
 																					processData: false,
 																					success: function(resp) {																						
-																						$('#fotoPersona').attr('src','http://'+IP+'/SpringGoraTeam/persona/'+sessvars.myObj[0]+'/getfoto'+'?'+Math.random());
+																						$('#fotoPersona').attr('src','http://'+IP+'/SpringGoraTeam/archivo/'+sessvars.myObj[0]+"/pf"+'?'+Math.random());
 																						$('#popoverF').popover('hide')																						 															 
 																					},																					
 																					error: function(jqXHR, estado, error) {
@@ -84,7 +86,7 @@
 											
 											<div class="col-sm-5" >
 												<div class="detalle-nombre">
-													<div ID="NOMBRES" class="atributo-nombre">{{nombre.nombres}}&nbsp;{{apepat.apepat}}&nbsp;{{apemat.apemat}}</div>												
+													<div ID="NOMBRES" class="atributo-nombre">{{persona.nombres}}&nbsp;{{persona.apepat}}&nbsp;{{persona.apemat}}</div>												
 
 													<span class="btnEdit-nombre"><a  class="btn btn-default btn-xs" id="popoverApellidosNombres" data-placement='above' title="Modificacion de Datos Personales" href='#'><i class="icon-prepend fa fa-pencil"></i></a></span>
 												</div>
@@ -95,22 +97,22 @@
 																	
 
 																	<label class="input"> <i class="icon-prepend fa fa-user"></i>
-																		<input type="text" name="fname" placeholder="Nombres" id="txtNombres" value="{{nombre.nombres}}">
+																		<input type="text" name="fname" model="nombre" placeholder="Nombres" id="txtNombres" value="{{persona.nombres}}">
 																	</label>
 																</section>
 																<section class="col col-12">
 																	<label class="input"> <i class="icon-prepend fa fa-user"></i>
-																		<input type="text" name="lname" placeholder="Apellido Paterno" id="txtapepat" value="{{apepat.apepat}}">
+																		<input type="text" name="lname" model="apepat" placeholder="Apellido Paterno" id="txtapepat" value="{{persona.apepat}}">
 																	</label>
 																</section>
 																<section class="col col-12">
 																	<label class="input"> <i class="icon-prepend fa fa-user"></i>
-																		<input type="text" name="lname" placeholder="Apellido Materno" id="txtapemat" value="{{apemat.apemat}}">
+																		<input type="text" name="lname" model="apemat" placeholder="Apellido Materno" id="txtapemat" value="{{persona.apemat}}">
 																	</label>
 																</section>												
 																
 																<div class="form-actions">	
-																	<button type="submit"  class="btn btn-primary btn-sm">
+																	<button type="submit"  ng-click="cambiaNombres()" class="btn btn-primary btn-sm">
 																		Grabar Cambios
 																	</button>
 																	<button type="button" id="btnCancelar" class="btn btn-danger btn-sm" onclick="$('#popoverApellidosNombres').popover('hide');">
@@ -119,6 +121,8 @@
 																</div>
 															</form>
 															<script type="text/javascript">
+
+
 																$(document).ready(function(){
 																	$( "#form1" ).submit(function( event ) {
 																		var nomb=$("#txtNombres").val();
@@ -298,7 +302,7 @@
 												<br><br>
 												</div>
 
-									</div>
+								</div>
 
 									<div class="col-sm-5" style="margin-top:60px">
 
@@ -1571,36 +1575,67 @@
 												<div class="form-group">
 													<div class="col-lg-5">
 														<ol class="dd-list">
-															<li class="dd-item" ng-repeat="habs in habilidad">
-																<div class="col-lg-10 dd-handle"><i class="fa fa-lg fa-sliders "></i>&nbsp;&nbsp;{{habs[1]}}
+															<li class="dd-item" ng-repeat="habs in _habilidades" style=" line-height: 13px;">
+																<div class="col-lg-10 dd-handle"><i class="fa fa-lg fa-sliders "></i>&nbsp;&nbsp;{{habs.nomhabilidades}}
 																</div>																
 																<div class="col-lg-2">																
-																<span><a ng-click="muestraAtri(habs[0])" class="btn btn-info btn-sm" type="button">
+																<span><a ng-click="muestraAtri(habs.idHabilidad,$index)" id="{{habs.idHabilidad}}"class="btn btn-info btn-xs btnEditaHab" type="button" >
 																<i class="fa fa-info-circle "></i></a>
 																</span>				
 																</div>
+																	<br><br><br>
+																<ol ng-repeat="atr in habs.atributotemp" style=" line-height: 13px;">
 
-															</li>								
-														</ol>															
-													</div>
-													<div class="alert alert-info col-lg-5">
-													ATRIBUTOS
-														<ul>
-															<li ng-repeat="atribs in atrib">
-																<span>{{atribs[1]}}
-																&nbsp;&nbsp;<a href="#"  class="btn btn-info btn-sm" type="button">
-																<i class="fa fa-pencil-square-o "></i></a>
-																</span>
-															
+																	<div class="col-lg-10 dd-handle" ><i class="fa fa-lg fa-sliders "></i>&nbsp;&nbsp;{{atr.nomatributo}}
+																	</div>
+																	<a href="#"  class="btn btn-info btn-xs btnEditaAtri" ng-click="cargarEditAtributo(atr.idatributos)" id="{{atr.idatributo}}" type="button">
+																	<i class="fa fa-pencil-square-o "></i></a>
+																</ol>
+
 															</li>
-														</ul>	
-													
+
+														</ol>															
 													</div>
 												</div>
 
 																			
 									</div>	
-					
+										<script type="text/javascript">
+																var varContAtr="";
+																var varContAtr2="";
+																var varContHabs="";
+																var varContComp="";
+
+																$(document).on("click",".btnEditaCom",CargarComp);	
+																function CargarComp()
+																{								
+																	var idFor=($(this).attr('id'));
+																	varContComp=idFor;
+																	//$(".campoEducacion"+varContAtr).hide();
+																	//alert(varContComp);
+																}
+																$(document).on("click",".btnEditaHab",CargarHab);	
+																function CargarHab()
+																{								
+																	var idFor=($(this).attr('id'));
+																	varContHabs=idFor;
+																	//$(".campoEducacion"+varContAtr).hide();
+																	alert(varContHabs);
+																}
+																$(document).on("click",".btnEditaAtri",CargarAtrib);	
+																function CargarAtrib()
+																{								
+																	var idFor=($(this).attr('id'));
+																	varContAtr=idFor;
+																	//$(".campoEducacion"+varContAtr).hide();
+																	alert(varContAtr);
+																	//alert(varContAtrs);
+																	//alert("Comp "+varContComp+" "+varContHabs+" "+varContAtr)
+																}
+										</script>	
+										<div id="popoverATrCuerpo" style="display: none">
+											<p>Hola</p>
+										</div>
 							
 								</div>
 							</div>								
@@ -1610,6 +1645,10 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div id="dialog_editAtributo" style="overflow-y: auto;">
+
 </div>
 
 
@@ -1694,6 +1733,13 @@
 
 		  });
 
+	$('.popoverATr').popover({ 
+		    html : true,
+		    content: function() {
+		      return $('#popoverATrCuerpo').html();
+		    }
+
+		  });
 
 
 
