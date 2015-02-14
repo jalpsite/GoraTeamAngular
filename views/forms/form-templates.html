@@ -66,14 +66,14 @@
 											<li class="active" data-target="#step1">
 												<a href="#tab1" data-toggle="tab"> <span class="step">1</span> <span class="title">Datos Personales</span> </a>
 											</li>
-											<li data-target="#step2">
-												<a href="#tab2" data-toggle="tab"> <span class="step">2</span> <span class="title">Experiencia Laboral</span> </a>
+											<li data-target="#step2" >
+												<a href="#tab2" data-toggle="tab" id="paso2"> <span class="step">2</span> <span class="title">Experiencia Laboral</span> </a>
 											</li>
 											<li data-target="#step3">
-												<a href="#tab3" data-toggle="tab"> <span class="step">3</span> <span class="title">Estudios</span> </a>
+												<a href="#tab3" data-toggle="tab" id="paso3"> <span class="step">3</span> <span class="title">Estudios</span> </a>
 											</li>
 											<li data-target="#step4">
-												<a href="#tab4" data-toggle="tab"> <span class="step">4</span> <span class="title">Competencia</span> </a>
+												<a href="#tab4" data-toggle="tab" id="paso4"> <span class="step">4</span> <span class="title">Competencia</span> </a>
 											</li>
 										</ul>
 										<div class="clearfix"></div>
@@ -91,7 +91,7 @@
 													</section>
 													<section class="col col-6 form-group">
 														<label class="input"> <i class="icon-append fa fa-user"></i>
-															<input type="text" name="appat"  placeholder="Apellido Paterno" ng-model="_persona.apepat"  ng-change="_persona.apepat=_persona.apepat.toUpperCase();">
+															<input type="text" name="appat"  id="apepat"placeholder="Apellido Paterno" ng-model="_persona.apepat"  ng-change="_persona.apepat=_persona.apepat.toUpperCase();">
 														</label>
 													</section>
 														
@@ -99,7 +99,7 @@
 												<div class="row">												
 													<section class="col col-6 form-group">
 														<label class="input"> <i class="icon-append fa fa-user"></i>
-															<input type="text" name="apmat" placeholder="Apellido Materno" ng-model="_persona.apemat" ng-change="_persona.apemat=_persona.apemat.toUpperCase();">
+															<input type="text" name="apmat" id="apmat"placeholder="Apellido Materno" ng-model="_persona.apemat" ng-change="_persona.apemat=_persona.apemat.toUpperCase();">
 														</label>
 													</section>
 													<section class="col col-6 form-group">
@@ -135,7 +135,7 @@
 												<section class="form-group">
 														
 														<label class="select">
-														<select name="nacionalidad" style="width:100%"  ng-model="_persona.nacionalidad"  ng-init="_persona.nacionalidad = null"  ng-options="opt[1] as opt[1] for opt in Nacionalidad"  >	
+														<select name="nacionalidad" style="width:100%"  ng-model="_persona.nacionalidad"  ng-init="_persona.nacionalidad = null"  ng-options="opt[1] as opt[1] for opt in Nacionalidad" id="nac" >	
 														<option value="" ng-disabled="!!_persona.nacionalidad">Seleccione Nacionalidad</option>
 															</select> <i></i> </label>
 													</section>
@@ -156,7 +156,7 @@
 													<br>
 													<br>
 														<label for="address" class="input"> <i class="icon-append fa fa-building"></i>
-															<input type="text" name="nDocumento" placeholder="Ingrese Numero de Documento"  ng-model="_persona.numerodocidentidad" ng-blur="verificacionDNI()">
+															<input type="text" name="nDocumento" placeholder="Ingrese Numero de Documento"  ng-model="_persona.numerodocidentidad" ng-blur="verificacionDNI()" id="nDocumento" disabled="disabled">
 														</label>
 													</section>
 												</div>										
@@ -312,7 +312,7 @@
 												<section class="form-group">
 													<label class="label">Descripción Personal</label>
 													<label class="textarea textarea-expandable">
-													<textarea class="custom-scroll" ng-model="_persona.presentacion" rows="3" name="presentacion"placeholder="Ingrese una Presentacion"  ng-change="_persona.presentacion=_persona.presentacion.toUpperCase();"></textarea>
+													<textarea class="custom-scroll" ng-model="_persona.presentacion" rows="3" name="presentacion"placeholder="Ingrese una Presentacion"  ng-change="_persona.presentacion=_persona.presentacion.toUpperCase();" id="dPpresentacion"></textarea>
 													</label>
 												</section>
 												
@@ -333,7 +333,7 @@
 														<section class="col col-6">
 															
 															<label class="select">
-															<select name="nacionalidad" style="width:100%"  ng-model="_experiencia.cargo"  ng-init="_experiencia.cargo = null"  ng-options="opt as opt[1] for opt in TipoCargo"  >	
+															<select  style="width:100%"  ng-model="_experiencia.cargo"  ng-init="_experiencia.cargo = null"  ng-options="opt as opt[1] for opt in TipoCargo"  >	
 															<option value="" ng-disabled="!!_experiencia.cargo">Seleccione Puesto</option>
 																</select><i></i></label>
 
@@ -344,7 +344,7 @@
 												<fieldset>
 													<section >
 														<label class="select">
-														<select name="nacionalidad" style="width:100%"  ng-model="_experiencia.pais"  ng-init="_experiencia.pais = null"  ng-options="opt[1] as opt[1] for opt in Nacionalidad"  >	
+														<select style="width:100%"  ng-model="_experiencia.pais"  ng-init="_experiencia.pais = null"  ng-options="opt[1] as opt[1] for opt in Nacionalidad"  >	
 														<option value="" ng-disabled="!!_experiencia.pais">Seleccione País</option>
 															</select><i></i></label>
 
@@ -368,6 +368,13 @@
 															<input type="text" name="finishdate" id="finishdate" placeholder="Fecha de Finalización" ng-model="_experiencia.anhofin">
 														</label>
 													</section>
+														<div class="inline-group">
+														<label class="checkbox">
+														<input type="checkbox" name="checkbox-inline" ng-model="estadoExp" ng-click="expActual()">
+														<i></i>
+														Hasta la Actualidad
+														</label>
+														</div>
 													<section>
 														<button class="btn btn-sm btn-primary" type="button" id="nuevo" ng-click="agregarExperiencia()">
 															<i class="fa fa-save" ></i> &nbsp Guardar
@@ -414,13 +421,13 @@
 												<fieldset>
 														<section >
 														<label class="select">
-															<select name="nacionalidad" style="width:100%"    ng-model="_estudio.iduniversidad"  ng-init="_estudio.iduniversidad = null"  ng-options="opt as opt[1] for opt in Instituciones"  >	
+															<select style="width:100%"    ng-model="_estudio.iduniversidad"  ng-init="_estudio.iduniversidad = null"  ng-options="opt as opt[1] for opt in Instituciones"  >	
 															<option value="" ng-disabled="!!_estudio.iduniversidad">Seleccione Universidad</option>
 															</select><i></i></label>													
 														</section>
 														<section>
 														<label class="select">
-															<select name="nacionalidad" style="width:100%"  ng-model="_estudio.idcarrera"  ng-init="_estudio.idcarrera = null"  ng-options="opt as opt[1] for opt in itemsCarre"  >	
+															<select style="width:100%"  ng-model="_estudio.idcarrera"  ng-init="_estudio.idcarrera = null"  ng-options="opt as opt[1] for opt in itemsCarre"  >	
 															<option value="" ng-disabled="!!_estudio.idcarrera">Seleccione Titulo</option>
 															</select><i></i></label>												
 													</section>																				
@@ -429,7 +436,7 @@
 													<section>
 														
 														<label class="select">
-															<select name="nacionalidad" style="width:100%" ng-model="_estudio.nivelestudio"  ng-init="_estudio.nivelestudio = null"  ng-options="opt as opt[1] for opt in itemsNivelE"  >	
+															<select  style="width:100%" ng-model="_estudio.nivelestudio"  ng-init="_estudio.nivelestudio = null"  ng-options="opt as opt[1] for opt in itemsNivelE"  >	
 															<option value="" ng-disabled="!!_estudio.nivelestudio">Seleccione Nivel de Estudio</option>
 															</select><i></i></label>
 													</section>
@@ -449,6 +456,13 @@
 															<label class="input"> <i class="icon-append fa fa-calendar"></i>
 															<input type="text" name="fechaFin" id="fechaFin01" placeholder="Fecha de Finalización"  ng-model="_estudio.anhofin">
 															</label>
+														</section>
+														<section >
+														<label class="checkbox">
+														<input type="checkbox" name="checkbox-inline" ng-model="estaFormaci" ng-click="formActual()">
+														<i></i>
+														Hasta la Actualidad
+														</label>
 														</section>
 														<section>
 																<label class="textarea textarea-expandable">
@@ -480,12 +494,12 @@
 														
 														<div class="panel panel-default" ng-repeat="estudio in _estudios">
 															<div class="panel-heading">
-																<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion100" href="#uni{{estudio.idformacion}}" class="collapsed"> <i class="fa fa-fw fa-plus-circle txt-color-green"></i> <i class="fa fa-fw fa-minus-circle txt-color-red"></i> {{estudio.nomCarrera}}</a></h4>
+																<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion100" href="#uni{{estudio.indice}}" class="collapsed"> <i class="fa fa-fw fa-plus-circle txt-color-green"></i> <i class="fa fa-fw fa-minus-circle txt-color-red"></i> {{estudio.nomCarrera}}</a></h4>
 															</div>
-															<div id="uni{{estudio.idformacion}}" class="panel-collapse collapse">
+															<div id="uni{{estudio.indice}}" class="panel-collapse collapse">
 																<div class="panel-body">
 																	<fieldset><div class="panel-body"><h6><span class="degree">{{estudio.uninom}}</span></h5>												
-																	<p>Fecha de Inicio:  {{estudio.anhoinicio}} </p><p>Fecha de Finalización:  {{estudio.anhofin}}</p></div></fieldset>
+																	<p>Fecha de Inicio:  {{estudio.anhoinicio}} </p><p>Fecha de Finalización:  {{estudio.encurso=1?'encurso':estudio.anhofin}}</p></div></fieldset>
 																</div>
 															</div>
 														</div>														
@@ -504,7 +518,7 @@
 												</section>
 												<section class="col col-2">
 													
-													<button  class="btn btn-sm btn-primary" ng-click="guardaMatrizPrimera()" type="button">
+													<button  class="btn btn-sm btn-primary" ng-click="guardaMatrizUpdate()" type="button">
 														<i class="fa fa-save"></i>
 													 	 Guardar Todo
 													</button>
@@ -611,8 +625,7 @@
 																				</ul>	
 																			</div>
 																		</div>
-																	</div>
-																	
+																	</div>												
 																</div>
 														</div>
 														</div>
@@ -714,6 +727,20 @@ $("#pestañaEstudios").hide();
 $("#BotonPenultimo").hide();
 $("#BotonPenultimo2").hide();
 $("#enviar").hide();
+$('#paso2').click(validar);
+$("#paso3").click(validar);
+$("#paso4").click(validar);
+function validar() {
+	if ($('#nombre').val().trim().length<1||$('#apepat').val().trim().length<1 ||$('#apmat').val().trim().length<1||$('#Nacdate').val().trim().length<1||$('#estadocivil').val().trim().length<1||$('#estadocivil').val().trim().length<1||$('#nac').val().trim().length<1||$('#nDocumento').val().trim().length<1||$('#dPpresentacion').val().trim().length<1)
+	 {
+	 	$.smallBox({
+							title : "Los Datos personales son Obligatorios para poder Continuar",
+							content : "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+							color : "#C46A69",
+							iconSmall : "fa fa-thumbs-up bounce animated",
+							timeout : 4000
+						});
+	 	return false;}else{return true;};}
 //$("#pestañaCompetencia").hide();
 	
 	$("#agregah").hide();
@@ -867,6 +894,14 @@ $("#enviar").hide();
 
 				highlight : function(element) {
 					$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+					$.smallBox({
+							title : "Los Datos personales son Obligatorios",
+							content : "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+							color : "#C46A69",
+							iconSmall : "fa fa-thumbs-up bounce animated",
+							timeout : 4000
+						});
+
 				},
 				unhighlight : function(element) {
 					$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
@@ -891,7 +926,7 @@ $("#enviar").hide();
 					if(index==4){
 						$("#botonFin").append("<li id='btnFinaliza' class='next'>"
 												+"<a href='javascript:void(0);' class='btn btn-lg txt-color-"
-												+"darken'> Finalizar</a></li>");
+												+"darken' > Finalizar</a></li>");
 						$("#btnSiguiente").hide();
 
 						}else if(index!=4){
@@ -903,6 +938,7 @@ $("#enviar").hide();
 					},
 				'onNext' : function(tab, navigation, index) {
 					var $valid = $("#wizard-1").valid();
+
 					if (!$valid) {
 						$validator.focusInvalid();
 						return false;
@@ -915,7 +951,7 @@ $("#enviar").hide();
 						$("#btnFinaliza").remove();
 						$("#botonFin").append("<li id='btnFinaliza' class='next'>"
 												+"<a href='javascript:void(0);' class='btn btn-lg txt-color-"
-												+"darken'> Finalizar</a></li>");
+												+"darken' ng-click='guardartodo()'> Finalizar</a></li>");
 						$("#btnSiguiente").hide();
 
 						}else if(index!=3){
@@ -933,9 +969,11 @@ $("#enviar").hide();
 				}
 			});
 			$('#Nacdate').datepicker({
-			dateFormat : 'yy-mm-dd',
+			dateFormat : 'yy/mm/dd',
 			changeMonth: true,
 			changeYear: true,
+			maxDate: "-18y",
+			yearRange: "-80:-10",
 			dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
 			monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
 			prevText : '<i class="fa fa-chevron-left"></i>',
@@ -946,6 +984,8 @@ $("#enviar").hide();
 			dateFormat : 'yy-mm-dd',
 			changeMonth: true,
 			changeYear: true,
+			yearRange: "-80:+1",
+			maxDate: "-1d",
 			dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
 			monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
 			prevText : '<i class="fa fa-chevron-left"></i>',
@@ -957,6 +997,8 @@ $("#enviar").hide();
 			dateFormat : 'yy-mm-dd',
 			changeMonth: true,
 			changeYear: true,
+			yearRange: "-80:+1",
+			maxDate: "0d",
 			dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
 			monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
 			prevText : '<i class="fa fa-chevron-left"></i>',
@@ -966,6 +1008,8 @@ $("#enviar").hide();
 			dateFormat : 'yy/mm/dd',
 			changeMonth: true,
 			changeYear: true,
+			yearRange: "-80:+1",
+			maxDate: "0d",
 			dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
 			monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
 			prevText : '<i class="fa fa-chevron-left"></i>',
@@ -976,6 +1020,8 @@ $("#enviar").hide();
 			dateFormat : 'yy/mm/dd',
 			changeMonth: true,
 			changeYear: true,
+			yearRange: "-80:+1",
+			maxDate: "0d",
 			dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
 			monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
 			prevText : '<i class="fa fa-chevron-left"></i>',

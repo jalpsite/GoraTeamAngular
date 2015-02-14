@@ -94,6 +94,7 @@ function controladorPrincipal($scope,$http){
 			this.descripcion="";		
 			this.anhoinicio="";
 			this.anhofin ="";
+			this.encurso=""
 			
 		}
 
@@ -122,6 +123,34 @@ function controladorPrincipal($scope,$http){
 			this.idatributo="";
 			//this.nomatributo="";
 			this.idhabilidad="";
+
+		}
+		$scope.expActual = function()
+		{
+			if ($scope.estadoExp) 
+			{
+				$("#finishdate").prop('disabled', false);				
+				
+			}
+			else
+			{
+				$("#finishdate").prop('disabled', true);
+				$scope._experiencia.anhofin="";
+			}
+			;	
+
+		}
+		$scope.formActual = function()
+		{ 			if ($scope.estaFormaci) 
+			{
+				$("#fechaFin01").prop('disabled', false);				
+				
+			}
+			else
+			{
+				$("#fechaFin01").prop('disabled', true);
+				$scope._estudio.anhofin="";
+			};	
 
 		}
 
@@ -280,7 +309,7 @@ function controladorPrincipal($scope,$http){
 		};
 		
 		$scope.agregarEstudio = function(){
-		if ($scope._estudio.anhofin<$scope._estudio.anhoinicio) 
+		if ($scope._estudio.anhofin<$scope._estudio.anhoinicio && $scope.estaFormaci==false) 
 				{
 						$.smallBox({
 							title : "Error el año de Inicio es menor al Año de Finalización",
@@ -290,7 +319,7 @@ function controladorPrincipal($scope,$http){
 							timeout : 4000
 						});
 				}
-		else if($scope._estudio.iduniversidad== null|| $scope._estudio.idcarrera== null|| $scope._estudio.nivelestudio== null|| $scope._estudio.idgrado== null || $scope._estudio.descripcion.trim().length<1|| $scope._estudio.anhofin.trim().length<1|| $scope._estudio.anhoinicio.trim().length<1)
+		else if($scope._estudio.iduniversidad== null|| $scope._estudio.idcarrera== null|| $scope._estudio.nivelestudio== null|| $scope._estudio.idgrado== null || $scope._estudio.descripcion.trim().length<1||  $scope._estudio.anhoinicio.trim().length<1)
 		{
 			$.smallBox({
 							title : "Para poder agregar Información sobre su Formación es nesecisario llenar todos los campos",
@@ -313,7 +342,15 @@ function controladorPrincipal($scope,$http){
 			est.nivelestudio=$scope._estudio.nivelestudio[1];	
 			est.anhoinicio=$scope._estudio.anhoinicio;
 			est.anhofin =$scope._estudio.anhofin;
-			est.descripcion=$scope._estudio.descripcion;			
+			est.descripcion=$scope._estudio.descripcion;
+			if ($scope.estaFormaci) 
+				{
+					est.encurso="1";
+					est.anhofin="1990/01/01"
+				}
+				else{
+					est.encurso="0";
+				};			
 			$scope._estudios.push(est);
 			$scope._estudio.anhoinicio="";
 			$scope._estudio.anhofin="";
@@ -326,7 +363,8 @@ function controladorPrincipal($scope,$http){
 		}
 		};
 		$scope.agregarExperiencia = function(){
-			if ($scope._experiencia.anhofin<$scope._experiencia.anhoinicio) 
+			
+			if ($scope._experiencia.anhofin<$scope._experiencia.anhoinicio && $scope.estadoExp==false) 
 				{
 						$.smallBox({
 							title : "Error el año de Inicio es menor al Año de Finalización",
@@ -337,7 +375,7 @@ function controladorPrincipal($scope,$http){
 						});
 				}
 
-		else if($scope._experiencia.empresa.trim().length<1|| $scope._experiencia.cargo== null|| $scope._experiencia.pais== null || $scope._experiencia.descripcion.trim().length<1|| $scope._experiencia.anhofin.trim().length<1|| $scope._experiencia.anhoinicio.trim().length<1)
+		else if($scope._experiencia.empresa.trim().length<1|| $scope._experiencia.cargo== null|| $scope._experiencia.pais== null || $scope._experiencia.descripcion.trim().length<1|| $scope._experiencia.anhoinicio.trim().length<1)
 		{
 			$.smallBox({
 							title : "Para poder agregar Información sobre su Experiencia Laboral es nesecisario llenar todos los campos",
@@ -483,7 +521,7 @@ function controladorPrincipal($scope,$http){
 
 		};		
 		
-		$scope.guardaMatriz = function()
+		$scope.guardaMatrizUpdate = function()
 		{
 			var contador=$scope._matrices.length - 1;			
 			var contadorHabilidades=0;
@@ -529,29 +567,35 @@ function controladorPrincipal($scope,$http){
 			function dataid(data)
 			{
 				$scope.id=data;
+				if ($scope._emails.length>0) { 
 				$http({
+
 					  method: 'POST', 
-					  url: 'http://'+$scope.IP+'/SpringGoraTeam/persona/email/create/'+$scope.id,
+					  url: 'http://'+$scope.IP+'/SpringGoraTeam/persona/email/update/'+$scope.id,
 					  dataType: 'json',
 					  data:JSON.stringify($scope._emails),	          
 					  contentType:'application/json'      
-					  }); 			 
+					  });
+			}
+					  if ($scope._telefonos.length>0) { 			 
 					$http({
 							method: 'POST', 
-							url: 'http://'+$scope.IP+'/SpringGoraTeam/persona/telefono/create/'+$scope.id,
+							url: 'http://'+$scope.IP+'/SpringGoraTeam/persona/telefono/update/'+$scope.id,
 							dataType: 'json',
 							data: JSON.stringify($scope._telefonos),
 							contentType:'application/json'
 						}); 
-				
+				}
+					if ($scope._direcciones.length>0) {
 					$http({
 							method: 'POST', 
-							url: 'http://'+$scope.IP+'/SpringGoraTeam/persona/direccion/create/'+$scope.id,
+							url: 'http://'+$scope.IP+'/SpringGoraTeam/persona/direccion/update/'+$scope.id,
 							dataType: 'json',
 							data: JSON.stringify($scope._direcciones),
 							contentType:'application/json'
-						}); 
-				 	if ($scope._estudios.length>0) {
+						});
+				}
+				 	if ($scope._experiencias.length>0) {
 				 		$http({
 							method: 'POST', 
 							url: 'http://'+$scope.IP+'/SpringGoraTeam/experiencia/create/'+$scope.id,
@@ -581,22 +625,54 @@ function controladorPrincipal($scope,$http){
 					});
 				};
 			}
+			
 			if($scope._persona.nombres.trim().length < 1 || $scope._persona.apepat.trim().length < 1 || $scope._persona.apemat.trim().length < 1 
 				|| $scope._persona.fechanacimiento.trim().length < 1 || $scope._persona.estadocivil== null || $scope._persona.nacionalidad== null
 				|| $scope._persona.numerodocidentidad.trim().length < 1 || $scope._persona.tipodocidentidad.trim().length < 1 || $scope._persona.presentacion.trim().length < 1 )	
 				{
-					alert("Los Datos personales son Obligatorios")
+					$.smallBox({
+							title : "Los Datos personales son Obligatorios",
+							content : "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+							color : "#C46A69",
+							iconSmall : "fa fa-thumbs-up bounce animated",
+							timeout : 4000
+						});
 				}
 			else
 			{
+				$.SmartMessageBox({
+					title : "Confirmar",
+					content : "Esta Seguro que desea Finalizar y guardar la información?",
+					buttons : '[Si][No]'
+				}, function(ButtonPressed) {
+					if (ButtonPressed === "Si") {
+							
 				$http({
 					method: 'POST', 
-					url: 'http://'+$scope.IP+'/SpringGoraTeam/persona/create/',
+					url: 'http://'+$scope.IP+'/SpringGoraTeam/persona/update/',
 					data: $.param($scope._persona),
 					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 
-				}).success(function(data){dataid(data);
-					alert("los datos fueron Registrados con exito");}); 	
+				}).success(function(data){
+					dataid(data);}); 	
+							$.smallBox({
+								title : "Los Datos Fueron almacenados con exito",
+								content : "<i class='fa fa-clock-o'></i> <i>Los datos fueron registrados con éxito</i>",
+								color : "#659265",
+								iconSmall : "fa fa-check fa-2x fadeInRight animated",
+								timeout : 4000
+							});
+					};
+					if (ButtonPressed === "No") {
+						$.smallBox({
+							title : "Confirmación cancelada",
+							content : "<i class='fa fa-clock-o'></i> <i>No se guardó los cambios</i>",
+							color : "#C46A69",
+							iconSmall : "fa fa-times fa-2x fadeInRight animated",
+							timeout : 4000
+						});
+					};
+				});
 			}			
 
 		};
@@ -651,13 +727,14 @@ function controladorPrincipal($scope,$http){
 					}).success(function(data)
 						{
 							$scope._emails=[];
-							//var dateee=data.fechanacimiento.replace(/\-/g, '/');
-							//dt_to = $.datepicker.formatDate('dd/mm/yy', new Date(dateee));
+							var dateee=data.fechanacimiento.replace(/\-/g, '/');
+							dt_to = $.datepicker.formatDate('yy/mm/dd', new Date(dateee));
+							$scope._persona.idpersona=data.idpersona;
 							$scope._persona.nombres=data.nombres;
 							$scope._persona.apepat=data.apepat;
 							$scope._persona.apemat=data.apemat;
 							$scope._persona.estadocivil=data.estadocivil;
-							$scope._persona.fechanacimiento=data.fechanacimiento;
+							$scope._persona.fechanacimiento=dt_to;
 							$scope._persona.nacionalidad=data.nacionalidad;
 							$scope._persona.tipodocidentidad=data.tipodocidentidad;
 							$scope._persona.numerodocidentidad=data.numerodocidentidad;

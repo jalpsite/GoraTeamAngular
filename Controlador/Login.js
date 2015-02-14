@@ -24,7 +24,13 @@ $scope.Simple = function(){
 				    		alert("Usuario no Registrado");
 				    	}else{
 				    		sessvars.myObj=data;
-				    		location.href="home.html";
+				    		if (sessvars.myObj[1]==1) 
+				    			{
+				    				location.href="home.html#/forms/Mantenimiento";
+				    			}
+				    		else{
+				    			location.href="home.html#/forms/form-templates";
+				    		};
 				    	}
 				 });
 
