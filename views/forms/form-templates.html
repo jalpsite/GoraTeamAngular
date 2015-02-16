@@ -399,9 +399,9 @@
 														
 														<div class="panel panel-default" ng-repeat="experiencia in _experiencias">
 															<div class="panel-heading">
-																<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-2" href="#Tabexp{{experiencia.idexperiencia}}" class="collapsed"> <i class="fa fa-fw fa-plus-circle txt-color-green"></i> <i class="fa fa-fw fa-minus-circle txt-color-red"></i> {{experiencia.empresa}}</a></h4>
+																<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-2" href="#Tabexp{{experiencia.indice}}" class="collapsed"> <i class="fa fa-fw fa-plus-circle txt-color-green"></i> <i class="fa fa-fw fa-minus-circle txt-color-red"></i> {{experiencia.empresa}}</a></h4>
 															</div>
-															<div id="Tabexp{{experiencia.idexperiencia}}" class="panel-collapse collapse">
+															<div id="Tabexp{{experiencia.indice}}" class="panel-collapse collapse">
 																<div class="panel-body">
 																	<fieldset><div class="panel-body"><h6><span class="degree">{{experiencia.cargonom}}</span></h6>
 																	<p>Fecha de Inicio:  {{experiencia.anhoinicio}} </p><p>Fecha de Finalización:  {{experiencia.anhofin}}</p></div></fieldset>
@@ -499,7 +499,7 @@
 															<div id="uni{{estudio.indice}}" class="panel-collapse collapse">
 																<div class="panel-body">
 																	<fieldset><div class="panel-body"><h6><span class="degree">{{estudio.uninom}}</span></h5>												
-																	<p>Fecha de Inicio:  {{estudio.anhoinicio}} </p><p>Fecha de Finalización:  {{estudio.encurso=1?'encurso':estudio.anhofin}}</p></div></fieldset>
+																	<p>Fecha de Inicio:  {{estudio.anhoinicio}} </p><p>Fecha de Finalización:  {{estudio.encurso==1?'encurso':estudio.anhofin}}</p></div></fieldset>
 																</div>
 															</div>
 														</div>														
@@ -598,7 +598,7 @@
 															<a href="#tabcompe{{compe.idcompetencia}}" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i>{{compe.nomcompetencia}}</a>
 														</li>
 														<li class="active">
-															<a href="#s1" data-toggle="tab">Agregar<span class="btn badge bg-color-blue txt-color-white"  id="agregarCompetencia"><i class="fa fa-plus-circle" ></i></span></a>
+															<a href="#s1" data-toggle="tab">Agregar<span class="btn badge bg-color-blue txt-color-white"  id="agregarCompetencia" ng-click="filtro()"><i class="fa fa-plus-circle" ></i></span></a>
 														</li>
 													</ul>
 

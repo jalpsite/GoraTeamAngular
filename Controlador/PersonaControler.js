@@ -1,25 +1,6 @@
-var smartApp = angular.module('smartApp', [
-	'ngRoute',
-	//'ngAnimate', // this is buggy, jarviswidget will not work with ngAnimate :(
-	'ui.bootstrap',
-	'plunker',
-	'app.controllers',
-	'app.demoControllers',
-	'app.main',
-	'app.navigation',
-	'app.localize',
-	'app.activity',
-	'app.smartui'
-]);
-smartApp.controller('pruebaAppCtrl', function($scope){
-	$scope.algo = "simpledddd";  
-  });
-
-
-smartApp.controller('prueba', controladorPrincipal);
 function controladorPrincipal($scope,$http){
 	$scope.perid=sessvars.myObj[0];
-	$scope.TamañoMatriz=0;
+	
 
 	function Persona()
 		{
@@ -36,11 +17,10 @@ function controladorPrincipal($scope,$http){
 			this.idManager="";
 			this.codigo=" ";
 			this.sexo="M";		
-			this.presentacion="";
-			this.perfil="";	
+			this.presentacion="";	
 		}
 		
-		function Telefono()
+	function Telefono()
 		{
 			this.idpersonatelefono="";
 			this.idpersona="";
@@ -48,7 +28,7 @@ function controladorPrincipal($scope,$http){
 			this.tipo ="";
 			this.estado="A";
 		}
-		function Email()
+	function Email()
 		{
 			
 			this.idpersona="";
@@ -57,7 +37,7 @@ function controladorPrincipal($scope,$http){
 			this.tipo="";
 			this.estado="A";
 		}	
-		function Direccion()
+	function Direccion()
 		{
 			this.idpersonadireccion="";
 			this.idpersona="";
@@ -67,7 +47,7 @@ function controladorPrincipal($scope,$http){
 			this.estado="A";
 			this.descripcion=""
 		}	
-		function Experiencia()
+	function Experiencia()
 		{
 			this.idexperiencia="";			
 			this.cargo="";
@@ -78,11 +58,9 @@ function controladorPrincipal($scope,$http){
 			this.cargonom ="";
 			this.pais="";
 			this.anhoinicio="";
-			this.anhofin ="";
-			this.indice="";
-			
+			this.anhofin ="";			
 		}
-		function Estudio()
+	function Estudio()
 		{
 			
 			this.idpersona="";
@@ -96,22 +74,19 @@ function controladorPrincipal($scope,$http){
 			this.descripcion="";		
 			this.anhoinicio="";
 			this.anhofin ="";
-			this.encurso=""
-			this.indice=""
-			
+			this.encurso=""			
 		}
 
-		function Matriz()
+	function Matriz()
 		{
 			this.idmatriz="";
 			this.idcompetencia="";
 			this.nomcompetencia="";
 			this.idpersona="";	
 			this.habilidades=[];
-			this.estado="A";
-				
+			this.estado="A";				
 		}
-		function Habilidad()
+	function Habilidad()
 		{
 			this.idMatriz="";
 			this.idHabilidad="";
@@ -120,31 +95,29 @@ function controladorPrincipal($scope,$http){
 			this.nomhabilidades="";
 			this.atributotemp=[];
 		}
-		function Atributos()
+	function Atributos()
 		{
 			this.idatributos="";
 			this.idatributo="";
-			this.nomatributo="";
+			//this.nomatributo="";
 			this.idhabilidad="";
-
 		}
-		$scope.expActual = function()
+	$scope.expActual = function()
 		{
 			if ($scope.estadoExp) 
 			{
-				$("#finishdate").prop('disabled', false);				
-				
+				$("#finishdate").prop('disabled', false);			
 			}
 			else
 			{
 				$("#finishdate").prop('disabled', true);
 				$scope._experiencia.anhofin="";
-			}
-			;	
+			};	
 
 		}
-		$scope.formActual = function()
-		{ 			if ($scope.estaFormaci) 
+	$scope.formActual = function()
+		{ 	
+			if ($scope.estaFormaci) 
 			{
 				$("#fechaFin01").prop('disabled', false);				
 				
@@ -153,27 +126,24 @@ function controladorPrincipal($scope,$http){
 			{
 				$("#fechaFin01").prop('disabled', true);
 				$scope._estudio.anhofin="";
-			};	
-
+			};
 		}
 
-
-
-		$scope.llamaTipoDocumento= function()
+	$scope.llamaTipoDocumento= function()
 		{			
 			$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/tipodocumentos').success(function(data) {
 				$scope.tipoDocumento = data ;
 				//$scope.seleccProvincia = $scope.items2[-1];  
 			});
 		};
-		$scope.llamaDepartamento = function()
+	$scope.llamaDepartamento = function()
 		{			
 			$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/departamento/'+$scope.seleccDepartamento+'/provincias').success(function(data) {
 				$scope.items2 = data ;
 				$scope.seleccProvincia = $scope.items2[-1];  
 			});
 		};
-		$scope.llamaProvincia = function()
+	$scope.llamaProvincia = function()
 		{
 			$scope.dept=$scope.seleccDepartamento;
 			$scope.prov=$scope.seleccProvincia;
@@ -182,46 +152,47 @@ function controladorPrincipal($scope,$http){
 			  $scope._direccion.idubigeo = $scope.items3[-1];  
 					});
 		};
-		$scope.agregarDireccion = function(){
-			if ($scope._direccion.tipo== null) 
-			{
-				alert("Debe Seleccionar un Tipo de Dirección")
-			}
-			else if ($scope._direccion.direccion.trim().length < 1) 
-			{
-				alert("Debe Ingresar una Dirección")
-			}
-			else
-			{
-				var dir= new Direccion();
-
-				dir.idpersonadireccion=$scope._direccion.idpersonadireccion;
-				dir.idpersona=$scope._direccion.idpersona;
-				dir.idubigeo=$scope._direccion.idubigeo[0];
-				dir.direccion=$scope._direccion.direccion;
-				dir.tipo=$scope._direccion.tipo[0];
-				dir.estado=$scope._direccion.estado;
-				dir.descripcion="Tipo de Dirección: "+$scope._direccion.tipo[1]+"\nDirección:"+$scope._direccion.direccion+"\n"+$scope.seleccDepartamento+" - "+$scope.seleccProvincia+" - "+$scope._direccion.idubigeo[1];
-				$scope._direcciones.push(dir);
-				$scope.seleccDepartamento = $scope.items[-1]; 
-				$scope.seleccProvincia = $scope.items2[-1];  
-				$scope._direccion.idubigeo = $scope.items3[-1];
-				$scope._direccion.tipo=$scope.TipoDireccion[-1];
-				$scope._direccion.direccion="";				
-			};			
+	$scope.agregarDireccion = function()
+	{
+		if ($scope._direccion.tipo== null) 
+		{
+			alert("Debe Seleccionar un Tipo de Dirección")
+		}
+		else if ($scope._direccion.direccion.trim().length < 1) 
+		{
+			alert("Debe Ingresar una Dirección")
+		}
+		else
+		{
+			var dir= new Direccion();
+			dir.idpersonadireccion=$scope._direccion.idpersonadireccion;
+			dir.idpersona=$scope._direccion.idpersona;
+			dir.idubigeo=$scope._direccion.idubigeo[0];
+			dir.direccion=$scope._direccion.direccion;
+			dir.tipo=$scope._direccion.tipo[0];
+			dir.estado=$scope._direccion.estado;
+			dir.descripcion="Tipo de Dirección: "+$scope._direccion.tipo[1]+"\nDirección:"+$scope._direccion.direccion+"\n"+$scope.seleccDepartamento+" - "+$scope.seleccProvincia+" - "+$scope._direccion.idubigeo[1];
+			$scope._direcciones.push(dir);
+			$scope.seleccDepartamento = $scope.items[-1]; 
+			$scope.seleccProvincia = $scope.items2[-1];  
+			$scope._direccion.idubigeo = $scope.items3[-1];
+			$scope._direccion.tipo=$scope.TipoDireccion[-1];
+			$scope._direccion.direccion="";				
+		};			
 			
-		};
+	};
 
-		$scope.agregarEmail = function(){
-			if ($scope._email.tipo== null) 
+	$scope.agregarEmail = function()
+	{
+		if ($scope._email.tipo== null) 
 			{
 				alert("Debe Seleccionar un Tipo de Email")
 			}
-			else if ($scope._email.email.trim().length < 1) 
+		else if ($scope._email.email.trim().length < 1) 
 			{
 				alert("Debe Ingresar un Email")
 			}
-			else
+		else
 			{
 				var ema= new Email();
 				ema.idpersona=$scope._email.idpersona;
@@ -232,17 +203,18 @@ function controladorPrincipal($scope,$http){
 				$scope._emails.push(ema);
 			};
 			
-		};
-		$scope.agregarTelefono = function(){
-			if ($scope._telefono.tipo== null) 
+	};
+	$scope.agregarTelefono = function()
+	{
+		if ($scope._telefono.tipo== null) 
 			{
 				alert("Debe Seleccionar un Tipo de Telefono")
 			}
-			else if ($scope._telefono.telefono.trim().length < 1) 
+		else if ($scope._telefono.telefono.trim().length < 1) 
 			{
 				alert("Debe Ingresar un Numero Telefonico")
 			}
-			else
+		else
 			{
 
 				var tel= new Telefono();
@@ -253,11 +225,10 @@ function controladorPrincipal($scope,$http){
 				tel.estado=$scope._telefono.estado;
 				$scope._telefonos.push(tel);
 			}
-			//alert($scope._telefono.telefono)
-		};
+	};
 
 		
-		$scope.cargaExp=function ()
+	$scope.cargaExp=function ()
 		{	
 			$("#experiencia").show();
 			$("#agregar").hide();
@@ -269,15 +240,17 @@ function controladorPrincipal($scope,$http){
 			
 		}
 		
-		$scope.llamaDHablidad= function(){
-			 $http.get('http://'+$scope.IP+'/SpringGoraTeam/competencia/'+$scope._matriz.idcompetencia[0]+'/habilidades').success(function(data) {
-			$scope.Hablidad = data ;
-			$scope._habilidad.idhabilidades = $scope.Hablidad[-1];
-			$("#divHbilidad").show();  
-					
-			});
+	$scope.llamaDHablidad= function()
+		{
+				$http.get('http://'+$scope.IP+'/SpringGoraTeam/competencia/'+$scope._matriz.idcompetencia[0]+'/habilidades').success(function(data) {
+				$scope.Hablidad = data ;
+				$scope._habilidad.idhabilidades = $scope.Hablidad[-1];
+				$("#divHbilidad").show();  
+						
+				});
 		};
-		$scope.llamaDAtributo= function(){
+	$scope.llamaDAtributo= function()
+		{
 			$(".select2-search-choice").remove();
 			 $http.get('http://'+$scope.IP+'/SpringGoraTeam/habilidad/'+$scope._habilidad.idhabilidades[0]+'/atributos').success(function(data) {
 			$scope.itenAtributos = data ;
@@ -286,7 +259,8 @@ function controladorPrincipal($scope,$http){
 
 			
 		};	
-		$scope.cargaInstiruciones = function(){
+	$scope.cargaInstiruciones = function()
+		{
 
 			$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/universidades').success(function(data) {
 			$scope.Instituciones = data ;
@@ -334,8 +308,7 @@ function controladorPrincipal($scope,$http){
 			{
 			var est = new Estudio();
 			est.idpersona=$scope._estudio.idpersona;
-			est.idformacion="";
-			est.indice=	$scope._estudios.length;	
+			est.idformacion=$scope._estudios.length;			
 			est.iduniversidad=$scope._estudio.iduniversidad[0];
 			est.uninom =$scope._estudio.iduniversidad[1];			
 			est.idcarrera=$scope._estudio.idcarrera[0];	
@@ -390,8 +363,7 @@ function controladorPrincipal($scope,$http){
 			else
 			{
 				var exp = new Experiencia();
-				exp.idexperiencia="";
-				exp.indice=$scope._experiencias.length;
+				exp.idexperiencia=$scope._experiencias.length;
 				exp.cargo=$scope._experiencia.cargo[0];
 				exp.cargonom=$scope._experiencia.cargo[1];
 				exp.descripcion=$scope._experiencia.descripcion;
@@ -434,8 +406,8 @@ function controladorPrincipal($scope,$http){
 			
 			var habi = new Habilidad();			
 			
-			habi.idMatriz=Math.floor((Math.random() * 1000) + 1);
-			habi.idHabilidad=Math.floor((Math.random() * 100) + 1);
+			habi.idMatriz=$scope._matrices.length;
+			habi.idHabilidad=$scope._habilidades.length;
 			habi.idpersona="";
 			habi.idhabilidades=$scope._habilidad.idhabilidades[0];	
 			habi.nomhabilidades=$scope._habilidad.idhabilidades[1];
@@ -446,7 +418,8 @@ function controladorPrincipal($scope,$http){
 				x.nomatributo=$scope.selectedAtributos[i][1];
 				x.idhabilidad="";
 				habi.atributotemp.push(x)
-			};			
+			};
+			
 			$("#agregah").hide();
 			$scope.Hablidad.splice( $.inArray($scope._habilidad.idhabilidades,$scope.Hablidad) ,1 );
 			$scope.selectedAtributos=[];
@@ -610,12 +583,12 @@ function controladorPrincipal($scope,$http){
 				 for (var i = $scope._estudios.length - 1; i >= 0; i--) {
 					$http({
 							method: 'POST', 
-							url: 'http://'+$scope.IP+'/SpringGoraTeam/formacion/update/'+$scope.id+'/'+$scope._estudios[i].iduniversidad+'/'+$scope._estudios[i].idcarrera+'/'+$scope._estudios[i].idgrado,
+							url: 'http://'+$scope.IP+'/SpringGoraTeam/formacion/create/'+$scope.id+'/'+$scope._estudios[i].iduniversidad+'/'+$scope._estudios[i].idcarrera+'/'+$scope._estudios[i].idgrado,
 							data: $.param($scope._estudios[i]),
 							headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 						}); 
 				 };
-				 for (var i = $scope._matrices.length - 1; i >= $scope.TamañoMatriz; i--) {
+				 for (var i = $scope._matrices.length - 1; i >= 0; i--) {
 				$.ajax({
 					  async:false, 
 					  cache:false,
@@ -701,31 +674,31 @@ function controladorPrincipal($scope,$http){
 			$scope.items = data ;
 		  $scope.seleccDepartamento = $scope.items[-1];  
 		});
-		$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/nacionalidad').success(function(data) {
+	$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/nacionalidad').success(function(data) {
 				$scope.Nacionalidad = data ;
-			});
-		$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/estadocivil').success(function(data) {
+		});
+	$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/estadocivil').success(function(data) {
 				$scope.Estadocivil = data ;
 			});
-		$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/tipoemail').success(function(data) {
+	$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/tipoemail').success(function(data) {
 				$scope.TipoEmail = data ;
 			});
-		$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/tipotelefono').success(function(data) {
+	$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/tipotelefono').success(function(data) {
 				$scope.TipoTelefono = data ;
 			});
-		$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/tipodireccion').success(function(data) {
+	$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/tipodireccion').success(function(data) {
 				$scope.TipoDireccion = data ;
 			});
-		$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/competencias').success(function(data) {
+	$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/competencias').success(function(data) {
 			$scope.itenCompetencia = data ;
 			$scope._matriz.idcompetencia = $scope.itenCompetencia[-1];  
 			
 			});
-		 $http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/cargos').success(function(data) {
+	$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/cargos').success(function(data) {
 				$scope.TipoCargo = data ;
 			});
 		cargaInicio($scope.perid);
-		function cargaInicio(id)
+	function cargaInicio(id)
 		{
 			$http({	method: 'GET', 
 					url: 'http://'+$scope.IP+'/SpringGoraTeam/persona/'+id,
@@ -780,199 +753,109 @@ function controladorPrincipal($scope,$http){
 								$http({	method: 'GET', 
 								url: 'http://'+$scope.IP+'/SpringGoraTeam/persona/'+id+'/experiencias',
 								}).success(function(data)
-									{	if (data.length>0) {$("#pestañas").show();};
-											
-										for (var i = data.length - 1; i >= 0; i--) {
-											var temp= new Experiencia();
-											temp.idexperiencia=data[i].idexperiencia;
-											temp.cargo=data[i].cargo;
-											temp.estado=data[i].estado;
-											temp.idpersona=data[i].idpersona;
-											temp.descripcion=data[i].descripcion;										
-											temp.cargonom=$scope.TipoCargo.filter(function (person) { return person[0] == "2" })[0][1];
-											temp.indice=$scope._experiencias.length;
-											temp.anhofin=data[i].anhofin;
-											temp.pais=data[i].pais;
+								{	if (data.length>0) {$("#pestañas").show();};
+										
+									for (var i = data.length - 1; i >= 0; i--) {
+										var temp= new Experiencia();
+										temp.idexperiencia=data[i].idexperiencia;
+										temp.cargo=data[i].cargo;
+										temp.estado=data[i].estado;
+										temp.idpersona=data[i].idpersona;
+										temp.descripcion=data[i].descripcion;										
+										temp.cargonom=$scope.TipoCargo.filter(function (person) { return person[0] == "2" })[0][1];
+										
+										var dateee=data[i].anhofin.replace(/\-/g, '/');
+										dt_to = $.datepicker.formatDate('yy/mm/dd', new Date(dateee));
+										temp.anhofin=dt_to;
+										temp.pais=data[i].pais;
 
-											temp.anhoinicio=data[i].anhoinicio;
-											temp.empresa=data[i].empresa;
-											$scope._experiencias.push(temp);
-										};
-									});
-								$http({	method: 'GET', 
-								url: 'http://'+$scope.IP+'/SpringGoraTeam/persona/'+id+'/formacion',
-								}).success(function(data)
-									{	if (data.length>0) {$("#pestañaEstudios").show();};
-														
-										for (var i = data.length - 1; i >= 0; i--) {
-											var temp= new Estudio();
-											temp.idformacion=data[i].idformacion;
-											temp.iduniversidad=data[i].universidad.iduniversidad;
-											temp.uninom=data[i].universidad.nombre;
-											temp.idgrado=data[i].grado.idgrado;
-											temp.encurso=data[i].encurso;
-											temp.idpersona=data[i].idpersona;
-											temp.descripcion=data[i].descripcion;										
-											
-											temp.indice=$scope._estudios.length;											
-											temp.idcarrera=data[i].carrera.idcarrera;											
-											temp.nomCarrera=data[i].carrera.nombre;
-											temp.nivelestudio=data[i].nivelestudio;
-											var dateee=data[i].anhofin.replace(/\-/g, '/');
-												dt_to = $.datepicker.formatDate('yy/mm/dd', new Date(dateee));
-											temp.anhofin=dt_to;
-											var dateee2=data[i].anhoinicio.replace(/\-/g, '/');
-												dt_to2 = $.datepicker.formatDate('yy/mm/dd', new Date(dateee2));
-											temp.anhoinicio=dt_to2;
-											$scope._estudios.push(temp);
-										};
-									});
-								$http({	method: 'GET', 
-								url: 'http://'+$scope.IP+'/SpringGoraTeam/persona/'+id+'/competencias',
-								}).success(function(data)
-									{	
-											for (var i = data.length - 1; i >= 0; i--) {
-											var temp= new Matriz();
-											temp.idmatriz=data[i][0];
-											temp.idcompetencia=data[i][1];
-											temp.nomcompetencia=data[i][2];
-											temp.idpersona=id;
-											
-											temp.habilidades=pruebahabi(data[i][1]);
-											temp.estado="A";											
-											$scope._matrices.push(temp);
-											
-											
-										};
-										$scope.TamañoMatriz=$scope._matrices.length;						
-									});
+										var dateee2=data[i].anhoinicio.replace(/\-/g, '/');
+										dt_to2 = $.datepicker.formatDate('yy/mm/dd', new Date(dateee2));
+										temp.anhoinicio=dt_to2;
+										temp.empresa=data[i].empresa;
+										$scope._experiencias.push(temp);
+									};
+								});
+
 						});
-			function pruebahabi(x)
-			{ var habilidades=[];
-				$http({	method: 'GET', 
-				url: 'http://'+$scope.IP+'/SpringGoraTeam/persona/'+id+'/'+x+'/habilidades',
-				}).success(function(data)
-					{	
-						for (var i = data.length - 1; i >= 0; i--)
-						{
-							var tempH= new Habilidad();
-							tempH.idMatriz="";
-							tempH.idHabilidad=data[i][1];
-							tempH.idpersona="";
-							tempH.idhabilidades=data[i][0];
-							tempH.nomhabilidades=data[i][2];
-							tempH.atributotemp=pruebaatri(x,tempH.idHabilidad);
-							habilidades.push(tempH);
-																	
-						}
-														
-												
-				});
-				return 	habilidades;
-			}
-			function pruebaatri(x,y)
-			{ var atributos=[];
-				$http({	method: 'GET', 
-				url: 'http://'+$scope.IP+'/SpringGoraTeam/persona/'+id+'/'+x+'/'+y+'/atributos',
-				}).success(function(data)
-				{	
-					for (var i = data.length - 1; i >= 0; i--)
-					{
-						var atributo= new Atributos();
-						atributo.idatributos=data[i][0];
-						atributo.idatributo=data[i][1];
-						atributo.nomatributo=data[i][2];
-						atributo.idhabilidad=y;
-						atributos.push(atributo);
-					}
-																	
-				});		
-				return 	atributos;
-			}
 		}
-		$scope.filtro=function()
-		{
-			
-			//$scope.itenCompetencia.splice( $.inArray(del,$scope.itenCompetencia) ,1 );
-			$scope.itenCompetencia.splice( $.inArray([[1,'Servidor Oracle']],$scope.itenCompetencia) ,1 );
-			alert($scope.itenCompetencia)
-		}	
-		$scope.guardaMatrizPrimera = function()
+	$scope.guardaMatrizPrimera = function()
 		{
 			var contador=$scope._matrices.length - 1;			
 			var contadorHabilidades=0;
-			if (contador>=0) {
-				contadorHabilidades=$scope._matrices[contador].habilidades.length - 1
-			};
-			function guardarAtributo(data)
-			{	
-				for (var i = $scope._matrices[contador].habilidades[contadorHabilidades].atributotemp.length - 1; i >= 0; i--) {
-					
-					$.ajax({
-					  async:false, 
-					  cache:false,
-					  url: 'http://'+$scope.IP+'/SpringGoraTeam/atributos/create/'+data+'/'+$scope._matrices[contador].habilidades[contadorHabilidades].atributotemp[i].idatributo,
-					  method: 'POST', 
-					  data: $.param($scope._matrices[contador].habilidades[contadorHabilidades].atributotemp[i]),
-					  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-					  success: function(data){console.log(data)}
-					});
+			if (contador>=0)
+				{
+					contadorHabilidades=$scope._matrices[contador].habilidades.length - 1
 				};
-				contadorHabilidades=contadorHabilidades-1;				
-			};
+			function guardarAtributo(data)
+				{	
+					for (var i = $scope._matrices[contador].habilidades[contadorHabilidades].atributotemp.length - 1; i >= 0; i--) {
+						
+						$.ajax({
+						  async:false, 
+						  cache:false,
+						  url: 'http://'+$scope.IP+'/SpringGoraTeam/atributos/create/'+data+'/'+$scope._matrices[contador].habilidades[contadorHabilidades].atributotemp[i].idatributo,
+						  method: 'POST', 
+						  data: $.param($scope._matrices[contador].habilidades[contadorHabilidades].atributotemp[i]),
+						  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+						  success: function(data){console.log(data)}
+						});
+					};
+					contadorHabilidades=contadorHabilidades-1;				
+				};
 			
 			function guardarHabilidades(data)
-			{	
-				
-				for (var i = $scope._matrices[contador].habilidades.length - 1; i >= 0; i--)
-				 {
-					$.ajax({
-					  async:false, 
-					  cache:false,
-					   url: 'http://'+$scope.IP+'/SpringGoraTeam/habilidad/create/'+$scope.id+'/'+data+'/'+$scope._matrices[contador].habilidades[i].idhabilidades,
-					  method: 'POST', 
-					  data: $.param($scope._matrices[contador].habilidades[i]),
-					  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-					  success: function(data){guardarAtributo(data);}
-					});
+				{	
 					
-				};	 
-				
-				contador=contador-1;
-			};
-			function dataid(data)
-			{
-				$scope.id=data;
-				
-				 if ($scope._experiencias.length>0) {
-					$http({
-							method: 'POST', 
-							url: 'http://'+$scope.IP+'/SpringGoraTeam/experiencia/create/'+$scope.id,
-							dataType: 'json',
-							data: JSON.stringify($scope._experiencias),
-							contentType:'application/json'
-						}); 
-				}
-				 for (var i = $scope._estudios.length - 1; i >= 0; i--) {
-					$http({
-							method: 'POST', 
-							url: 'http://'+$scope.IP+'/SpringGoraTeam/formacion/create/'+$scope.id+'/'+$scope._estudios[i].iduniversidad+'/'+$scope._estudios[i].idcarrera+'/'+$scope._estudios[i].idgrado,
-							data: $.param($scope._estudios[i]),
-							headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-						}); 
-				 };
-				 for (var i = $scope._matrices.length - 1; i >= 0; i--) {
-				$.ajax({
-					  async:false, 
-					  cache:false,
-					  url: 'http://'+$scope.IP+'/SpringGoraTeam/matriz/create/'+$scope.id+'/'+$scope._matrices[i].idcompetencia,
-					  method: 'POST', 
-					  data: $.param($scope._matrices[i]), 
-					  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-					  success: function(data){guardarHabilidades(data);}
-					});
+					for (var i = $scope._matrices[contador].habilidades.length - 1; i >= 0; i--)
+					 {
+						$.ajax({
+						  async:false, 
+						  cache:false,
+						   url: 'http://'+$scope.IP+'/SpringGoraTeam/habilidad/create/'+$scope.id+'/'+data+'/'+$scope._matrices[contador].habilidades[i].idhabilidades,
+						  method: 'POST', 
+						  data: $.param($scope._matrices[contador].habilidades[i]),
+						  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+						  success: function(data){guardarAtributo(data);}
+						});
+						
+					};	 
+					
+					contador=contador-1;
 				};
-			}
+			function dataid(data)
+				{
+					$scope.id=data;
+					
+					 if ($scope._experiencias.length>0) {
+						$http({
+								method: 'POST', 
+								url: 'http://'+$scope.IP+'/SpringGoraTeam/experiencia/create/'+$scope.id,
+								dataType: 'json',
+								data: JSON.stringify($scope._experiencias),
+								contentType:'application/json'
+							}); 
+					}
+					 for (var i = $scope._estudios.length - 1; i >= 0; i--) {
+						$http({
+								method: 'POST', 
+								url: 'http://'+$scope.IP+'/SpringGoraTeam/formacion/create/'+$scope.id+'/'+$scope._estudios[i].iduniversidad+'/'+$scope._estudios[i].idcarrera+'/'+$scope._estudios[i].idgrado,
+								data: $.param($scope._estudios[i]),
+								headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+							}); 
+					 };
+					 for (var i = $scope._matrices.length - 1; i >= 0; i--) {
+					$.ajax({
+						  async:false, 
+						  cache:false,
+						  url: 'http://'+$scope.IP+'/SpringGoraTeam/matriz/create/'+$scope.id+'/'+$scope._matrices[i].idcompetencia,
+						  method: 'POST', 
+						  data: $.param($scope._matrices[i]), 
+						  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+						  success: function(data){guardarHabilidades(data);}
+						});
+					};
+				}
 			if($scope._persona.nombres.trim().length < 1 || $scope._persona.apepat.trim().length < 1 || $scope._persona.apemat.trim().length < 1 
 				|| $scope._persona.fechanacimiento.trim().length < 1 || $scope._persona.estadocivil== null || $scope._persona.nacionalidad== null
 				|| $scope._persona.numerodocidentidad.trim().length < 1 || $scope._persona.tipodocidentidad.trim().length < 1 || $scope._persona.presentacion.trim().length < 1 )	
@@ -1013,56 +896,7 @@ function controladorPrincipal($scope,$http){
 					};
 				});
 				
-			}
-
+			}		
 
 		};
 	}
-
-smartApp.config(['$routeProvider', '$provide', function($routeProvider, $provide) {
-	$routeProvider
-		.when('/', {
-			redirectTo: '/dashboard'
-		})
-
-		/* We are loading our views dynamically by passing arguments to the location url */
-
-		// A bug in smartwidget with angular (routes not reloading). 
-		// We need to reload these pages everytime so widget would work
-		// The trick is to add "/" at the end of the view.
-		// http://stackoverflow.com/a/17588833
-		.when('/:page', { // we can enable ngAnimate and implement the fix here, but it's a bit laggy
-			templateUrl: function($routeParams) {
-				return 'views/'+ $routeParams.page +'.html';
-			},
-			controller: 'PageViewController'
-		})
-		.when('/:page/:child*', {
-			templateUrl: function($routeParams) {
-				return 'views/'+ $routeParams.page + '/' + $routeParams.child + '.html';
-			},
-			controller: 'PageViewController'
-		})
-		.otherwise({
-			redirectTo: '/dashboard'
-		});
-
-	// with this, you can use $log('Message') same as $log.info('Message');
-	$provide.decorator('$log', ['$delegate',
-	function($delegate) {
-		// create a new function to be returned below as the $log service (instead of the $delegate)
-		function logger() {
-			// if $log fn is called directly, default to "info" message
-			logger.info.apply(logger, arguments);
-		}
-
-		// add all the $log props into our new logger fn
-		angular.extend(logger, $delegate);
-		return logger;
-	}]); 
-
-}]);
-
-smartApp.run(['$rootScope', 'settings', function($rootScope, settings) {
-	settings.currentLang = settings.languages[0]; // en
-}])
