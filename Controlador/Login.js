@@ -29,7 +29,7 @@ $scope.Simple = function(){
 								});
 							}else{
 								sessvars.myObj=data;
-								if (sessvars.myObj[5]==1) 
+								if (sessvars.myObj[5]=="COMPLETO") 
 									{
 										location.href="home.html#/forms/Mantenimiento";
 									}

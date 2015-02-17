@@ -30,9 +30,6 @@
 		<script src="js/libs/angular/angular.js"></script>
  		 <script src="Controlador/Login.js"></script> 		 
  		 <script type="text/javascript" src="sessionvars.js"></script>
-		
-
-
    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 	    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
@@ -41,15 +38,6 @@
 	    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script> if (!window.jQuery.ui) { document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');} </script>
 
-		
-		
-		 <!-- CUSTOM NOTIFICATION -->
-		<script src="js/notification/SmartNotification.min.js"></script>
-		<!-- browser msie issue fix -->
-		<script src="js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
-		<script src="js/libs/angular/angular-route.js"></script>
-		<script src="js/libs/angular/angular-animate.js"></script>
-		<script src="js/libs/angular/ui-bootstrap-custom-tpls-0.11.0.js"></script>
 </head>
 <body>
 	<div  ng-controller="controlador1">
@@ -63,7 +51,7 @@
 			</div>
 
 			<span id="extr-page-header-space"> <span class="hidden-mobile hidden-xs">¿Necesita Una Cuenta?</span> <a href="#" class="btn btn-primary">Registrar</a> </span>
-			<div id="main" role="main" style="margin-left:0px;width:100%!important;min-height:700px">
+			<div id="main" role="main" style="margin-left:0px;width:100%!important;">
 
 			<!-- MAIN CONTENT -->
 			<div id="content" class="container" style="max-width: 600px;">
@@ -122,7 +110,4 @@
 
 </body>
 </html>
-<script type="text/javascript">
-
-sessvars.myObj ="";
-</script>
+<script type="text/javascript">	sessvars.myObj ="";</script>
