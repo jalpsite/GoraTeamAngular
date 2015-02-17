@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-
-=======
 	
->>>>>>> Rama-Jordan-11/02/2015
+
 <link rel="stylesheet" type="text/css" media="screen" href="css/estilo.css">
 <div class="row" >
 	<div class="col-sm-12">
@@ -22,7 +19,7 @@
 
 										<div class="row">											
 											<div class="col-sm-2 profile-pic">
-												<img id="fotoPersona" src="http://10.77.33.117:8083/SpringGoraTeam/persona/1/getfoto" style="width:100px;height:100px;">
+												<img id="fotoPersona" src="" style="width:100px;height:100px;">
 													<div class="btnFoto">
 														<div id="inputWrapper">
 															<a href="" class="btn btn-default btn-xs" style="height: 22px; width: 22px;" id="popoverF" data-placement='above' title="Subir una Imagen" ><i class="icon-prepend fa fa-plus"></i>
@@ -48,12 +45,13 @@
 																	</div>
 																</form>
 																<script type="text/javascript">
+																$('#fotoPersona').attr('src','http://'+IP+'/SpringGoraTeam/archivo/'+sessvars.myObj[0]+'/pf');
 															
 																	$( "#frmImagen" ).submit(function( event ) {
 																		  
 																		var formData = new FormData(this);
 																				$.ajax({                        
-																					url: "http://"+IP+"/SpringGoraTeam/persona/"+sessvars.myObj[0]+"/createfoto",
+																					url: "http://"+IP+"/SpringGoraTeam/archivo/"+sessvars.myObj[0]+"/subir/pf",
 																					type: "POST",                        
 																					data:  formData,
 																					mimeType:"multipart/form-data",
@@ -62,7 +60,7 @@
 																					contentType: false,
 																					processData: false,
 																					success: function(resp) {																						
-																						$('#fotoPersona').attr('src','http://'+IP+'/SpringGoraTeam/persona/'+sessvars.myObj[0]+'/getfoto'+'?'+Math.random());
+																						$('#fotoPersona').attr('src','http://'+IP+'/SpringGoraTeam/archivo/'+sessvars.myObj[0]+"/pf"+'?'+Math.random());
 																						$('#popoverF').popover('hide')																						 															 
 																					},																					
 																					error: function(jqXHR, estado, error) {
@@ -88,7 +86,7 @@
 											
 											<div class="col-sm-5" >
 												<div class="detalle-nombre">
-													<div ID="NOMBRES" class="atributo-nombre">{{nombre.nombres}}&nbsp;{{apepat.apepat}}&nbsp;{{apemat.apemat}}</div>												
+													<div ID="NOMBRES" class="atributo-nombre">{{persona.nombres}}&nbsp;{{persona.apepat}}&nbsp;{{persona.apemat}}</div>												
 
 													<span class="btnEdit-nombre"><a  class="btn btn-default btn-xs" id="popoverApellidosNombres" data-placement='above' title="Modificacion de Datos Personales" href='#'><i class="icon-prepend fa fa-pencil"></i></a></span>
 												</div>
@@ -99,22 +97,22 @@
 																	
 
 																	<label class="input"> <i class="icon-prepend fa fa-user"></i>
-																		<input type="text" name="fname" placeholder="Nombres" id="txtNombres" value="{{nombre.nombres}}">
+																		<input type="text" name="fname" model="nombre" placeholder="Nombres" id="txtNombres" value="{{persona.nombres}}">
 																	</label>
 																</section>
 																<section class="col col-12">
 																	<label class="input"> <i class="icon-prepend fa fa-user"></i>
-																		<input type="text" name="lname" placeholder="Apellido Paterno" id="txtapepat" value="{{apepat.apepat}}">
+																		<input type="text" name="lname" model="apepat" placeholder="Apellido Paterno" id="txtapepat" value="{{persona.apepat}}">
 																	</label>
 																</section>
 																<section class="col col-12">
 																	<label class="input"> <i class="icon-prepend fa fa-user"></i>
-																		<input type="text" name="lname" placeholder="Apellido Materno" id="txtapemat" value="{{apemat.apemat}}">
+																		<input type="text" name="lname" model="apemat" placeholder="Apellido Materno" id="txtapemat" value="{{persona.apemat}}">
 																	</label>
 																</section>												
 																
 																<div class="form-actions">	
-																	<button type="submit"  class="btn btn-primary btn-sm">
+																	<button type="submit"  ng-click="cambiaNombres()" class="btn btn-primary btn-sm">
 																		Grabar Cambios
 																	</button>
 																	<button type="button" id="btnCancelar" class="btn btn-danger btn-sm" onclick="$('#popoverApellidosNombres').popover('hide');">
@@ -123,6 +121,8 @@
 																</div>
 															</form>
 															<script type="text/javascript">
+
+
 																$(document).ready(function(){
 																	$( "#form1" ).submit(function( event ) {
 																		var nomb=$("#txtNombres").val();
@@ -171,7 +171,7 @@
 																<form id="FormPais" action="" class="smart-form" ng-controller="DatosPaises" style="width:200px">
 																<section>
 																<label class="select">
-																<select style="" name="cboPais" id="cboPais" ng-model="seleccPais"  ng-options="opt[0] as opt[1] for opt in Nacion track by opt[1] " ng-init="seleccPais=null" >
+																<select style="" name="cboPais" id="cboPais" ng-model="seleccPais"  ng-options="opt[0] as opt[1] for opt in Nacion track by opt[1]" ng-init="seleccPais=null" >
 
 																<option value="" ng-disabled="!!seleccPais">Seleccione Pais</option>
 																</select>
@@ -302,7 +302,7 @@
 												<br><br>
 												</div>
 
-									</div>
+								</div>
 
 									<div class="col-sm-5" style="margin-top:60px">
 
@@ -785,7 +785,7 @@
 							    		<form id="" action="" class="smart-form form{{teles.idpersonatelefono}}" ng-controller="DatosTipoTel" >	
 											<div class="form-group col-xs-3">
 												<label class="select">
-													<select class="cboTipoTel{{teles.idpersonatelefono}}" id="cboTipoTel" ng-model="seleccTipoTel"  ng-options="opt[0] as opt[1] for opt in TipoTel"  ng-init="seleccTipoTel = null" >
+													<select class="cboTipoTel{{teles.idpersonatelefono}}" ng-model="seleccTipoTel"  ng-options="opt as opt[1] for opt in TipoTel track by opt[1]"  ng-init="seleccTipoTel = null" >
 													<option value="" ng-disabled="seleccTipoTel">Seleccione Tipo de Telefono</option>
 													</select>
 													<i></i> 
@@ -818,13 +818,17 @@
 							   </ul>
 						</div>
 						<script type="text/javascript">
-							var x=""
+							var x="";
+							var comboTel="";
 							$(document).on("click",".btnEditatelefonos",CargarTelefonos);	
 							function CargarTelefonos()
 								{								
 									var idTelefono=($(this).attr('id'));
 									x=idTelefono;
-									$(".campoTelefonos"+idTelefono).hide();
+									comboTel=$(".tipo"+x).html();									
+									$(".cboTipoTel"+x).val(comboTel);
+									$(".campoTelefonos"+idTelefono).hide();								
+
 								}
 							function cierraColapse(){
 								//alert(".campoTelefonos"+x);
@@ -843,16 +847,9 @@
 
 
 							function llama(){
-							alert(".form"+x);
-							//$(".form"+x).submit(function( event ) {
-								//alert("LLEGE");
-								//event.preventDefault();$("#miCombo option:selected").html();
 								var tipo=($(".cboTipoTel"+x+" option:selected").html());
-								//alert(tips);
-								//var tipo=($(".tipTele"+x).val());
 								var nomb=($(".nomb"+x).val());
 								var id= x;
-								//alert (tipo+" - "+nomb+" - "+x)
 								var formData = {"idpersonatelefono":id,"estado":"A","telefono":nomb,"tipo":tipo};
 								$.ajax({
 								url : "http://10.77.33.117:8083/SpringGoraTeam/persona/telefono/update/"+sessvars.myObj[0],
@@ -860,10 +857,7 @@
 								data: formData,
 								success: function(data, textStatus, jqXHR)
 									{
-									//var vive="";
-									//data - response from server
 									alert("Datos modificados satisfactoriamente");
-									//alert(data.tipo+data.telefono);
 									$(".tipo"+x).html(data.tipo);
 									$(".numero"+x).html(data.telefono);
 									$('.telefonoColapsable'+x).collapse('toggle');
@@ -871,7 +865,7 @@
 									 },
 									 error: function (jqXHR, textStatus, errorThrown)
 									   {
-									alert("No sale");
+									alert("No Se pudo completar los cambios");
 									   }
 									});
 								//});
@@ -916,7 +910,7 @@
 							    		<form id="" action="" class="smart-form form{{correos.idpersonaemail}}" ng-controller="DatosTipoCorreo" >	
 											<div class="form-group col-xs-3">
 												<label class="select">
-													<select class="cboTipoCorreo{{correos.idpersonaemail}}" id="cboTipoCorreo" ng-model="seleccTipoCorreo"  ng-options="opt[0] as opt[1] for opt in TipoCorreo"  ng-init="seleccTipoCorreo = null" >
+													<select class="cboTipoCorreo{{correos.idpersonaemail}}" id="cboTipoCorreo" ng-model="seleccTipoCorreo"  ng-options="opt as opt[1] for opt in TipoCorreo track by opt[1]"  ng-init="seleccTipoCorreo = null" >
 													<option value="" ng-disabled="seleccTipoCorreo">Seleccione Tipo de E-Mail</option>
 													</select>
 													<i></i> 
@@ -947,12 +941,15 @@
 						</div>
 						<script type="text/javascript">
 							var y=""
+							var comboTel="";
+
 							$(document).on("click",".btnEditaCorreos",CargarCorreos);	
 							function CargarCorreos()
 								{								
 									var idCorreo=($(this).attr('id'));
 									y=idCorreo;
-									//alert(x);
+									comboTel=$(".tipoCorreo"+y).html();
+									$(".cboTipoCorreo"+y).val(comboTel);
 									$(".campocorreos"+idCorreo).hide();
 								}
 							function cierraColapse2(){
@@ -1027,12 +1024,16 @@
 								<div class="well well-sm well-light">
 							    	<div class="campoDireccion{{direcs.idpersonadireccion}}" id="{{direcs.idpersonadireccion}}">	
 								    	<input type="hidden" value="{{direcs.idpersonadireccion}}" class="valorOculto">
+								    
 								    	 <br>						    		
-								     	TIPO : <label id="tipoDire{{direcs.idpersonadireccion}}" class="tipo{{direcs.idpersonadireccion}}">{{direcs.tipo}}</label> &nbsp;<span class="btnEdit-Direcc"><a  class="btn btn-default btn-xs btnEditaDirecs" id="{{direcs.idpersonadireccion}}" data-placement='above' data-toggle="collapse" href="#DireecColapsable{{direcs.idpersonadireccion}}" aria-expanded="false" aria-controls="DatosColapsables"><i class="icon-prepend fa fa-pencil"></i></a></span><br> 
+								     	TIPO : <label id="tipoDire{{direcs.idpersonadireccion}}" class="tipo{{direcs.idpersonadireccion}}">{{direcs.tipo}}</label> &nbsp;<span class="btnEdit-Direcc"><a  class="btn btn-default btn-xs btnEditaDirecs" id="{{direcs.idpersonadireccion}}" data-placement='above' data-toggle="collapse" href="#DireecColapsable{{direcs.idpersonadireccion}}" aria-expanded="false" aria-controls="DatosColapsables" name="{{direcs.idubigeo}}"><i class="icon-prepend fa fa-pencil"></i></a></span><br> 
 								     	Direccion : <label class="numeroDire{{direcs.idpersonadireccion}}"> {{direcs.direccion}} </label>
 							    	</div>
 
 							    	<div id="DireecColapsable{{direcs.idpersonadireccion}}" class="panel-collapse collapse DireecColapsable{{direcs.idpersonadireccion}}" >
+							    		<input type="hidden" value="{{ubig.departamento}}" class="depOcul{{direcs.idpersonadireccion}}">
+								    	<input type="hidden" value="{{ubig.provincia}}" class="provOcul{{direcs.idpersonadireccion}}">
+								    	<input type="hidden" value="{{ubig.distrito}}" class="distOcul{{direcs.idpersonadireccion}}">
 							    	<div class="" ng-controller="DatosPersonalesController">
 							    		<form id="" action="" class="smart-form form{{correos.idpersonaemail}}" ng-controller="controladorPrincipal" >	
 											<br>
@@ -1053,13 +1054,13 @@
 											<div class="row">
 												<section  class="col col-6">
 													<label class="select">
-														<select class="cbotipoDir{{direcs.idpersonadireccion}}" name="tipoDireccion"  style="width:100%" ng-model="_direccion.tipo" ng-options="opt[0] as opt[1] for opt in TipoDireccion"  ng-init="_direccion.tipo = null">
+														<select class="cbotipoDir{{direcs.idpersonadireccion}}" name="tipoDireccion"  style="width:100%" ng-model="_direccion.tipo" ng-options="opt as opt[1] for opt in TipoDireccion track by opt[1]"  ng-init="_direccion.tipo = null">
 															<option value="" ng-disabled="!!_direccion.tipo">Tipo de Dirección</option>	
 														</select><i></i> </label>	
 												</section>
 												<section class="col col-6">
 													<label class="select">
-														<select name="cboDepartamento" style="width:100%" id="cboDepartamento" ng-model="seleccDepartamento" ng-options="opt as opt for opt in items"  ng-init="seleccDepartamento = null" ng-change="llamaDepartamento()" >
+														<select name="cboDepartamento" style="width:100%" id="cboDepartamento" class="cboDepartamento{{direcs.idpersonadireccion}}" ng-model="seleccDepartamento" ng-options="opt as opt for opt in items track by opt"  ng-init="seleccDepartamento = null" ng-change="llamaDepartamento()" >
 															<option value="" ng-disabled="!!seleccDepartamento">Seleccione Departamento</option>	
 														</select><i></i> </label>
 																																									
@@ -1067,13 +1068,13 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="select">
-														<select name="cboProvincia" style="width:100%" ng-model="seleccProvincia" ng-options="opt as opt for opt in items2" ng-init="seleccProvincia = null"  ng-change="llamaProvincia()">
+														<select name="cboProvincia" style="width:100%" class="cboProv{{direcs.idpersonadireccion}}" ng-model="seleccProvincia" ng-options="opt as opt for opt in items2 track by opt" ng-init="seleccProvincia = null"  ng-change="llamaProvincia()">
 															<option value="" ng-disabled="!!seleccProvincia">Seleccione Provincia</option>	
 														</select><i></i> </label>
 												</section>
 												<section class="col col-6">
 													<label class="select">
-														<select name="cboDistrito" style="width:100%" class="cboUbigeo{{direcs.idpersonadireccion}}"  ng-model="_direccion.idubigeo" ng-options="opt as opt[1] for opt in items3 track by opt[0] " ng-init="_direccion.idubigeo = null"  >
+														<select name="cboDistrito" style="width:100%" class="cboUbigeo{{direcs.idpersonadireccion}}" id="cboDist{{direcs.idpersonadireccion}}" ng-model="_direccion.idubigeo" ng-options="opt as opt[1] for opt in items3 track by opt[0] " ng-init="_direccion.idubigeo = null"  >
 															<option value="" ng-disabled="!!_direccion.idubigeo">Seleccione Distrito</option>	
 														</select><i></i> </label>
 												</section>
@@ -1102,13 +1103,85 @@
 							   </ul>
 						</div>
 						<script type="text/javascript">
-							var z=""
+							var z="";
+							var comboTel="";
+
 							$(document).on("click",".btnEditaDirecs",CargarDirecc);	
 							function CargarDirecc()
 								{								
 									var idDire=($(this).attr('id'));
+									var idUbig=($(this).attr("name"));
+									
 									z=idDire;
+									comboTel=$(".tipo"+z).html();
+									$(".cbotipoDir"+z).val(comboTel);
 									$(".campoDireccion"+idDire).hide();
+									
+									$.get('http://'+IP+'/SpringGoraTeam/listas/ubigeo/'+idUbig, function( data ) {
+									//$( ".result" ).html( data );
+										
+										//alert(data[0].provincia);
+										//alert(data[0].distrito);
+										$(".cboDepartamento"+z).val(data[0].departamento);
+
+										$.get('http://'+IP+'/SpringGoraTeam/listas/departamento/'+data[0].departamento+'/provincias', function( data2 ) {
+
+											  $(data2).each(function () {
+						                        var option = $(document.createElement('option'));
+
+						                        option.text(this);
+						                        option.val(this);
+
+						                        $(".cboProv"+z).append(option);
+						                    });
+
+
+											//alert(data[0].provincia);
+											$(".cboProv"+z).val(data[0].provincia);
+
+											$.get('http://'+IP+'/SpringGoraTeam/listas/departamento/'+data[0].departamento+'/provincia/'+data[0].provincia+'/distritos', function( data3 ) {
+ 												$(data3).each(function () {
+						                        var option = $(document.createElement('option'));
+
+						                        option.text(data3[0][1]);
+						                        option.val(data3[0][0]);
+
+						                        $("#cboDist"+z).append(option);
+						                        $("#cboDist"+z).val(data3[0][0]);
+						                  		 });
+
+
+											});
+										});
+									});
+									//$(".cboDepartamento"+z).val(data[0].departamento);
+									/*
+									$.ajax({
+						                type: "POST",
+						                url: "pagina.aspx/llenar",
+						                data: "{}",
+						                contentType: "application/json; charset=utf-8",
+						                dataType: "json",
+						                success: function (msg) {
+						                    var datos = $.parseJSON(msg.d);
+
+						                    $(datos).each(function () {
+						                        var option = $(document.createElement('option'));
+
+						                        option.text(this.Nombre);
+						                        option.val(this.Codigo);
+
+						                        $("#cboEjemplo").append(option);
+						                    });
+						                },
+						                error: function (msg) {
+						                    $("#dvAlerta > span").text("Error al llenar el combo");
+						                }
+						            });
+									*/
+
+
+
 								}
 							function cierraColapse3(){
 								//alert(".campoTelefonos"+x);
@@ -1147,7 +1220,7 @@
 									   }
 									});
 								//});
-		
+								
 							}
 					 	</script>
 					</div>
@@ -1169,10 +1242,11 @@
 							&nbsp; Tengo {{exp.length}} Experiencias Laborales. Ellas Son:<br>
 							  <br>
 							  <ul class="example-animate-container articulo">
-							    <li class="animate-repeat " ng-repeat="exps in exp ">
+							    <li class="animate-repeat " ng-repeat="exps in exp">
 								<div class="well well-sm well-light">
 							    	<div class="campoExperiencia{{exps.idexperiencia}}" id="{{exps.idexperiencia}}">	
-								    	 <br>						    		
+								    	 <br>	
+								    	 <input type="hidden" class="carg{{exps.idexperiencia}}" value="{{exps.cargo}}">					    		
 								     	EMPRESA : 
 								     	<label class="empExp{{exps.idexperiencia}}">{{exps.empresa}}</label> &nbsp;
 								     	<span class="btnEdit-Exp">
@@ -1181,7 +1255,7 @@
 									     	</a>
 									     </span>
 									     <br> 
-								     	CARGO : <label class="cargoExp{{exps.idexperiencia}}"> {{exps.cargo}} </label>
+								     	DESCRIPCION : <label class="cargoExp{{exps.idexperiencia}}"> {{exps.descripcion}}</label>
 								     	<br>
 								     	NACIONALIDAD : <label class="nacExp{{exps.idexperiencia}}">{{exps.pais}}</label>
 							    	</div>	
@@ -1196,9 +1270,11 @@
 																<input type="text" placeholder="Empresa" id="empresa" class="empr{{exps.idexperiencia}}" value="{{exps.empresa}}">
 															</label>
 														</section>
+
 														<section class="col col-6" ng-controller="DatosTipoExp">	
 															<label class="select">
-															<select name="nacionalidad" class="cargExp{{exps.idexperiencia}}" style="width:100%"  ng-model="_experiencia.cargo"  ng-init="_experiencia.cargo = null"  ng-options="opt as opt[1] for opt in TipoCargo track by opt[0]"  >	
+
+															<select name="nacionalidad" class="cargExp{{exps.idexperiencia}}" style="width:100%"  ng-model="exps.cargo"  ng-init="exp = null"  ng-options="opt as opt[1] for opt in TipoCargo track by opt[0]"  >	
 															<option value="" ng-disabled="!!_experiencia.cargo">Seleccione Puesto</option>
 																</select><i></i></label>
 
@@ -1210,7 +1286,7 @@
 													<section >
 														<label class="label">Nacionalidad</label>
 														<label class="select">
-														<select name="nacionalidad" style="width:100%" class="pais{{exps.idexperiencia}}" ng-model="_experiencia.pais"  ng-init="_experiencia.pais = null"  ng-options="opt[0] as opt[1] for opt in Nacionalidad"  >	
+														<select name="nacionalidad" style="width:100%" class="pais{{exps.idexperiencia}}" ng-model="_experiencia.pais"  ng-init="_experiencia.pais = null"  ng-options="opt as opt[1] for opt in Nacionalidad track by opt[1]"  >	
 														<option value="" ng-disabled="!!_experiencia.pais">Seleccione País</option>
 															</select><i></i></label>
 
@@ -1245,34 +1321,39 @@
 							    		</div>
 							    	
 							    		<script type="text/javascript">
-							    			var varCont=""
+							    			var varCont="",comboPais;
 											$(document).on("click",".btnEditaExp",CargarExp);	
 											function CargarExp()
 											{								
 												var idDire=($(this).attr('id'));
 												varCont=idDire;
 												//alert(varCont);
+
+												comboPais=$(".nacExp"+varCont).html();
+												$(".pais"+varCont).val(comboPais);
+												$(".cargExp"+varCont).val($(".carg"+varCont).val());
+												//alert($(".carg"+varCont).val());
 												$(".campoExperiencia"+varCont).hide();
 
 
-							    			$('.starindateMod'+varCont).datepicker({
-											dateFormat : 'yy/mm/dd',
-											changeMonth: true,
-											changeYear: true,
-											dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
-											monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
-											prevText : '<i class="fa fa-chevron-left"></i>',
-											nextText : '<i class="fa fa-chevron-right"></i>',
-											});
-												$('.findateMod'+varCont).datepicker({
+								    			$('.starindateMod'+varCont).datepicker({
 												dateFormat : 'yy/mm/dd',
 												changeMonth: true,
 												changeYear: true,
 												dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
 												monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
 												prevText : '<i class="fa fa-chevron-left"></i>',
-												nextText : '<i class="fa fa-chevron-right"></i>',			
-											});
+												nextText : '<i class="fa fa-chevron-right"></i>',
+												});
+													$('.findateMod'+varCont).datepicker({
+													dateFormat : 'yy/mm/dd',
+													changeMonth: true,
+													changeYear: true,
+													dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+													monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+													prevText : '<i class="fa fa-chevron-left"></i>',
+													nextText : '<i class="fa fa-chevron-right"></i>',			
+												});
 												}
 
 											function cierraColapse4(){
@@ -1287,7 +1368,7 @@
 												var emp=($(".empr"+varCont).val());
 												var cargEmp=$(".cargExp"+varCont).val();
 												var descEmp=$(".txtdesc"+varCont).val();											
-												var pais=($(".pais"+varCont+" option:selected").html());
+												var pais=($(".pais"+varCont).val());
 												var inicio=($('.starindateMod'+varCont).val());
 												var ano1=inicio.charAt(0)+inicio.charAt(1)+inicio.charAt(2)+inicio.charAt(3);
 												var mes1=inicio.charAt(5)+inicio.charAt(6);
@@ -1311,7 +1392,7 @@
 													alert(varCont+" - "+data4.empresa);
 
 													$(".empExp"+varCont).html(data4.empresa);
-													$(".cargoExp"+varCont).html(data4.cargo);
+													$(".cargoExp"+varCont).html(data4.descripcion);
 													$(".nacExp"+varCont).html(data4.pais);
 													$('.ExpColapsable'+varCont).collapse('toggle');
 													$(".campoExperiencia"+varCont).show();	
@@ -1367,192 +1448,21 @@
 							    <li class="animate-repeat " ng-repeat="educs in educ ">
 									<div class="well well-sm well-light">
 								    	<div class="campoEducacion{{educs.idformacion}}" id="{{educs.idformacion}}">	
-<<<<<<< HEAD
-									    	 <br>						    		
-									     	CARRERA : 
-									     	<label class="carrEduc{{educs.idformacion}">{{educs.carrera.nombre}}</label> &nbsp;
-=======
 									    	<br>						    		
 									     	CARRERA : 
 									     	<label class="carrEduc{{educs.idformacion}}">{{educs.carrera.nombre}}</label> &nbsp;
->>>>>>> Rama-Jordan-11/02/2015
 									     	<span class="btnEdit-Exp">
 										     	<a  class="btn btn-default btn-xs btnEditaEduc" id="{{educs.idformacion}}" data-placement='above' data-toggle="collapse" href="#EducColapsable{{educs.idformacion}}" aria-expanded="false" aria-controls="DatosColapsables">
 										     		<i class="icon-prepend fa fa-pencil"></i>
 										     	</a>
-<<<<<<< HEAD
-										     </span>
-										     <br> 
-=======
 										    </span>
 										    <br> 
->>>>>>> Rama-Jordan-11/02/2015
 									     	GRADO : <label class="gradoEduc{{educs.idformacion}}"> {{educs.grado.descripcion}} </label>
 									     	<br>
 									     	NIVEL : <label class="nivelEduc{{educs.idformacion}}">{{educs.nivelestudio}}</label>
 									     	<br>
 									     	UNIVERSIDAD : <label class="uniEduc{{educs.idformacion}}">{{educs.universidad.nombre}}</label>
 								    	</div>
-<<<<<<< HEAD
-
-								    	<div id="EducColapsable{{educs.idformacion}}" class="panel-collapse collapse EducColapsable{{educs.idformacion}}" >
-								    		<div class="" ng-controller="DatosPersonalesController">
-								    		<form id="" action="" class="smart-form form{{educs.idformacion}}"  ng-controller="DatosEducacionCombos">	
-												<fieldset>
-													<section >
-														<label class="select">
-														<select class="cboUni{{educs.idformacion}}" style="width:100%"    ng-model="_estudio.iduniversidad"  ng-init="_estudio.iduniversidad = null"  ng-options="opt as opt[1] for opt in  unis track by opt[0]"  >	
-															<option value="" ng-disabled="!!_estudio.iduniversidad">Seleccione Universidad</option>
-														</select><i></i></label>													
-													</section>
-													<section>
-														<label class="select">
-														<select class="cboTitulo{{educs.idformacion}}" style="width:100%"  ng-model="_estudio.idcarrera"  ng-init="_estudio.idcarrera = null"  ng-options="opt as opt[1] for opt in carrera track by opt[0]"  >	
-																<option value="" ng-disabled="!!_estudio.idcarrera">Seleccione Titulo</option>
-														</select><i></i></label>												
-													</section>																				
-												</fieldset>
-												<fieldset>													
-													<section>
-														<label class="select">
-														<select class="cboNivel{{educs.idformacion}}" style="width:100%" ng-model="_estudio.nivelestudio"  ng-init="_estudio.nivelestudio = null"  ng-options="opt as opt[1] for opt in nivel track by opt[1]"  >	
-															<option value="" ng-disabled="!!_estudio.nivelestudio">Seleccione Nivel de Estudio</option>
-														</select><i></i></label>
-													</section>
-													<section>														
-														<label class="select">
-														<select class="cboGrado{{educs.idformacion}}" style="width:100%" ng-model="_estudio.idgrado"  ng-init="_estudio.idgrado = null"  ng-options="opt as opt[1] for opt in Grado track by opt[0]">	
-															<option value="" ng-disabled="!!_estudio.idgrado">Seleccione el grado</option>
-														</select><i></i></label>
-													</section>	
-													<section class="col-col-6">
-														<label class="input"> <i class="icon-append fa fa-calendar"></i>
-															<input type="text" class="fecIniEst{{educs.idformacion}}" placeholder="Fecha de Inicio"  ng-model="_estudio.anhoinicio">
-														</label>
-													</section>
-													<section class="col-col-6">									
-														<label class="input"> <i class="icon-append fa fa-calendar"></i>
-															<input type="text" class="fecFinEst{{educs.idformacion}}" placeholder="Fecha de Finalización"  ng-model="_estudio.anhofin">
-														</label>
-													</section>
-													<section>
-														<label class="textarea textarea-expandable">
-															<i class="icon-append fa fa-comment"></i>
-															<textarea rows="3" class="custom-scroll txtDescFor{{educs.idformacion}}"  placeholder="Ingrese una descripcion extra" ng-model="_estudio.descripcion" ng-change="_estudio.descripcion=_estudio.descripcion.toUpperCase();"></textarea>
-														</label>
-													</section>	
-												</fieldset>
-											</form>
-												<button type="submit"  class="btn btn-primary btn-sm" onclick="llama5()">
-													Grabar Cambios
-												</button>
-												<button type="button" id="btnCancelar" class="btn btn-danger btn-sm" onclick="cierraColapse5()">
-													Cancelar
-												</button>
-												<br><br>										
-										<script type="text/javascript">
-
-								    			var varContEd=""
-												$(document).on("click",".btnEditaEduc",CargarEdu);	
-												function CargarEdu()
-												{								
-													var idFor=($(this).attr('id'));
-													varContEd=idFor;
-													$(".campoEducacion"+varContEd).hide();
-
-
-								    			$('.fecIniEst'+varContEd).datepicker({
-												dateFormat : 'yy/mm/dd',
-												changeMonth: true,
-												changeYear: true,
-												dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
-												monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
-												prevText : '<i class="fa fa-chevron-left"></i>',
-												nextText : '<i class="fa fa-chevron-right"></i>',
-												});
-												$('.fecFinEst'+varContEd).datepicker({
-													dateFormat : 'yy/mm/dd',
-													changeMonth: true,
-													changeYear: true,
-													dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
-													monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
-													prevText : '<i class="fa fa-chevron-left"></i>',
-													nextText : '<i class="fa fa-chevron-right"></i>',			
-												});
-												}
-
-												function cierraColapse5(){
-												//alert(".campoTelefonos"+x);
-													$('.EducColapsable'+varContEd).collapse('toggle');
-													$(".campoEducacion"+varContEd).show();							
-
-												}
-
-												function llama5(){
-													
-													var univ=($(".cboUni"+varContEd).val());	
-													var titulo=$(".cboTitulo"+varContEd).val();
-													var nivel=$(".cboNivel"+varContEd).val();	
-													var Desc= $(".txtDescFor"+varContEd).val();	
-													var grado= $(".cboGrado"+varContEd).val();	
-													var inicio=($('.fecIniEst'+varContEd).val());
-													var ano1=inicio.charAt(0)+inicio.charAt(1)+inicio.charAt(2)+inicio.charAt(3);
-													var mes1=inicio.charAt(5)+inicio.charAt(6);
-													var dia1=inicio.charAt(8)+inicio.charAt(9);
-													var fec1=ano1+"/"+mes1+"/"+dia1;
-													var fin=($('.fecFinEst'+varContEd).val());
-													var ano2=fin.charAt(0)+fin.charAt(1)+fin.charAt(2)+fin.charAt(3);
-													var mes2=fin.charAt(5)+fin.charAt(6);
-													var dia2=fin.charAt(8)+fin.charAt(9);
-													var fec2=ano2+"/"+mes2+"/"+dia2;
-													var idFor = varContEd;
-													//alert(idExp+" - "+univ+" - "+titulo+" - "+nivel+" - "+Desc+" - "+grado+" - "+fec1+" - "+fec2);
-													var formData = {"idformacion":idFor,"descripcion":Desc,"estado":"A","nivelestudio":nivel,"anhoinicio":fec1,"anhofin":fec2}
-													$.ajax({
-													url : "http://"+IP+"/SpringGoraTeam/formacion/update/"+sessvars.myObj[0]+"/"+univ+"/"+titulo+"/"+grado+"/",
-													type: "POST",
-													data: formData,
-													success: function(data5, textStatus, jqXHR)
-														{
-														alert("Datos modificados satisfactoriamente");
-														$(".carrEduc"+varContEd).html(data5.carrera.nombre);
-														$(".gradoEduc"+varContEd).html(data5.grado.descripcion);
-														$(".nivelEduc"+varContEd).html(data5.nivelestudio);
-														$(".uniEduc"+varContEd).html(data5.universidad.nombre);
-														$('.EducColapsable'+varContEd).collapse('toggle');
-														$(".campoEducacion"+varContEd).show();	
-														 },
-														 error: function (jqXHR, textStatus, errorThrown)
-														   {
-														alert("No sale");
-														   }
-														});
-												}
-												
-
-								    	function DatosEducacionCombos($scope,$http){
-											$scope.IP=IP;							
-												$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/universidades').success(function(data) {
-												$scope.unis = data ;
-												});
-												$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/grados').success(function(data) {
-												$scope.Grado = data ;
-												});
-												$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/carreras').success(function(data) {
-												$scope.carrera = data ;
-												});
-												$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/nivelestudio').success(function(data) {
-												$scope.nivel = data ;
-												});
-
-
-
-												}
-
-
-								    	</script>
-								    		</div>
-=======
 
 								    	<div id="EducColapsable{{educs.idformacion}}" class="panel-collapse collapse EducColapsable{{educs.idformacion}}" >
 								    		<div class="" ng-controller="DatosPersonalesController">
@@ -1590,18 +1500,18 @@
 														</section>	
 														<section class="col-col-6">
 															<label class="input"> <i class="icon-append fa fa-calendar"></i>
-																<input type="text" class="fecIniEst{{educs.idformacion}}" placeholder="Fecha de Inicio"  ng-model="_estudio.anhoinicio">
+																<input type="text" class="fecIniEst{{educs.idformacion}}" placeholder="Fecha de Inicio"   value="{{educs.anhoinicio}}">
 															</label>
 														</section>
 														<section class="col-col-6">									
 															<label class="input"> <i class="icon-append fa fa-calendar"></i>
-																<input type="text" class="fecFinEst{{educs.idformacion}}" placeholder="Fecha de Finalización"  ng-model="_estudio.anhofin">
+																<input type="text" class="fecFinEst{{educs.idformacion}}" placeholder="Fecha de Finalización"  value="{{educs.anhofin}}">
 															</label>
 														</section>
 														<section>
 															<label class="textarea textarea-expandable">
 																<i class="icon-append fa fa-comment"></i>
-																<textarea rows="3" class="custom-scroll txtDescFor{{educs.idformacion}}"  placeholder="Ingrese una descripcion extra" ng-model="_estudio.descripcion" ng-change="_estudio.descripcion=_estudio.descripcion.toUpperCase();"></textarea>
+																<textarea rows="3" class="custom-scroll txtDescFor{{educs.idformacion}}"  placeholder="Ingrese una descripcion extra" >{{educs.descripcion}}</textarea>
 															</label>
 														</section>	
 													</fieldset>
@@ -1621,6 +1531,16 @@
 													{								
 														var idFor=($(this).attr('id'));
 														varContEd=idFor;
+														//alert($(".uniEduc"+varContEd).html());
+														$(".cboUni"+varContEd+" option:selected").html($(".uniEduc"+varContEd).html());
+														$(".cboTitulo"+varContEd+" option:selected").html($(".carrEduc"+varContEd).html());
+														$(".cboNivel"+varContEd+" option:selected").html($(".nivelEduc"+varContEd).html());
+														$(".cboGrado"+varContEd+" option:selected").html($(".gradoEduc"+varContEd).html());
+														//$(".cargExp"+varCont).val($(".carg"+varCont).val());
+
+
+
+
 														$(".campoEducacion"+varContEd).hide();
 
 
@@ -1648,7 +1568,6 @@
 													//alert(".campoTelefonos"+x);
 														$('.EducColapsable'+varContEd).collapse('toggle');
 														$(".campoEducacion"+varContEd).show();							
->>>>>>> Rama-Jordan-11/02/2015
 
 													}
 
@@ -1694,12 +1613,6 @@
 													}
 													
 
-<<<<<<< HEAD
-									</div>
-									</div>
-								</li>
-							</ul>
-=======
 											    	function DatosEducacionCombos($scope,$http){
 														$scope.IP=IP;							
 															$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/universidades').success(function(data) {
@@ -1723,7 +1636,6 @@
 							</ul>
 						</div>
 					</div>
->>>>>>> Rama-Jordan-11/02/2015
 				</div>
 			</div>
 		</div>
@@ -1743,47 +1655,85 @@
 							<div class="tabs-left" ng-controller="DatosCompetenciaController">
 									<ul id="myModCom" class="nav nav-tabs tabs-left" >
 										<li ng-repeat="competis in competi" >		
-											<a href="#tab{{competis[0]}}" ng-click="muestraHab(competis[0])" class="btnEditaCom" id="{{competis[0]}}" data-toggle="tab">{{competis[1]}}</a>
+											<a href="#tab{{competis[1]}}" ng-click="muestraHab(competis[1])" class="btnEditaCom" id="{{competis[1]}}" data-toggle="tab">{{competis[2]}}</a>
 
 										</li>														
 									</ul>
 								<div class="tab-content" >
 
-									<div class="tab-pane fade tab{{competis[0]}}" ng-repeat="competis in competi" id="tab{{competis[0]}}">
+									<div class="tab-pane fade tab{{competis[1]}}" ng-repeat="competis in competi" id="tab{{competis[1]}}">
 										HABILIDADES											
 												<div class="form-group">
 													<div class="col-lg-5">
 														<ol class="dd-list">
-															<li class="dd-item" ng-repeat="habs in habilidad">
-																<div class="col-lg-10 dd-handle"><i class="fa fa-lg fa-sliders "></i>&nbsp;&nbsp;{{habs[1]}}
+															<li class="dd-item" ng-repeat="habs in _habilidades" style=" line-height: 13px;">
+																<div class="col-lg-10 dd-handle"><i class="fa fa-lg fa-sliders "></i>&nbsp;&nbsp;{{habs.nomhabilidades}}
 																</div>																
-																<div class="col-lg-2">																
-																<span><a ng-click="muestraAtri(habs[0])" class="btn btn-info btn-sm" type="button">
-																<i class="fa fa-info-circle "></i></a>
-																</span>				
+																<div class="col-lg-2">														<span>
+																		<a href-void  class="btn btn-info btn-sm popoverATr" ng-click="cargarEditHabilidad(habs.idHabilidad)">
+																		<i class="fa fa-pencil-square-o "></i></a>
+																	</span>		
+																	<span>
+																		<a ng-click="muestraAtri(habs.idHabilidades,$index)" id="{{habs.idHabilidad}}"class="btn btn-info btn-xs btnEditaHab" type="button" >
+																		<i class="fa fa-info-circle "></i></a>
+																	</span>				
 																</div>
+																	<br><br><br>
+																<ol ng-repeat="atr in habs.atributotemp" style=" line-height: 13px;">
 
-															</li>								
-														</ol>															
-													</div>
-													<div class="alert alert-info col-lg-5">
-													ATRIBUTOS
-														<ul>
-															<li ng-repeat="atribs in atrib">
-																<span>{{atribs[1]}}
-																&nbsp;&nbsp;<a href="#"  class="btn btn-info btn-sm" type="button">
-																<i class="fa fa-pencil-square-o "></i></a>
-																</span>
-															
+																	<div class="col-lg-10 dd-handle" ><i class="fa fa-lg fa-sliders "></i>&nbsp;&nbsp;{{atr.nomatributo}}
+																	</div>
+																	<a href="#"  class="btn btn-info btn-xs btnEditaAtri" ng-click="cargarEditAtributo(atr.idatributos)" id="{{atr.idatributo}}" type="button">
+																	<i class="fa fa-pencil-square-o "></i></a>
+																</ol>
+
 															</li>
-														</ul>	
-													
+
+														</ol>															
 													</div>
 												</div>
 
 																			
 									</div>	
-					
+										<script type="text/javascript">
+																var varContAtr="";
+																var varContAtr2="";
+																var varContHabs="";
+																var varContHabsCamb="";
+																var varContComp="";
+																var idFor;
+
+																$(document).on("click",".btnEditaCom",CargarComp);	
+																function CargarComp()
+																{								
+																	var idFor=($(this).attr('id'));
+																	varContComp=idFor;
+																	//$(".campoEducacion"+varContAtr).hide();
+																	//alert(varContComp);
+																}
+																$(document).on("click",".btnEditaHab",CargarHab);	
+																function CargarHab()
+																{								
+																	var idFor=($(this).attr('id'));
+																	varContHabs=idFor;
+
+																	//$(".campoEducacion"+varContAtr).hide();
+																	//alert(varContHabs);
+																}
+																$(document).on("click",".btnEditaAtri",CargarAtrib);	
+																function CargarAtrib()
+																{								
+																	idFor=($(this).attr('id'));
+																	varContAtr=idFor;
+																	//$(".campoEducacion"+varContAtr).hide();
+																	//alert(varContAtr);
+																	//alert(varContAtrs);
+																	//alert("Comp "+varContComp+" "+varContHabs+" "+varContAtr)
+																}
+										</script>	
+										<div id="popoverATrCuerpo" style="display: none">
+											<p>Hola</p>
+										</div>
 							
 								</div>
 							</div>								
@@ -1795,7 +1745,12 @@
 	</div>
 </div>
 
+<div id="dialog_editAtributo" style="overflow-y: auto;">
 
+</div>
+
+<div id="dialog_editHabilidad" style="overflow-y: auto;">
+</div>
 
 <!-- end widget grid -->
 
@@ -1877,6 +1832,13 @@
 
 		  });
 
+	$('.popoverATr').popover({ 
+		    html : true,
+		    content: function() {
+		      return $('#popoverATrCuerpo').html();
+		    }
+
+		  });
 
 
 

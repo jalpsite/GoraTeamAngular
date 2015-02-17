@@ -1,0 +1,82 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+		&times;
+	</button>
+	<h4 class="modal-title" id="myModalLabel">Modificacion del Atributo</h4>
+</div>
+<div class="modal-body" app>
+	<div class="row" ng-controller="controlador1">
+		<div class="col-md-12">
+			<div class="well well-sm well-primary">
+				<form class="form " role="form" >
+					<div class="form-group">
+						<select class="form-control" style="width:100%" ng-model="Hab" ng-change="CambiaCombo()" ng-init="Hab = null"  ng-options="opt[0] as opt[1] for opt in HabMost" >
+							<option value="" ng-disabled="!!Hab">Seleccione Habilidades</option>
+						</select><i></i>
+					</div>
+					<div class="form-group">
+						<select class="form-control" style="width:100%" ng-model="Atributos"  ng-init="Atributos = null"  ng-options="opt[0] as opt[1] for opt in AtributosMost" >
+							<option value="" ng-disabled="!!Atributos">Seleccione Atributos</option>
+						</select><i></i>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">
+				Cancelar
+			</button>
+			<button type="button" class="btn btn-primary" ng-click="llamaAtrib()">
+				Modificar
+			</button>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+      
+
+
+function controlador1($scope,$http){
+		alert(sessvars.myObj[0]);
+		$http.get('http://'+IP+'/SpringGoraTeam/habilidad/extracto/'+sessvars.myObj[0]+'/1/habilidades').success(function(data) {
+			$scope.HabMost = data ;
+			
+		});
+
+		$scope.CambiaCombo=function(){
+
+		$http.get('http://'+IP+'/SpringGoraTeam/habilidad/'+$scope.Hab+'/atributos').success(function(data) {
+		$scope.AtributosMost = data ;
+		});
+
+		alert("Hola")
+
+		}
+
+		$scope.llamaAtrib=function(){
+
+		var formData = {idatributos:"1"}
+		
+			/*$.ajax({
+				url : "http://"+IP+"/SpringGoraTeam/atributos/update/1/"+$scope.Atributos+"/",
+				type: "POST",
+				data: formData,
+			success: function(data5, textStatus, jqXHR)
+				{
+				alert("Datos modificados satisfactoriamente");
+				},
+			error: function (jqXHR, textStatus, errorThrown)
+			   {
+				alert("No sale");
+			}
+				});
+*/
+			}
+}
+
+
+</script>
+
+
