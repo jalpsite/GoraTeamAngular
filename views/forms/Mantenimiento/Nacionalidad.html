@@ -1,0 +1,71 @@
+<div>
+	<form id="FormPais" action="" class="smart-form" style="width:200px">
+		
+		<section>
+			<label class="select">
+				<select style="" name="cboPais" id="cboPais"  >
+					<option value="" >Seleccione Pais</option>
+				</select>
+				<i></i> 
+			</label>																	
+		</section>											
+		<div class="modal-footer">	
+			<button type="button" id="btnModPais" class="btn btn-primary btn-sm">
+				Grabar Cambios
+			</button>
+			<button type="button" id="btnCancelar" class="btn btn-primary btn-sm" onclick="$('#popoverPais').popover('hide');">
+				Cancelar
+			</button>
+		</div>
+	</form>
+</div>
+	<script type="text/javascript">
+		$(document).ready(function(){	
+			$('#cboPais').html('');
+			var nacionCargada;
+
+				nacionCargada=$("#MPais").html();				
+			var cont=0;
+				$.get('http://'+IP+'/SpringGoraTeam/listas/nacionalidad', function( datas ) {
+ 					$(datas).each(function () {
+
+						var option = $(document.createElement('option'));
+						//alert(datas)
+	                        option.text(datas[cont][1]);
+						    option.val(datas[cont][1]);
+
+						    $("#cboPais").append(option);
+						    //$("#cboPais").val(data3[0][0]);
+
+						    $("#cboPais").val(nacionCargada);
+						    cont++;
+					});
+ 				});
+
+				
+
+			$("#btnModPais").click(function( event ) {
+					var pais=$("#cboPais option:selected").html();
+				
+					var formData = {nacionalidad:pais,idpersona:sessvars.myObj[0]};
+						$.ajax({
+						    url : "http://"+IP+"/SpringGoraTeam/persona/update/4/",
+						    type: "POST",
+						    data : formData,
+							    success: function(data, textStatus, jqXHR)
+							    {
+							    	alert("DATOS MODIFICADOS CORRECTAMENTE!!");
+								   	$('#popoverPais').popover('hide');
+									$("#MPais").html(data.nacionalidad);
+							    },
+							    error: function (jqXHR, textStatus, errorThrown)
+								{
+									alert("No sale");
+								}
+						});
+				});
+		});	
+
+		
+	</script>
+									

@@ -1,0 +1,69 @@
+
+<form id="formSexo" action="" class="smart-form" ng-controller="DatosPersonalesController" style="width:200px;">
+	<section >
+		<label class="label">Sexo</label>
+		<div class="inline-group">
+			<label class="radio">
+				<input type="radio" id="sexoM" name="Sexo" value="M">
+					<i></i>Masculino
+			</label>
+			<label class="radio">
+				<input type="radio" id="sexoF" name="Sexo" value="F">
+				<i></i>Femenino
+			</label>
+		</div>
+	</section>
+	<div class="modal-footer">	
+		<button type="submit" class="btn btn-primary btn-sm">
+			Grabar Cambios
+		</button>
+		<button type="button" id="btnCancelar" class="btn btn-primary btn-sm" onclick="$('#popoverSexo').popover('hide');">
+			Cancelar
+		</button>
+	</div>	
+</form>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var sex=$("#Msexo").html();
+			if (sex=="MASCULINO") {
+				$("#sexoM").prop("checked", "checked");
+			}
+			if (sex=="FEMENINO") {
+				$("#sexoF").prop("checked", "checked");
+			}
+
+		var sexoSel,sexoMost;
+			$( "#formSexo" ).submit(function( event ) {
+				if($("#sexoM").is(':checked')) {  
+					sexoSel="M";
+					sexoMost="MASCULINO";
+				}else
+ 				
+ 				if($("#sexoF").is(':checked')) {  
+					sexoSel="F";
+					sexoMost="FEMENINO"; 
+				} 
+		event.preventDefault();
+																		 
+	var formData = {sexo:sexoSel,idpersona:sessvars.myObj[0]};
+	$.ajax({
+		url : "http://"+IP+"/SpringGoraTeam/persona/update/6/",
+			type: "POST",
+			data : formData,
+				success: function(data, textStatus, jqXHR)
+					{
+						alert("DATOS MODIFICADOS CORRECTAMENTE!!");
+						$('#popoverSexo').popover('toggle');
+						$("#Msexo").html(sexoMost);
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+					alert("No sale");
+				 }
+		});
+																
+	});
+});
+
+</script>

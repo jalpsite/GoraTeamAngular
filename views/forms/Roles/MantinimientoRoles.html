@@ -1,0 +1,239 @@
+<script src="Controlador/UsuarioControler.js"></script>
+<div class="row" ng-if="RolAdmin">
+	<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+		<h1 class="page-title txt-color-blueDark">
+			
+			<!-- PAGE HEADER -->
+			<i class="fa-fw fa fa-pencil-square-o"></i> 
+				Roles
+			<span>>  
+				Mantenimiento de Roles
+			</span>
+		</h1>
+	</div>
+</div>
+
+
+
+
+<!-- widget grid -->
+<section id="widget-grid" class="" ng-controller="controladorUsuario" ng-if="RolAdmin">
+
+
+	<div class=" well">
+		<section >
+		<div class="input-group">
+			<input class="form-control" type="text" ng-model="valor" placeholder="Buscar">
+			<div class="input-group-btn">
+				<button class="btn btn-default btn-primary" type="button"  ng-click="buscarUsuario()">
+					<i class="fa fa-search"></i> Buscar
+				</button>
+			</div>
+		</div></section>
+		<br>
+		<br>
+		<section class="col col-6 smart-form">
+			<label class="select">
+			<select name="gender" ng-model="selectBuscar">
+			<option value="0">Por Nombre o Apellido</option>
+			<option value="1">Por Numero de Documento</option>
+			</select> <i></i> </label>
+		</section>
+	</div>
+
+	<div class="row">
+
+		<!-- NEW COL START -->
+	
+		<!-- END COL -->
+
+		<!-- NEW COL START -->
+		<article class="col-sm-12 col-md-12 col-lg-12">
+			
+			<!-- Widget ID (each widget will need unique ID)-->
+			
+			<div class="jarviswidget jarviswidget-color-red" id="wid-id-221" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-deletebutton="false" data-widget-sortable="false" >
+				<!-- widget options:
+				usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+				data-widget-colorbutton="false"
+				data-widget-editbutton="false"
+				data-widget-togglebutton="false"
+				data-widget-deletebutton="false"
+				data-widget-fullscreenbutton="false"
+				data-widget-custombutton="false"
+				data-widget-collapsed="true"
+				data-widget-sortable="false"
+
+				-->
+				<header>
+					<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+					<h2>Basic Form Elements </h2>
+
+				</header>
+
+				<!-- widget div-->
+				<div>
+
+					<!-- widget edit box -->
+					<div class="jarviswidget-editbox">
+						<!-- This area used as dropdown edit box -->
+
+					</div>
+					<!-- end widget edit box -->
+
+					<!-- widget content -->
+					<div class="widget-body no-padding">
+
+						<form action="" class="smart-form">
+							
+							<fieldset>
+								<div class="row " >
+									<section class="col col-6 form-group">
+										<label class="input"> <i class="icon-append fa fa-user"></i>
+												<input type="text" name="nombres" id="nombre" placeholder="Nombres" ng-model="_persona.nombres" ng-change="_persona.nombres=_persona.nombres.toUpperCase();" disabled="disabled">
+										</label>
+										<br>
+										<label class="input"> <i class="icon-append fa fa-user"></i>
+												<input type="text" name="appat"  id="apepat"placeholder="Apellido Paterno" ng-model="_persona.apepat"  ng-change="_persona.apepat=_persona.apepat.toUpperCase();" disabled="disabled">
+										</label>
+										<br>
+										<label class="input"> <i class="icon-append fa fa-user"></i>
+											<input type="text" name="apmat" id="apmat"placeholder="Apellido Materno" ng-model="_persona.apemat" ng-change="_persona.apemat=_persona.apemat.toUpperCase();" disabled="disabled">
+										</label>
+										<br>
+										<label class="input"><i class="icon-append fa fa-calendar"></i>
+											<input type="text" name="nacimiento" id="Nacdate" placeholder="Fecha de Nacimiento" ng-model="_persona.fechanacimiento" disabled="disabled">
+										</label>
+										<br>
+										<label for="address" class="input"> <i class="icon-append fa fa-building"></i>
+											<input type="text" name="nDocumento" placeholder="Ingrese Numero de Documento"  ng-model="_persona.numerodocidentidad" id="nDocumento" disabled="disabled">
+										</label>
+										<br>
+										<label class="label">Sexo</label>
+											<div class="inline-group" >
+												<label class="radio">
+													<input type="radio" name="Sexo" ng-model="_persona.sexo" value="M" disabled="disabled">
+												<i></i>Masculino</label>
+												<label class="radio">
+													<input type="radio" name="Sexo" ng-model="_persona.sexo" value="F" disabled="disabled">
+												<i></i>Femenino</label>
+											</div>
+										
+									</section>
+									<section class="col col-1 form-group">
+									</section>
+									<section class="col col-3 form-group alert alert-info no-margin fade in">
+										<h1><span class="semi-bold">Roles</span></h1>
+										<br>
+										<label class="toggle" ng-repeat="rol in roles">
+											<input type="checkbox" name="checkbox-toggle" ng-model="rol.seleccion"><i data-swchon-text="ON" data-swchoff-text="OFF"></i>{{rol.descripcion}}</label>										
+									</section>
+									<section class="col col-2 form-group">
+									</section>														
+								</div>
+							</fieldset>
+							<footer>
+								<button type="button" id="rolSave"class="btn btn-primary disabled" ng-click="rolUserSave()">
+									Guardar
+								</button>
+							</footer>
+
+						</form>
+
+					</div>
+					<!-- end widget content -->
+
+				</div>
+				<!-- end widget div -->
+
+			</div>
+			<!-- end widget -->
+
+		</article>
+		<!-- END COL -->		
+
+	</div>
+	<div class="modal fade" id="ModalUsuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4>Lista de Usuarios</h4>
+            </div>
+
+            <div class="modal-body">
+                <!-- The form is placed inside the body of modal -->
+                <form id="loginForm" method="post" class="form-horizontal">
+                    <div class="table-responsive">
+							
+							<table class="table">
+							<thead>			                
+								<tr>
+									
+									<th data-class="expand"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Nombres</th><th>Apellidos</th><th>DNI</th>	
+									<th data-class="expand"></th>
+								</tr> 
+							</thead>
+							<tbody id = "Tematico">
+								<tr ng-repeat="usua in persona">
+								<td style="display:none;">dd</td>
+								<td>{{usua.nombres}}</td>
+								<td>{{usua.apepat}} {{usua.apemat}}</td>
+								<td>{{usua.numerodocidentidad}}</td>
+								<td><a href="javascript:void(0);" class="btn bg-color-magenta txt-color-white btn-circle" ng-click="asignarRol(usua)"><i class="fa fa-pencil"></i></a></td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+                    <input type="hidden" id="fecha"  />
+                    <div class="modal-footer">
+        				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>       
+     				</div>                
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+	<!-- END ROW -->
+	
+
+</section>
+<!-- end widget grid -->
+
+		
+<!-- SCRIPTS ON PAGE EVENT -->
+<script type="text/javascript">
+
+
+	pageSetUp();
+	
+	
+	var pagefunction = function() {
+		
+		// class switcher for radio and checkbox
+		$('input[name="demo-switcher-1"]').change( function() {
+		  //alert($(this).val())
+		  $this = $(this);
+		  
+		  myNewClass = $this.attr('id');
+		  
+		  $('.demo-switcher-1 input[type="checkbox"]').removeClass();
+		  $('.demo-switcher-1 input[type="checkbox"]').addClass("checkbox "+ myNewClass);
+		  
+		  $('.demo-switcher-1 input[type="radio"]').removeClass();
+		  $('.demo-switcher-1 input[type="radio"]').addClass("radiobox "+ myNewClass);
+		  
+		});
+		
+	};
+	
+	// end pagefunction
+	
+	// run pagefunction on load
+	
+	pagefunction();
+	
+</script>

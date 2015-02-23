@@ -1,0 +1,57 @@
+
+<img id="fotoPersona" src="" style="width:100px;height:100px;">
+<div class="btnFoto">
+	<div id="inputWrapper">
+		<a href="#" class="btn btn-default btn-xs" style="height: 22px; width: 22px;" id="popoverF" data-placement='above' title="Subir una Imagen" >
+			<i class="icon-prepend fa fa-plus"></i>
+		</a>	
+		<div id="popoverFoto" style="display: none">
+			<form id="frmImagen" action="" class="smart-form" style="width:200px;" enctype="multipart/form-data" accept-charset="utf-8" >
+				<section>
+					<label class="label">
+						Seleccione Imagen
+					</label>
+					<div class="input input-file">
+						<span class="button">
+							<input type="file" id="file" accept="image/jpg, image/JPG,image/JPEG, image/jpeg" name="file" onchange="this.parentNode.nextSibling.value = this.value">
+							Buscar
+						</span>
+						<input type="text" placeholder="Seleccionar" readonly="">
+					</div>
+				</section>
+				<div class="modal-footer">	
+					<button type="submit" id="btnAceptar" class="btn btn-primary btn-sm">
+						Subir Imagen
+					</button>
+					<button type="button" id="btnCancelar" class="btn btn-primary btn-sm" onclick="$('#popoverF').popover('hide');">
+						Cancelar
+					</button>
+				</div>
+			</form>
+			<script type="text/javascript">
+				$('#fotoPersona').attr('src','http://'+IP+'/SpringGoraTeam/archivo/'+sessvars.myObj[0]+'/pf');
+				$( "#frmImagen" ).submit(function( event ) {
+					var formData = new FormData(this);
+					$.ajax({                        
+						url: "http://"+IP+"/SpringGoraTeam/archivo/"+sessvars.myObj[0]+"/subir/pf",
+						type: "POST",                        
+						data:  formData,
+						mimeType:"multipart/form-data",
+						async: false,
+						cache: false,
+						contentType: false,
+						processData: false,
+							success: function(resp) {
+								$('#fotoPersona').attr('src','http://'+IP+'/SpringGoraTeam/archivo/'+sessvars.myObj[0]+"/pf"+'?'+Math.random());
+								$('#popoverF').popover('hide');
+							},
+							error: function(jqXHR, estado, error) {
+								alert(estado + " " + error);
+							}
+					});
+					event.preventDefault();
+				});
+			</script>
+		</div>	
+	</div>
+</div>													

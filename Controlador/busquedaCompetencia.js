@@ -8,7 +8,10 @@ function ControladorDatosCompetencia($scope, $http){
 	$scope.init= function(){
 		getDataOfService();
 	};
-
+	
+	
+	
+	
 	$http.get('http://'+$scope.IP+'/SpringGoraTeam/listas/competencias').success(function(data) {
 	    $scope.items4 = data ;
       	$scope.seleccCompetencia = $scope.items4[-1];
@@ -23,6 +26,7 @@ function ControladorDatosCompetencia($scope, $http){
     });
 
 	$scope.updateArrayCompetencia= function(){
+		reset();
 		$scope._comp = [];
 		if($scope.seleccCompetencia.length > 0){
 			for (var i = 0; i < $scope.seleccCompetencia.length ; i++) {
@@ -34,6 +38,7 @@ function ControladorDatosCompetencia($scope, $http){
 		getDataOfService();
 	};
 	$scope.updateArrayHabilidad= function(){
+		reset();
 		$scope._hab = [];
 		if($scope.seleccHabilidad.length > 0){
 			for (var i = 0; i < $scope.seleccHabilidad.length ; i++) {
@@ -45,6 +50,7 @@ function ControladorDatosCompetencia($scope, $http){
 		getDataOfService();
 	};
 	$scope.updateArrayAtributo= function(){
+		reset();
 		$scope._atri = [];
 		if($scope.seleccAtributo.length > 0){
 			for (var i = 0; i < $scope.seleccAtributo.length ; i++) {
@@ -87,17 +93,34 @@ function ControladorDatosCompetencia($scope, $http){
 			return true;
 		};
 	};
-
+	
+	var reset=function(){
+		$scope.paginacion=0;
+		$scope.pagina=1;
+		$scope.totalResultados=0;
+	}
+	
+	$scope.paginacion=0;
+	$scope.pagina=1;
+	$scope.totalResultados=0;
 	function getDataOfService(){
       	$http({
        	   method: 'POST', 
-       	   url: 'http://'+$scope.IP+'/SpringGoraTeam/persona/filtro',
+       	   url: 'http://'+$scope.IP+'/SpringGoraTeam/persona/filtro/'+$scope.pagina,
 		   params: {competencias:$scope._comp,habilidades:$scope._hab,atributos:$scope._atri},       	   
 		   headers: {'Content-Type': 'application/x-www-form-urlencoded'}
        	}).success(function (data) {
        		var filtroPersona = data;
        		$scope.listPersonaCompetencia = [];
 			if(filtroPersona.length > 0){
+				//Obtener numero de paginacion
+				$scope.paginacion=parseInt(filtroPersona[filtroPersona.length-1].codigo);
+				$scope.totalResultados=parseInt(filtroPersona[filtroPersona.length-1].numerodocidentidad);							
+				filtroPersona.splice(filtroPersona.length-1, 1);
+				
+				$scope.llenarPaginasTotal($scope.paginacion);				
+				
+				////////
 				var contador=0;
 				for (var i = 0; i < filtroPersona.length ; i++) {
 					var idPersona=filtroPersona[i].idpersona;
@@ -115,7 +138,8 @@ function ControladorDatosCompetencia($scope, $http){
 			          	contador++;
 			        });
 				};
-			};
+				
+			}else{$scope.pagina=1;$scope.paginacion=0;totalResultados=0;};
 		});
 	}
 
@@ -235,4 +259,61 @@ function ControladorDatosCompetencia($scope, $http){
 
     	},
 	}).css({overflow:"auto"});
+			
+	
+		$scope.getNumber = function(pag) {			
+			return new Array(pag);   
+		}
+		
+		
+		$scope.updatePagina= function(pag){				
+			$scope.pagina=pag;								
+			if(pag==($scope.flag+10)){				
+				$scope.paginasMostrar.splice(0,10);
+				//$scope.$apply();
+				$scope.flag=($scope.flag+9);
+				$scope.llenarPaginas($scope.paginasTotal);								
+			}			
+			if(pag<=($scope.paginasMostrar[0]-1)){
+				$scope.paginasMostrar.splice(0,10);
+				//$scope.$apply();
+				$scope.flag=($scope.flag-9);
+				$scope.llenarPaginas($scope.paginasTotal);	
+			}			
+			if(pag==1){
+				$scope.paginasMostrar.splice(0,10);
+				//$scope.$apply();
+				$scope.flag=0;
+				$scope.llenarPaginas($scope.paginasTotal);	
+			}						
+			getDataOfService();		
+			scroll('tbBusqueda');												
+		};
+		
+		$scope.paginasTotal=[];
+		$scope.paginasMostrar=[];
+		$scope.flag=0;
+		
+		$scope.llenarPaginasTotal=function(data){			
+			for(i=0;i<data;i++){
+				$scope.paginasTotal.push(i+1);
+			}
+			$scope.llenarPaginas($scope.paginasTotal);
+		}
+		
+		$scope.llenarPaginas=function(data){
+			$scope.paginasMostrar.splice(0,10);		
+			for(i=$scope.flag;i<($scope.flag+10)&&i<$scope.paginacion;i++){						
+				$scope.paginasMostrar.push(data[i]);							
+			}			
+			//$scope.$apply();					
+		}				
 }
+function scroll(id){
+          // Reove "link" from the ID
+        id = id.replace("link", "");
+          // Scroll		  	 
+		 $('html,body').animate({
+          scrollTop: parseInt($("#"+id).offset().top)-140},
+            'slow');
+		}

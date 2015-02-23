@@ -1,5 +1,4 @@
-
-<div class="row">
+<div class="row" ng-if="RolAdmin">
 	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
 		<h1 class="page-title txt-color-blueDark">
 			<i class="fa fa-table fa-fw "></i> 
@@ -12,7 +11,7 @@
 </div>
 
 <!-- widget grid -->
-<section id="widget-grid" class="">
+<section id="widget-grid" class="" ng-if="RolAdmin">
 
 	<div class="row">
 		<article class="col-sm-12 col-md-12 col-lg-12">
@@ -74,9 +73,30 @@
 								</fieldset>
 								<fieldset>									
 									<section>
-										<label class="label">Resultado</label>
+																				
 										<div class="table-responsive">
-											<table class="table table-bordered">
+											
+											<div style="text-align:right">
+											
+											<span class="label {{paginacion>1?'hide':''}}" style="display: table-cell; vertical-align: middle;">Pagina: {{pagina}} de {{paginacion}} | {{totalResultados}} resultados en total.</span>										
+											<ul class="pagination {{paginacion<=1?'hide':''}}" style="margin-left:20px;" >
+												<li><span class="label" style="display: table-cell; vertical-align: middle;">Pagina: {{pagina}} de {{paginacion}} | {{totalResultados}} resultados en total.</span>										</li>
+												<li class="active {{flag<9?'hide':''}}">
+													<a href="javascript:void(0);" ng-click="updatePagina(1)" style="cursor:pointer;"><i class="fa fa-fast-backward"></i></a>
+												</li>
+												<li class="{{pagina==1?'hide':''}}">
+													<a href="javascript:void(0);" ng-click="pagina==1?'':updatePagina(pagina-1)"><i class="fa fa-arrow-left"></i></a>
+												</li>
+												<li ng-repeat="i in paginasMostrar track by $index" class="{{i==pagina?'active':''}}">
+													<a class="" href="javascript:void(0);" ng-click="pagina!=i?updatePagina(i):''">{{i}}</a>
+												</li>
+												<li class="{{pagina==paginacion?'hide':''}}">
+													<a href="javascript:void(0);" ng-click="pagina<paginacion?updatePagina(pagina+1):updatePagina(pagina)"><i class="fa fa-arrow-right"></i></a>
+												</li>												
+											</ul>
+											</div>
+											
+											<table class="table table-bordered" id="tbBusqueda">
 												<thead>
 													<tr>
 														<th rowspan="2" style="text-align: center; vertical-align: middle;">Nombres</th>
@@ -104,9 +124,16 @@
 														<td>{{personaComp.apellidosJefe}}</td>
 														<td><a href-void class="btn btn-link" ng-click="cargarEmails(personaComp.idJefe)">{{isExisteId(personaComp.idJefe) ? "Ver emails" : ""}}</a></td>
 														<td><a href-void class="btn btn-link" ng-click="cargarTelefonos(personaComp.idJefe)">{{isExisteId(personaComp.idJefe) ? "Ver teléfonos" : ""}}</a></td>
+														
+													</tr>
+													<tr ng-if="listPersonaCompetencia.length == 0">
+														<td colspan="9" style="text-align:center;">
+														  <strong>No se encontraron coincidencias</strong>
+														</td>
 													</tr>
 												</tbody>
 											</table>
+											
 										</div>	
 									</section>
 								</fieldset>
@@ -126,7 +153,7 @@
 </section>
 <!-- end widget grid -->
 
-<div id="dialog_atributo" style="overflow-y: auto;">
+<div id="dialog_atributo" style="overflow-y: auto;" ng-if="RolAdmin">
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -140,7 +167,7 @@
 	</table>
 </div>
 
-<div id="dialog_email">
+<div id="dialog_email" ng-if="RolAdmin">
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -154,7 +181,7 @@
 	</table>
 </div>
 
-<div id="dialog_telefono">
+<div id="dialog_telefono" ng-if="RolAdmin">
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -169,7 +196,6 @@
 </div>
 
 <script src="Controlador/busquedaCompetencia.js"></script>
-<script src="js/plugin/select2/select2.min.js"></script>
 <script type="text/javascript">
 
 	// DO NOT REMOVE : GLOBAL FUNCTIONS!

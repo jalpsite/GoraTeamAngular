@@ -1,4 +1,5 @@
 <!-- User info -->
+
 			<div class="login-info">
 				<span> <!-- User image size is adjusted inside CSS, it should stay as is --> 
 					
@@ -20,13 +21,19 @@
 			will not initialize.
 			-->
 
-			<navigation>
-				<nav:item data-view="/dashboard" data-icon="fa fa-lg fa-fw fa-home" title="Dashboard" />	
-				<nav:item data-view="/forms/form-templates" data-icon="fa fa-lg fa-fw fa-inbox" title="Personal"></nav:item>	
-				<nav:item data-view="/forms/Mantenimiento" data-icon="fa fa-lg fa-fw  fa-cogs" title="Mantenimiento"></nav:item>
-				<nav:item data-view="/forms/busqueda-templates" data-icon="fa fa-lg fa-fw fa-inbox" title="Búsqueda"></nav:item>
+			<navigation >
+				<nav:item id="Dashboard" data-view="/dashboard" data-icon="fa fa-lg fa-fw fa-home" title="Dashboard" />	
+				<nav:item id="Personal"data-view="/forms/form-templates" data-icon="fa fa-lg fa-fw fa-edit" title="Personal" ng-if="perfil=='INCOMPLETO'"></nav:item>	
+				<nav:item id="Mantenimiento" data-view="/forms/Mantenimiento" data-icon="fa fa-lg fa-fw  fa-cogs" title="Mantenimiento" ng-if="perfil=='COMPLETO'"></nav:item>
+				<div ng-if="RolAdmin">
+				<nav:item data-view="/forms/busqueda-templates" data-icon="fa fa-lg fa-fw fa-search" title="Búsqueda"></nav:item>
+				<nav:item data-view="/forms/PrimerRegistro" data-icon="fa fa-lg fa-fw fa-book" title="Registro"></nav:item>
+				<nav:item data-view="/forms/Roles/MantinimientoRoles" data-icon="fa fa-lg fa-fw fa-key" title="Mantenimiento de Roles"></nav:item>
+				</div>
 			</navigation>
 			<span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i> </span>
 <script type="text/javascript">
 	$("#lblnomb").html(sessvars.myObj[4]);
+	
+
 </script>

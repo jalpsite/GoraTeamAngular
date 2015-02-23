@@ -1,0 +1,108 @@
+<form id="formIdentidad" style="width:200px;" action="" class="smart-form" >
+	<div class="form-group">
+		<section >
+			<label class="select">
+				<select name="cboTipo" id="cboTipo" >
+					<option value="" >Seleccione Tipo de documento</option>
+				</select>
+				<i></i> 
+			</label>
+		</section>
+		<section>
+			<label for="address" class="input"> 
+				<i class="icon-append fa fa-building"></i>
+				<input type="text" id="txtDocumento" name="nDocumento" placeholder="Ingrese Numero de Documento" >
+			</label>
+		</section>
+	</div>
+	<div class="form-group">
+		<button type="submit"  class="btn btn-primary btn-sm">
+			Grabar Cambios
+		</button>
+		<button type="button" id="btnCancelar" class="btn btn-primary btn-sm" onclick="$('#popoverIdentidad').popover('hide');">
+			Cancelar
+		</button>
+	</div>
+
+</form>
+	
+	<script type="text/javascript">
+		var pagefunction = function() {
+		$('#formIdentidad').bootstrapValidator({
+			feedbackIcons : {
+				valid : 'glyphicon glyphicon-ok',
+				invalid : 'glyphicon glyphicon-remove',
+				validating : 'glyphicon glyphicon-refresh'
+			},
+			fields : { 
+				nDocumento : {
+					validators : {
+						notEmpty : {
+							message : 'El DNI es requerido'
+						},
+						digits : {
+							message : 'El DNI no puede tener letras'
+						},
+						stringLength : {
+							max : 8,
+							min : 8,
+							message : 'Solo se permite el ingreso de 8 numeros'
+						}
+					}
+				}
+			}														
+		});
+	}
+
+	loadScript("js/plugin/bootstrapvalidator/bootstrapValidator.min.js", pagefunction);		
+
+
+			$(document).ready(function(){
+				var cont=0;
+				$("#cboTipo").html('');
+					
+				$.get('http://'+IP+'/SpringGoraTeam/listas/tipodocumentos', function( datas ) {
+ 					$(datas).each(function () {
+						var option = $(document.createElement('option'));	
+						    option.text(datas[cont][1]);
+						    option.val(datas[cont][1]);
+
+						    $("#cboTipo").append(option);
+						    $("#cboTipo").val($("#Mtipo").html());
+						cont++;
+					});
+ 				});
+ 				cont=0;
+				
+				$("#txtDocumento").val($("#Mdni").html());
+			
+
+			
+			$( "#formIdentidad" ).submit(function( event ) {
+				var tipo=$("#cboTipo").val();
+				var numero=$("#txtDocumento").val();
+				event.preventDefault();
+				var formData = {tipodocidentidad:tipo,numerodocidentidad:numero,idpersona:sessvars.myObj[0]};
+					$.ajax({
+						url : "http://"+IP+"/SpringGoraTeam/persona/update/5/",
+						type: "POST",
+						data : formData,
+							success: function(data, textStatus, jqXHR)
+							{
+								alert("DATOS MODIFICADOS CORRECTAMENTE!!");
+								$('#popoverIdentidad').popover('hide');
+								$("#Mtipo").html(data.tipodocidentidad);
+								$("#Mdni").html(data.numerodocidentidad);
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								alert("No sale");
+							}
+						});
+				});
+
+		});
+
+		
+	
+	</script>

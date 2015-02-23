@@ -1,0 +1,77 @@
+<form style="width:200px; " id="formPresentacion" action="" class="smart-form">
+	<div class="form-group">
+		<section>
+			<label class="label">Textarea expandable</label>
+			<label class="textarea textarea-expandable">
+				<textarea id="txtPresenta" name="txtPres" class="custom-scroll" rows="6"></textarea>
+			</label>
+		</section>
+	</div>
+	<div class="form-group">	
+		<button type="submit" id="btnModPrest" class="btn btn-primary btn-sm">
+			Grabar Cambios
+		</button>
+		<button type="button" id="btnCancelar" class="btn btn-primary btn-sm" onclick="$('#popoverPresentacion').popover('hide');">
+			Cancelar
+		</button>
+	</div>
+</form>
+<script>
+	
+	var pagefunction = function() 
+	{
+		$('#formPresentacion').bootstrapValidator({
+			feedbackIcons : {
+				valid : 'glyphicon glyphicon-ok',
+				invalid : 'glyphicon glyphicon-remove',
+				validating : 'glyphicon glyphicon-refresh'
+			},
+			fields : 
+			{ 
+				txtPres : 
+				{
+					validators : 
+					{
+						notEmpty : {
+							message : 'La presentacion es Requerida'
+						},
+						stringLength : {
+							max : 500,
+							message : 'Solo se permite el ingreso de 500 letras'
+						}
+					}
+				}
+			
+			}
+
+		});
+	}
+	
+	loadScript("js/plugin/bootstrapvalidator/bootstrapValidator.min.js", pagefunction);	
+
+
+	$(document).ready(function(){	
+		$("#txtPresenta").val($("#mPresenta").html());
+		$( "#btnModPrest" ).click(function( event ) {
+			var presenta=$("#txtPresenta").val();
+			event.preventDefault();
+			var formData = {presentacion:presenta,idpersona:sessvars.myObj[0]};
+				$.ajax({
+					url : "http://"+IP+"/SpringGoraTeam/persona/update/7/",
+					type: "POST",
+					data : formData,
+						success: function(data, textStatus, jqXHR)
+							{
+								var vive="";
+								alert("DATOS MODIFICADOS CORRECTAMENTE!!");
+							    $('#popoverPresentacion').popover('toggle');
+								$("#mPresenta").html(data.presentacion);
+							},
+						error: function (jqXHR, textStatus, errorThrown)
+							{
+								alert("No sale");
+							}
+				});
+		});
+	});
+</script>

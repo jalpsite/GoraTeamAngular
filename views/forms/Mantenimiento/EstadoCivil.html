@@ -1,0 +1,84 @@
+ <form id="formCivil" action="" class="smart-form" style="width:200px;">
+ 	<section>
+		<label class="label">Estado Civil</label>
+		<label class="select">
+			<select name="cboCivil" id="cboCivil" >												
+				<option value="">Seleccione Estado Civil</option>
+			</select>
+			<i></i> 
+		</label>
+	</section>
+	
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-primary btn-sm">
+			Grabar Cambios
+		</button>
+		<button type="button" id="btnCancelar" class="btn btn-primary btn-sm" onclick="$('#popoverCivil').popover('hide');">
+			Cancelar
+		</button>
+	</div>
+</form>
+
+	<script>
+
+		$(document).ready(function(){
+				$('#cboCivil').html('');
+				var cont=0;
+				$.get('http://'+IP+'/SpringGoraTeam/listas/estadocivil', function( datas ) {
+ 					$(datas).each(function () {
+
+						var option = $(document.createElement('option'));
+						//alert(datas)
+	                        option.text(datas[cont][1]);
+						    option.val(datas[cont][0]);
+
+						    $("#cboCivil").append(option);
+						    //$("#cboPais").val(data3[0][0]);
+
+						    if ($("#Mcivil").html()=="CASADO") {
+								$("#cboCivil").val("C");
+								}
+							if ($("#Mcivil").html()=="SOLTERO") {
+									$("#cboCivil").val("S");
+								}
+							if ($("#Mcivil").html()=="VIUDO") {
+									$("#cboCivil").val("V");
+								}
+							if ($("#Mcivil").html()=="DIVORCIADO") {
+									$("#cboCivil").val("D");
+								}						    
+						    cont++;
+					});
+ 				});
+
+			
+
+			$( "#formCivil" ).submit(function( event ) {
+			var civil=$("#cboCivil").val();
+			event.preventDefault();
+			var formData = {estadocivil:civil,idpersona:sessvars.myObj[0]};
+				$.ajax({
+					url : "http://"+IP+"/SpringGoraTeam/persona/update/2/",
+					type: "POST",
+					data : formData,
+						success: function(data, textStatus, jqXHR)
+							{
+								var vive="";
+								alert("DATOS MODIFICADOS CORRECTAMENTE!!");
+								if (data.estadocivil=="C") { vive ="CASADO"};
+								if (data.estadocivil=="S") { vive ="SOLTERO"};
+								if (data.estadocivil=="V") { vive ="VIUDO"};
+								if (data.estadocivil=="D") { vive ="DIVORCIADO"};
+								$('#popoverCivil').popover('toggle');
+								$("#Mcivil").html(vive);
+							},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							alert("No sale");
+						}
+					});
+			});
+		});
+
+		
+	</script>

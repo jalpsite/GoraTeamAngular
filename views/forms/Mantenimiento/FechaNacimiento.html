@@ -1,0 +1,76 @@
+<div>
+	<form id="FormFecha" class="smart-form" >
+		<div class="form-group col-xs-3">
+			<label class="input">
+				<i class="icon-append fa fa-calendar"></i>
+				<input type="text" name="nacimiento" id="fechasNace" placeholder="Fecha de Nacimiento">
+			</label>
+		</div>
+		<div class="form-group col-xs-3">
+		<button id="btnGrabaFecha" type="submit" class="btn btn-primary btn-sm"  >
+			Grabar Cambios
+		</button>
+		<button type="button" id="btnCancelarFecha" class="btn btn-primary btn-sm" onclick="cierraColapseFecha()">
+			Cancelar
+			</button>
+		</div>
+	</form>							
+</div>
+	<script type="text/javascript">
+
+
+		var fullDate;
+			$('#fechasNace').datepicker({
+				dateFormat : 'dd/mm/yy',
+				changeMonth: true,
+				changeYear: true,
+				dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+				monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+				prevText : '<i class="fa fa-chevron-left"></i>',
+				nextText : '<i class="fa fa-chevron-right"></i>',
+			});
+
+
+		$(document).ready(function(){	
+		
+		$( "#fecha_nac" ).click(function( event ) {	
+			
+			$("#fechasNace").val($('#MFecha').html());
+		});
+		$( "#btnGrabaFecha" ).click(function( event ) {	
+				var day1 = $("#fechasNace").datepicker('getDate').getDate();                
+				var month1 = $("#fechasNace").datepicker('getDate').getMonth() + 1;
+				var year1 = $("#fechasNace").datepicker('getDate').getFullYear();
+				fullDate2 = day1 + "/" + month1 + "/" + year1;
+				fullDate = year1 + "/" + month1 + "/" + day1;
+				Nace=fullDate;
+				ms = Date.parse(Nace);
+		    	fecha = new Date(ms);
+				var formData = {fechanacimiento:fecha,idpersona:sessvars.myObj[0]};
+
+					$.ajax({
+						url : "http://"+IP+"/SpringGoraTeam/persona/update/3/",
+						type: "POST",
+						data : formData,
+							success: function(data, textStatus, jqXHR)
+							{
+								alert("DATOS MODIFICADOS CORRECTAMENTE!!");
+								$('#MFecha').html(fullDate2);
+								$('.FechaColapsable').collapse('hide');
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								alert("No sale");
+							}
+					});												
+			});
+		});
+	
+
+		
+	
+
+		function cierraColapseFecha(){
+			$('.FechaColapsable').collapse('hide');
+		}
+	</script>

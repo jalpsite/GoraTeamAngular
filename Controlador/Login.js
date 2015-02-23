@@ -1,6 +1,7 @@
 
 function controlador1($scope,$http){
 $scope.Simple = function(){
+	var ip="10.77.33.117:8083";
 	if($scope.pass==null || $scope.pass=="" || $scope.usuario==null || $scope.usuario==""){
 		$.smallBox({
 			title : "Datos Incompletos",
@@ -14,7 +15,7 @@ $scope.Simple = function(){
 		
 			$http({
 			   method: 'POST', 
-			   url: 'http://10.77.33.117:8083/SpringGoraTeam/persona/login',
+			   url: 'http://'+ip +'/SpringGoraTeam/usuario/login',
 			   data: $.param({dni:$scope.pass,correo:$scope.usuario}),
 			   headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		  
@@ -29,13 +30,23 @@ $scope.Simple = function(){
 								});
 							}else{
 								sessvars.myObj=data;
-								if (sessvars.myObj[5]=="COMPLETO") 
-									{
-										location.href="home.html#/forms/Mantenimiento";
-									}
-								else{
-									location.href="home.html#/forms/form-templates";
-								};
+								$http({
+										method: 'GET', 
+										url: 'http://'+ip+'/SpringGoraTeam/usuario/'+sessvars.myObj[6]+'/roles/',
+										}).success(function(data)
+											{		
+												sessvars.myObj.push(data);
+												if (sessvars.myObj[5]=="COMPLETO") 
+													{
+														location.href="home.html#/forms/Mantenimiento";
+													}
+												else{
+													location.href="home.html#/forms/form-templates";
+												};						
+														
+											});
+
+								
 							}
 			});
 		}

@@ -1,0 +1,125 @@
+<form id="formApeNom" action="" ng-controller="DatosPersonalesController" class="smart-form"  style="width:200px">					
+	<div class="form-group">
+		<section class="col col-12">
+			<label class="input"> 
+				<i class="icon-prepend fa fa-user"></i>
+				<input type="text" name="fname" model="nombre" placeholder="Nombres" id="txtNombres" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); " >
+			</label>
+		</section>
+		<section class="col col-12">
+			<label class="input">
+				<i class="icon-prepend fa fa-user"></i>
+				<input type="text" name="lname" model="apepat" placeholder="Apellido Paterno" id="txtapepat" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
+			</label>
+		</section>
+		<section class="col col-12">
+			<label class="input"> 
+				<i class="icon-prepend fa fa-user"></i>
+				<input type="text" name="lname2" model="apemat" placeholder="Apellido Materno" id="txtapemat" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
+			</label>
+		</section>
+	</div>	
+	<div class="form-group">	
+			<button type="submit" id="grabApenom" class="btn btn-primary btn-sm">
+				Grabar Cambios
+			</button>
+			<button type="button" id="btnCancelar" class="btn btn-primary btn-sm" onclick="$('#popoverApellidosNombres').popover('hide');">
+				Cancelar
+			</button>
+	</div>
+				
+</form>
+<script type="text/javascript">
+	var pagefunction = function() {
+		$('#formApeNom').bootstrapValidator({
+			feedbackIcons : {
+				valid : 'glyphicon glyphicon-ok',
+				invalid : 'glyphicon glyphicon-remove',
+				validating : 'glyphicon glyphicon-refresh'
+			},
+			fields : { 
+				fname : {
+					validators : {
+						notEmpty : {
+							message : 'El Nombre es Requerido'
+						},
+						regexp: {
+							regexp: /^[a-z\s]+$/i,
+							message: 'El Nombre solo puede tener Letras'
+						},
+						stringLength : {
+							max : 50,
+							message : 'Solo se permite el ingreso de 50 letras'
+						}
+					}
+				},
+				lname : {
+					validators : {
+						notEmpty : {
+							message : 'El Nombre es Requerido'
+						},
+						regexp: {
+							regexp: /^[a-z\s]+$/i,
+							message: 'El Nombre solo puede tener Letras'
+						},
+						stringLength : {
+							max : 50,
+							message : 'Solo se permite el ingreso de 50 letras'
+						}
+					}
+				},
+				lname2 : {
+					validators : {
+						notEmpty : {
+							message : 'El Nombre es Requerido'
+						},
+						regexp: {
+							regexp: /^[a-z\s]+$/i,
+							message: 'El Nombre solo puede tener Letras'
+						},
+						stringLength : {
+							max : 50,
+							message : 'Solo se permite el ingreso de 50 letras'
+						}
+					}
+				}
+			}														
+		});
+	}
+
+	loadScript("js/plugin/bootstrapvalidator/bootstrapValidator.min.js", pagefunction);		
+
+$(document).ready(function(){
+	$("#txtNombres").val($("#muestraNomb").html());
+	$("#txtapepat").val($("#muestraApepat").html());
+	$("#txtapemat").val($("#muestraApemat").html());
+//alert(nomb+apepat+apemat);
+
+	$( "#grabApenom" ).click(function( event ) {
+			var nomb=$("#txtNombres").val();
+			var apat=$("#txtapepat").val();
+			var amat=$("#txtapemat").val();
+			event.preventDefault();
+			var formData = {nombres:nomb,apepat:apat,apemat:amat,idpersona:sessvars.myObj[0]};
+				$.ajax({
+					url : "http://"+IP+"/SpringGoraTeam/persona/update/1/",
+					type: "POST",
+					data : formData,
+						success: function(data, textStatus, jqXHR)
+							{
+							alert("DATOS MODIFICADOS CORRECTAMENTE!!");
+							$('#popoverApellidosNombres').popover('hide');
+							
+							$("#muestraNomb").html(data.nombres);
+							$("#muestraApepat").html(data.apepat)
+							$("#muestraApemat").html(data.apemat)
+							},
+						error: function (jqXHR, textStatus, errorThrown)
+							{
+							alert("No sale");
+							}
+					});
+		});
+});
+		
+</script>

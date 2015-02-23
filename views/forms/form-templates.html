@@ -56,11 +56,11 @@
 					<!-- end widget edit box -->
 
 					<!-- widget content -->
-					<div class="widget-body">
+					<div class="widget-body" ng-controller="controladorPrincipal">
 
 						<div class="row">
-							<form action="" id="wizard-1" class="smart-form" novalidate="novalidate" ng-controller="controladorPrincipal">
-								<div id="bootstrap-wizard-1" class="col-sm-12">
+							<form action="" id="wizard-1" class="smart-form" novalidate="novalidate"  ng-init="cargaListas()">
+								<div id="bootstrap-wizard-1" class="col-sm-12" ng-init="cargaInicio()">
 									<div class="form-bootstrapWizard">
 										<ul class="bootstrapWizard form-wizard">
 											<li class="active" data-target="#step1">
@@ -145,12 +145,9 @@
 													<br>
 														<label class="label">Tipo de Documento</label>
 														<div class="inline-group">
-															<label class="radio" >
-																<input type="radio" name="tDocumento" ng-model="_persona.tipodocidentidad" value="DNI">
-																<i></i>DNI</label>
-															<label class="radio">
-																<input type="radio" name="tDocumento" ng-model="_persona.tipodocidentidad" value="Pasaporte">
-																<i></i>Pasaporte</label>
+															<label class="radio" ng-repeat="tDocument in tipoDocumento">
+																<input type="radio" name="tDocumento" ng-model="_persona.tipodocidentidad" value="{{tDocument[1]}}">
+																<i></i>{{tDocument[1]}}</label>			
 														</div>
 													</section>
 													<section  class="col col-6 form-group">
@@ -194,7 +191,7 @@
 													</section>
 													<section class="col col-4">
 														<label class="input"> <i class="icon-append fa fa-envelope-o"></i>
-															<input type="email" name="email" placeholder="Email"  ng-model="_email.email" ng-change="_email.email=_email.email.toUpperCase();">
+															<input  name="email" placeholder="Email"  ng-model="_email.email" ng-change="_email.email=_email.email.toUpperCase();">
 														</label>												
 													</section>													
 													<section class="col col-4">
@@ -684,9 +681,7 @@
 <!-- SCRIPTS ON PAGE EVENT -->
 <script type="text/javascript">
 
-loadScript("js/plugin/bootstrap-tags/bootstrap-tagsinput.min.js", function(){
-			$('.tagsinput').tagsinput('refresh')
-		});
+
 $("#experiencia").hide();
 $("#divHbilidad").hide();
 $("#estudios").hide();
@@ -695,7 +690,6 @@ $("#pestañas").hide();
 $("#pestañaEstudios").hide();
 $("#BotonPenultimo").hide();
 $("#BotonPenultimo2").hide();
-$("#enviar").hide();
 $('#paso1').click(function(){$("#sectionFinal").css("display", "none");$("#botonFin").css("display", "block");});
 $('#paso2').click(validar);
 $("#paso3").click(validar);
@@ -837,10 +831,7 @@ function validar() {
 			var $validator = $("#wizard-1").validate({
 
 				rules : {
-					email : {
-						required : false,
-						email : "Ingrese un email valido"
-					},
+					
 					nombres : {
 						required : true
 					},
@@ -878,10 +869,7 @@ function validar() {
 					presentacion : "Este Campo es obligatorio",
 					estadoCivil : "Este Campo es obligatorio",
 					nDocumento : "Este Campo es obligatorio",
-					email : {
-						required : "Ingrese un email de contacto",
-						email : "El formato del email no es el correcto"
-					}
+					
 				},
 
 				highlight : function(element) {

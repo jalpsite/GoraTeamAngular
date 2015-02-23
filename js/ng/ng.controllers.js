@@ -70,6 +70,17 @@ angular.module('app.controllers', [])
 
 	.controller('SmartAppController', ['$scope', function($scope) {
 		// your main controller
+		$scope.perfil=sessvars.myObj[5];
+
+		for (var j = sessvars.myObj[7].length - 1; j >= 0; j--)
+			{				
+				if (sessvars.myObj[7][j].rol.nomrol=="ROLE_ADMIN") 
+				{
+					$scope.RolAdmin=true;
+
+				}	
+			}
+		console.log(sessvars.myObj);
 
 	}])
 

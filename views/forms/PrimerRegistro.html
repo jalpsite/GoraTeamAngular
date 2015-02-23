@@ -1,0 +1,270 @@
+<script src="Controlador/PersonaControler.js"></script>
+<div class="row" ng-if="RolAdmin">
+	<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+		<h1 class="page-title txt-color-blueDark">
+			
+			<!-- PAGE HEADER -->
+			<i class="fa-fw fa fa-pencil-square-o"></i> 
+				Consultores
+			<span>>  
+				Primer Registro del Consultor
+			</span>
+		</h1>
+	</div>
+</div>
+
+
+<!-- widget grid -->
+<section id="widget-grid" class="" ng-if="RolAdmin">
+
+	
+	<div class="row">
+		
+		<article class="col-sm-12 col-md-12 col-lg-12">
+			
+			<!-- Widget ID (each widget will need unique ID)-->
+			<div class="jarviswidget jarviswidget-color-red" id="wid-id-220" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-deletebutton="false" data-widget-sortable="false" >
+				<!-- widget options:
+					usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+					
+					data-widget-colorbutton="false"	
+					data-widget-editbutton="false"
+					data-widget-togglebutton="false"
+					data-widget-deletebutton="false"
+					data-widget-fullscreenbutton="false"
+					data-widget-custombutton="false"
+					data-widget-collapsed="true" 
+					data-widget-sortable="false"
+					
+				-->
+				<header>
+					<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+					<h2>Registro Inicial </h2>				
+					
+				</header>
+
+				<!-- widget div-->
+				<div>
+					
+					<!-- widget edit box -->
+					<div class="jarviswidget-editbox">
+						<!-- This area used as dropdown edit box -->
+						
+					</div>
+					<!-- end widget edit box -->
+					
+					<!-- widget content -->
+					<div class="widget-body no-padding" ng-controller="controladorPrincipal">
+						
+						<form action="" id="checkout-form" class="smart-form" novalidate="novalidate" >
+										<fieldset>												
+												<div class="row">
+													<section class="col col-6">
+														<label class="input"> <i class="icon-append fa fa-envelope-o"></i>
+															<input   placeholder="Email"  ng-model="_usuario.usuario" ng-blur="verificacionUsuario()"ng-change="_usuario.usuario=_usuario.usuario.toUpperCase();">
+														</label>												
+													</section>	
+													<section  class="col col-6 form-group">
+														<label for="address" class="input"> <i class="icon-append fa fa-building"></i>
+															<input type="text" name="nDocumento" placeholder="Ingrese Numero de Documento"  ng-model="_persona.numerodocidentidad" ng-blur="verificacionDNI()" id="nDocumento" >
+														</label>
+													</section>
+												</div>	
+													<ul class="demo-btns">
+															
+											</fieldset>
+											<footer>
+								<button type="button" id="PrimerGrabar"class="btn btn-primary" ng-click="primerSave()">
+									Guardar
+								</button>
+							</footer>
+
+							
+						</form>
+
+					</div>
+					<!-- end widget content -->
+					
+				</div>
+				<!-- end widget div -->
+				
+			</div>
+			<!-- end widget -->
+
+		</article>
+		<!-- END COL -->		
+
+	</div>
+
+	<!-- END ROW -->
+
+</section>
+<!-- end widget grid -->
+<!-- SCRIPTS ON PAGE EVENT -->
+<script type="text/javascript">
+
+
+	
+	
+	
+	pageSetUp();
+	
+
+	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+	 *
+	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+	 *
+	 * // activate tooltips
+	 * $("[rel=tooltip]").tooltip();
+	 *
+	 * // activate popovers
+	 * $("[rel=popover]").popover();
+	 *
+	 * // activate popovers with hover states
+	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+	 *
+	 * // activate inline charts
+	 * runAllCharts();
+	 *
+	 * // setup widgets
+	 * setup_widgets_desktop();
+	 *
+	 * // run form elements
+	 * runAllForms();
+	 *
+	 ********************************
+	 *
+	 * pageSetUp() is needed whenever you load a page.
+	 * It initializes and checks for all basic elements of the page
+	 * and makes rendering easier.
+	 *
+	 */var pagefunction1 = function() {
+
+		
+		// activate Nestable for list 1
+		$('#nestable').nestable({
+			group : 1
+		}).on();
+
+		// activate Nestable for list 2
+		
+		// output initial serialised data
+
+		$('#nestable-menu').on('click', function(e) {
+			var target = $(e.target), action = target.data('action');
+			if (action === 'expand-all') {
+				$('.dd').nestable('expandAll');
+			}
+			if (action === 'collapse-all') {
+				$('.dd').nestable('collapseAll');
+			}
+		});
+
+		
+		
+	};
+
+	var pagefunction = function() {
+
+		// load bootstrap wizard
+		loadScript("js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js", runBootstrapWizard);
+
+		//Bootstrap Wizard Validations
+
+		function runBootstrapWizard() {
+
+			var $validator = $("#wizard-1").validate({
+
+				rules : {
+					
+					nombres : {
+						required : true
+					},
+					appat : {
+						required : true
+					},
+					apmat : {
+						required : true
+					},
+					nacimiento : {
+						required : true
+					},
+
+					nacionalidad : {
+						required : true
+					},
+					presentacion : {
+						required : true
+					},
+					estadoCivil : {
+						required : true
+					},
+					nDocumento : {
+						required : true
+					}
+					
+				},
+
+				messages : {
+					nombres : "Ingrese sus nombres",
+					appat : "Ingrese su apellido Paterno",
+					apmat : "Ingrese su apellido Materno",
+					nacimiento : "Seleccione su fecha de nacimiento",
+					nacionalidad : "Este Campo es obligatorio",
+					presentacion : "Este Campo es obligatorio",
+					estadoCivil : "Este Campo es obligatorio",
+					nDocumento : "Este Campo es obligatorio",
+					
+				},
+
+				highlight : function(element) {
+					$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+					$.smallBox({
+							title : "Los Datos personales son Obligatorios",
+							content : "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+							color : "#C46A69",
+							iconSmall : "fa fa-thumbs-up bounce animated",
+							timeout : 4000
+						});
+
+				},
+				unhighlight : function(element) {
+					$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+				},
+				errorElement : 'span',
+				errorClass : 'help-block',
+				errorPlacement : function(error, element) {
+					if (element.parent('.input-group').length) {
+						error.insertAfter(element.parent());
+					} else {
+						error.insertAfter(element);
+					}
+				}
+			});
+
+			
+
+			
+			$('#Nacdate').datepicker({
+			dateFormat : 'yy/mm/dd',
+			changeMonth: true,
+			changeYear: true,
+			maxDate: "-18y",
+			yearRange: "-80:-10",
+			dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+			monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+			prevText : '<i class="fa fa-chevron-left"></i>',
+			nextText : '<i class="fa fa-chevron-right"></i>',
+			
+		});
+
+		};
+		
+
+
+		
+
+	};
+	pagefunction();
+
+</script>
